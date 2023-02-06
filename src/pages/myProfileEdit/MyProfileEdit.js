@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DetailHeader from '../../components/detailHeader/DetailHeader'
+import TitleHeader from '../../components/titleHeader/TitleHeader'
 import ProfilePlanEdit from '../../components/profilePlanEdit/ProfilePlanEdit';
 import ProfileFollow from '../../components/profileFollow/ProfileFollow';
 
@@ -19,7 +19,6 @@ import {
     CustomPhotoSheet,
 
 } from './MyProfileEditStyle';
-import IconEdit from '../../asset/IconEdit.png';
 import IconPhoto from '../../asset/IconPhoto.png';
 
 import tempProfile from '../../asset/temp/tempProfile.jpeg';
@@ -126,7 +125,7 @@ export default function MyProfile() {
 
     return (
         <>
-            <DetailHeader title="" />
+            <TitleHeader title="" />
             <ProfileContainer>
                 <WrapProfilePhoto>
                     <img className='photo' src={tempProfile} />
@@ -134,7 +133,6 @@ export default function MyProfile() {
                 </WrapProfilePhoto>
                 <h4 className='mate-name'>메이트</h4>
                 <input className='greeting' placeholder='자기소개/한줄소개' />
-                <img src={IconEdit} className='edit-icon' />
 
                 <TagContainer>
                     <ButtonStyle onClick={openTypeSheet}>

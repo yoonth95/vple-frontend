@@ -15,11 +15,10 @@ import {
     ContainerItemsWrap,
     RecommendItemsWrap
 } from "./HomeStyle";
-import Flag from '../../asset/flag.png';
-import image from '../../asset/page1.jpg';
-import image2 from '../../asset/page2.jpg';
+import IconClipW from '../../asset/IconClipW.png';
+import image from '../../asset/temp/page1.jpg';
+import image2 from '../../asset/temp/page2.jpg';
 import arrow from '../../asset/arrow.png'
-
 import { DefaultButton } from '../../components/DefaultButton';
 
 const Home = () => {
@@ -95,7 +94,7 @@ const Home = () => {
                                 return (
                                     <RecommendImageWrap onClick={routerFood}>
                                         <img src={image2} className='itemImage' />
-                                        <img src={Flag} className='flagIcon' />
+                                        <img src={IconClipW} className='flagIcon' />
                                         <span className='itemsName'>{value}</span>
                                     </RecommendImageWrap>
                                 )

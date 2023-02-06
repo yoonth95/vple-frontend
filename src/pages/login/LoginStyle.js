@@ -4,8 +4,7 @@ import LogoImg from '../../asset/logo.png';
 import IconEmail from '../../asset/IconEmail.png';
 import IconLock from '../../asset/IconLock.png';
 import IconKakao from '../../asset/IconKakao.png';
-import IconNaver from '../../asset/IconNaver.png';
-import IconGoogle from '../../asset/IconGoogle.png';
+
 import IconReveal from '../../asset/IconReveal.png';
 import IconHide from '../../asset/IconHide.png';
 
@@ -128,22 +127,6 @@ export const StyledKaKaoButton = styled(ButtonStyle)`
     margin-left: 7px;
     margin-top: 1rem;
     margin-bottom: 160px;
-`;
-export const StyledNaverButton = styled(ButtonStyle)`
-    background-image: url(${IconNaver});
-    width: 31px;
-    height: 31px;
-    margin-right: 7px;
-    margin-left: 7px;
-    margin-top: 1rem;
-`;
-export const StyledGoogleButton = styled(ButtonStyle)`
-    background-image: url(${IconGoogle});
-    width: 31px;
-    height: 31px;
-    margin-right: 7px;
-    margin-left: 7px;
-    margin-top: 1rem;
 `;
 
 export const StyledBar = styled.span`

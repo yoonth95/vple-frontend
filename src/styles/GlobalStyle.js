@@ -3,7 +3,8 @@ import {createGlobalStyle} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   html {
-    background-color: #F4F1FA;
+    background-color: black;
+    //#F4F1FA;
   }
 
   * {
@@ -12,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .App {
-    background-color: #F4F1FA;
+    background-color: white;
     max-width: 500px;
     height: 100vh;
     margin: 0 auto;

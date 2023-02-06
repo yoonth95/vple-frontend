@@ -1,4 +1,4 @@
-import DetailHeader from '../../components/detailHeader/DetailHeader'
+import DetailHeader from '../../components/titleHeader/TitleHeader'
 import tempGuide from '../../asset/temp/tempGuide.png';
 import React, { useRef, useState } from "react";
 import { useLocation } from 'react-router-dom';

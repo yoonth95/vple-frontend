@@ -1,4 +1,4 @@
-import DetailHeader from '../../components/detailHeader/DetailHeader'
+import DetailHeader from '../../components/titleHeader/TitleHeader'
 import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
 import CardButton2 from '../../components/cardButton2/CardButton2';
 import {UlStyle} from '../../styles/UlStyle';

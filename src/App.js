@@ -35,7 +35,6 @@ function App() {
                     <Route path='/myProfile' element={<MyProfile/>} />
                     <Route path='/myProfile/edit' element={<MyProfileEdit/> }/>
                 </Routes>
-
                 <BottomNav/>
             </Router>
         </div>

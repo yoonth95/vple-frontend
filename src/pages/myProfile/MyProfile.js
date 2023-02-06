@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import DetailHeader from '../../components/detailHeader/DetailHeader'
+import TitleHeader from '../../components/titleHeader/TitleHeader'
 import ProfilePlan from '../../components/profilePlan/ProfilePlan';
 import ProfileFollow from '../../components/profileFollow/ProfileFollow';
 import { useNavigate } from 'react-router-dom';
@@ -99,7 +99,7 @@ export default function MyProfile() {
 
     return (
         <>
-            <DetailHeader title="" />
+            <TitleHeader title="" />
             <ProfileContainer>
                 <WrapProfilePhoto>
                     <img className='photo' src={tempProfile} />

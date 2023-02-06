@@ -4,7 +4,7 @@ import Logo from '../../asset/logo.png';
 import {
     StyledTopMargin, StyledLogo, StyledDiv, Interval, InputDiv, StyledIconEmail, StyledInputEmail,
     StyledIconLock, StyledInputPassword, RevealButton, StyledFilledButton, LoginOptionButton, StyledButtonG, StyledBar,
-    StyledKaKaoButton, StyledNaverButton, StyledGoogleButton, HideButton
+    StyledKaKaoButton, HideButton
 } from './LoginStyle';
 import { ButtonStyle } from '../../styles/ButtonStyle';
 
@@ -52,7 +52,7 @@ export default function Login() {
             <StyledButtonG>회원가입</StyledButtonG>
 
             <br />
-            <StyledKaKaoButton /><StyledNaverButton /><StyledGoogleButton />
+            <StyledKaKaoButton />
 
         </StyledTopMargin>
     );

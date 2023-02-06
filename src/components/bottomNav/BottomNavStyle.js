@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   background-color: white;
+  max-width: 500px;
   z-index: 1;
   position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
+  margin: 0 auto;
   padding: 3vh 0;
 `;
 
