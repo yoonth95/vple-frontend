@@ -1,37 +1,48 @@
 import React, {useState} from 'react';
-import {useRecoilState, useRecoilValue} from "recoil";
-import {headerListState} from "../../recoil/state";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container, NavContainer} from "./BottomNavStyle";
+
+import homeBtn from "../../asset/navBar/home.png";
+import keepBtn from "../../asset/navBar/keep.png";
+import planBtn from "../../asset/navBar/plan.png";
+import userBtn from "../../asset/navBar/user.png";
 
 const BottomNav = () => {
 
-    const headerTabList = useRecoilValue(headerListState); // 해더에 보여줄 배열 string 값
-
-    let navigate = useNavigate();
-    const onClickRouting = (index) => {
-        if(index === 0 ){
-            navigate('/')
-        } else if (index === 1){
-            navigate('/plan')
-        } else if (index === 2) {
-            navigate('/funding')
-        } else if ( index === 3) {
-            navigate('/myprofile')
-        }else {
-            return alert('error');
-        }
-    }
+    const[active, setActive] = useState(1);
 
     return (
         <>
             <Container>
                 <NavContainer >
-                    {headerTabList.map((list, index) => {
-                        return (
-                            <div className='navItem' onClick={() => onClickRouting(index)}>{list}</div>
-                        )
-                    })}
+                    <div>
+                        <Link to="/" className="nav-item" onClick={()=> setActive(1)}>
+                            <img src={homeBtn} 
+                            className={active == 1 ? "nav-button-active" : "nav-button"} />
+                            <span>홈화면</span>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/plan" className="nav-item" onClick={()=> setActive(2)}>
+                            <img src={planBtn} 
+                            className={active == 2 ? "nav-button-active" : "nav-button"} />
+                            <span>플랜 세우기</span>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/funding" className="nav-item" onClick={()=> setActive(3)}>
+                            <img src={keepBtn} 
+                            className={active == 3 ? "nav-button-active" : "nav-button"} />
+                            <span>저장</span>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/myprofile" className="nav-item" onClick={()=> setActive(4)}>
+                            <img src={userBtn} 
+                            className={active == 4 ? "nav-button-active" : "nav-button"} />
+                            <span>마이페이지</span>
+                        </Link>
+                    </div>
                 </NavContainer>
             </Container>
         </>
