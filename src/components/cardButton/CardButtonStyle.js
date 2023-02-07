@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import { ButtonStyle } from '../../styles/ButtonStyle';
+import DefaultButton from '../../components/DefaultButton';
 import IconClipW from '../../asset/IconClipW.png';
 import IconClipG from '../../asset/IconClipG.png';
 
-export const CardButtonStyle = styled(ButtonStyle)`
+export const CardButtonStyle = styled(DefaultButton)`
     box-shadow: 0px 0px 5px #C5C5C5;
     border-radius: 10px;
     margin: 10px;
+    position: relative;
 
     .link{
         text-decoration-line: none;
@@ -15,9 +16,9 @@ export const CardButtonStyle = styled(ButtonStyle)`
 `;
 
 export const StyledImgDiv = styled.div`
-    width: 132.76px;
-    height: 141.16px;
-    background-size: 132.76px, 141.16px;
+    width : 40vw;
+    height: 17vh;
+    //background-size: 35vw;, 141.16px;
     background-color: #F8F8F8;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -25,48 +26,42 @@ export const StyledImgDiv = styled.div`
 `;
 
 export const StyledContentDiv = styled.div`
-    width: 132.76px;
-    height: 42.02px;
-    background-size: 132.76px, 42.02px;
+    width: 40vw;
+    height: 6vh;
+    //background-size: 132.76px, 42.02px;
     background-color: #FFFFFF;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    
 `;
 
-export const ClipButtonW = styled(ButtonStyle)`
+export const ClipButtonW = styled(DefaultButton)`
     background-image: url(${IconClipW});
-    background-size: 12px 13px;
-    width: 12px;
-    height: 13px;
-    margin-top: 11px;
-    margin-left: 43px;
+    background-size: 17px 20px;
+    width: 17px;
+    height: 20px;
+    background-repeat: no-repeat;
     
     position: absolute;
+    top: 13px;
+    right: 13px;
 `;
-export const ClipButtonG = styled(ButtonStyle)`
+export const ClipButtonG = styled(DefaultButton)`
     background-image: url(${IconClipG});
-    background-size: 12px 13px;
-    width: 12px;
-    height: 13px;
-    margin-top: 11px;
-    margin-left: 43px;
+    background-size: 17px 20px;
+    width: 17px;
+    height: 20px;
+    background-repeat: no-repeat;
 
     position: absolute;
+    top: 13px;
+    right: 13px;
 `;
 
 export const StyledTitleFont = styled.div`
-    font-size: 12px;
+    font-size: 16px;
     color: #414141;
-    padding: 5px 0px 0px 7px;
+    padding: 13px 0px 0px 10px;
     text-align: left;
     text-decoration: none;
-`;
-export const StyledContentFont = styled.div`
-    font-size: 7px;
-    color: #5F5F5F;
-    padding: 0px 0px 0px 7px;
-    text-align: left;
-    textDecoration: none;
 `;
 

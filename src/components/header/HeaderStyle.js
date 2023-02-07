@@ -17,7 +17,6 @@ export const HeaderIcons = styled.div`
     align-items: center;
     width: 100px;
     height: 70px;
-    margin: 0.1vh 0;
 
     .logoIcon {
       width: 62px;

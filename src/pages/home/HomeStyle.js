@@ -6,13 +6,13 @@ export const SearchContainer = styled.section`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 13vh;
+  height: 11vh;
   background-color: #F8F8F8;
 
   .userWrap {
     font-size: 18px;
     width: 90%;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
   }
   span {
     font-weight: bold;
@@ -38,7 +38,7 @@ export const ItemsBtn = styled.div`
   color: white;
   width: 85%;
   height: 48.52px;
-  margin: 25px 25px 25px 25px;
+  margin: 20px;
   border-radius: 10px 10px 10px 10px;
   box-shadow: rgba(50, 50, 93, 0.25)
   0px 2px 5px -1px, rgba(0, 0, 0, 0.3)
@@ -53,7 +53,7 @@ export const CardSection = styled.article`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 335px;
+  height: 310px;
   background-color: #F8F8F8;
   //border: solid 1px red;
 `;
@@ -62,7 +62,7 @@ export const TitleWrap = styled.div`
   display: flex;
   align-items: center;
   width: 90%;
-  margin-top: 30px;
+  margin-top: 25px;
   margin-left: 10px;
   
   .titleDeco {
@@ -83,7 +83,7 @@ export const TitleWrap = styled.div`
   }
 `;
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.ul`
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -91,7 +91,7 @@ export const CardContainer = styled.div`
   height: 100%;
   cursor: pointer;
   overflow: auto;
-  //border: solid 1px red;
+  padding: 20px;
 `;
 
 export const CardWrap = styled.div`

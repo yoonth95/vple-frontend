@@ -7,15 +7,17 @@ import {UlStyle} from '../../styles/UlStyle';
 function ViewAllGuide() {
 
     const cards = [
-        { guideTitle: '경주 여행 추천', content: '김나현 • 2022.01.30' },
-        { guideTitle: '경주 여행 추천', content: '김나현 • 2022.02.30' },
-        { guideTitle: '경주 여행 추천', content: '김나현 • 2022.03.30' },
-        { guideTitle: '경주 여행 추천', content: '김나현 • 2022.04.30' },
-        { guideTitle: '경주 여행 추천', content: '김나현 • 2022.05.30' },
-        { guideTitle: '경주 여행 추천', content: '김나현 • 2022.06.30' },
-        { guideTitle: '경주 여행 추천', content: '김나현 • 2022.07.30' },
-        { guideTitle: '경주 여행 추천', content: '김나현 • 2022.08.30' },
-        { guideTitle: '경주 여행 추천', content: '김나현 • 2022.09.30' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
+        { guideTitle: '경주 여행 추천' },
     ];
 
     return (
@@ -25,8 +27,7 @@ function ViewAllGuide() {
             <UlStyle>
                 {cards.map(card => (
                     <CardButton
-                        guideTitle={card.guideTitle}
-                        content={card.content}
+                        title={card.guideTitle}
                     />
 
                 ))}

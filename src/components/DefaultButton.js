@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DefaultButton = styled.button`
+const DefaultButton = styled.button`
     &:hover{
         opacity:0.8;
     }
@@ -9,3 +9,5 @@ export const DefaultButton = styled.button`
     font-size: 11px;
     color: #B5B5B5;
 `;
+
+export default DefaultButton;

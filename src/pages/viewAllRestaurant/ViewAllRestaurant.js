@@ -1,6 +1,6 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
 import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
-import CardButton2 from '../../components/cardButton2/CardButton2';
+import CardButton from '../../components/cardButton/CardButton';
 import {UlStyle} from '../../styles/UlStyle';
 
 export default function ViewAllRestaurant() {
@@ -27,8 +27,8 @@ export default function ViewAllRestaurant() {
             <DetailSearchBar/>
             <UlStyle>
                 {cards.map(card => (
-                    <CardButton2
-                        name={card.name}
+                    <CardButton
+                        title={card.name}
                     />
 
                 ))}

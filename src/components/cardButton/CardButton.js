@@ -1,14 +1,18 @@
 
 import React, { useState } from "react";
-import { ButtonStyle } from '../../styles/ButtonStyle';
+import DefaultButton from '../../components/DefaultButton';
 import {
-    CardButtonStyle, WrapImg, StyledImgDiv, ClipButtonG, ClipButtonW,
-    StyledContentDiv, StyledTitleFont, StyledContentFont
+    CardButtonStyle, 
+    StyledImgDiv, 
+    ClipButtonG, 
+    ClipButtonW,
+    StyledContentDiv, 
+    StyledTitleFont,
 } from './CardButtonStyle'
 
 import { useNavigate } from 'react-router-dom';
 
-export default function CardButton({ guideTitle, content }) {
+export default function CardButton({ title }) {
 
     const [isClip, setClip] = useState(false);
 
@@ -16,8 +20,7 @@ export default function CardButton({ guideTitle, content }) {
     const move = () => {
         navigate('/guide/detail', {
             state: {
-                guideTitle: guideTitle,
-                content: content
+                title: title,
             }
         });
     }
@@ -25,20 +28,20 @@ export default function CardButton({ guideTitle, content }) {
     return (
         <CardButtonStyle>
 
-            <ButtonStyle onClick={() => setClip(!isClip)}>
+            <DefaultButton onClick={() => setClip(!isClip)}>
                 {isClip ? <ClipButtonG /> : <ClipButtonW />}
 
                 <div onClick={move}>
 
                     <StyledImgDiv />
                     <StyledContentDiv>
-                        <StyledTitleFont>{guideTitle}</StyledTitleFont>
-                        <StyledContentFont>{content}</StyledContentFont>
+                        <StyledTitleFont>{title}</StyledTitleFont>
                     </StyledContentDiv>
 
                 </div>
 
-            </ButtonStyle>
+            </DefaultButton>
+
 
         </CardButtonStyle>
 

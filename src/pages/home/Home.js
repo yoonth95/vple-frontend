@@ -19,11 +19,16 @@ import IconClipW from '../../asset/IconClipW.png';
 import image from '../../asset/temp/page1.jpg';
 import image2 from '../../asset/temp/page2.jpg';
 import arrow from '../../asset/arrow.png'
-import { DefaultButton } from '../../components/DefaultButton';
+import DefaultButton from '../../components/DefaultButton';
+import CardButton from '../../components/cardButton/CardButton';
 
 const Home = () => {
 
-    const bestGuide = ['2박 3일 경주 여행', '1박 2일 부산 여행', '1박 2일 부산 여행', '1박 2일 부산 여행'];
+    const bestGuide = [
+        { guideTitle : '2박 3일 경주 여행'}, 
+        { guideTitle : '1박 2일 부산 여행'}, 
+        { guideTitle : '2박 3일 경주 여행'}, 
+        { guideTitle : '1박 2일 부산 여행'}, ];
     const bestRestaurant = ['연화바루', '비건버거', '비건포차'];
 
     let navigate = useNavigate();
@@ -64,27 +69,23 @@ const Home = () => {
                 </TitleWrap>
 
                 <CardContainer>
-                    {bestGuide.map((value, index) => {
-                        return (
-                            <CardWrap onClick={routerGuide} >
-                                <img src={image} className='tourImage' />
-                                <div className='cardInfoWrap'>
-                                    <p className='cardTitle'>{value}</p>
-                                    <span className='cardRecommend'>vple 추천</span>
-                                </div>
-                            </CardWrap>
-                        )
-                    })}
+                        <CardContainer>
+                            {bestGuide.map(card => (
+                                <CardButton
+                                    title={card.guideTitle}
+                                />
+                            ))}
+                        </CardContainer>
                 </CardContainer>
             </CardSection>
 
             <RecommendContainer>
                 <RecommendTitleWrap>
-                        <div className='titleDeco' />
-                        <h3 className='recommendTitle'>추천 식당</h3>
-                        <DefaultButton onClick={routerFood}>
-                            <img src={arrow} className='arrow' />
-                        </DefaultButton>
+                    <div className='titleDeco' />
+                    <h3 className='recommendTitle'>추천 식당</h3>
+                    <DefaultButton onClick={routerFood}>
+                        <img src={arrow} className='arrow' />
+                    </DefaultButton>
                 </RecommendTitleWrap>
 
                 <ContainerItemsWrap>
