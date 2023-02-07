@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import DefaultButton from '../../components/DefaultButton';
+import DefaultButton from '../DefaultButton';
 import {
     CardButtonStyle, 
     StyledImgDiv, 
@@ -8,11 +8,11 @@ import {
     ClipButtonW,
     StyledContentDiv, 
     StyledTitleFont,
-} from './CardButtonStyle'
+} from './GuideCardButtonStyle'
 
 import { useNavigate } from 'react-router-dom';
 
-export default function CardButton({ title }) {
+export default function GuideCardButton({ title }) {
 
     const [isClip, setClip] = useState(false);
 

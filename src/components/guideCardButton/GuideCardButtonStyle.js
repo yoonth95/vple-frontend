@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import DefaultButton from '../../components/DefaultButton';
+import DefaultButton from '../DefaultButton';
 import IconClipW from '../../asset/IconClipW.png';
 import IconClipG from '../../asset/IconClipG.png';
 
@@ -17,7 +17,7 @@ export const CardButtonStyle = styled(DefaultButton)`
 
 export const StyledImgDiv = styled.div`
     width : 40vw;
-    height: 17vh;
+    height: 15vh;
     //background-size: 35vw;, 141.16px;
     background-color: #F8F8F8;
     border-top-left-radius: 10px;
@@ -27,7 +27,7 @@ export const StyledImgDiv = styled.div`
 
 export const StyledContentDiv = styled.div`
     width: 40vw;
-    height: 6vh;
+    height: 5.5vh;
     //background-size: 132.76px, 42.02px;
     background-color: #FFFFFF;
     border-bottom-left-radius: 10px;

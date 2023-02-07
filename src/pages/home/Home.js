@@ -15,21 +15,22 @@ import {
     ContainerItemsWrap,
     RecommendItemsWrap
 } from "./HomeStyle";
-import IconClipW from '../../asset/IconClipW.png';
-import image from '../../asset/temp/page1.jpg';
-import image2 from '../../asset/temp/page2.jpg';
 import arrow from '../../asset/arrow.png'
 import DefaultButton from '../../components/DefaultButton';
-import CardButton from '../../components/cardButton/CardButton';
+import GuideCardButton from '../../components/guideCardButton/GuideCardButton';
+import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
 
 const Home = () => {
 
     const bestGuide = [
-        { guideTitle : '2박 3일 경주 여행'}, 
-        { guideTitle : '1박 2일 부산 여행'}, 
-        { guideTitle : '2박 3일 경주 여행'}, 
-        { guideTitle : '1박 2일 부산 여행'}, ];
-    const bestRestaurant = ['연화바루', '비건버거', '비건포차'];
+        { guideTitle: '2박 3일 경주 여행' },
+        { guideTitle: '1박 2일 부산 여행' },
+        { guideTitle: '2박 3일 경주 여행' },
+        { guideTitle: '1박 2일 부산 여행' },];
+    const bestRestaurant = [
+        { restaurantTitle: '연화바루' },
+        { restaurantTitle: '비건버거' },
+        { restaurantTitle: '비건포차' },];
 
     let navigate = useNavigate();
     const routerPlan = () => {
@@ -68,14 +69,12 @@ const Home = () => {
                     </DefaultButton>
                 </TitleWrap>
 
-                <CardContainer>
-                        <CardContainer>
-                            {bestGuide.map(card => (
-                                <CardButton
-                                    title={card.guideTitle}
-                                />
-                            ))}
-                        </CardContainer>
+                <CardContainer className="card-container">
+                    {bestGuide.map(card => (
+                        <GuideCardButton
+                            title={card.guideTitle}
+                        />
+                    ))}
                 </CardContainer>
             </CardSection>
 
@@ -88,21 +87,13 @@ const Home = () => {
                     </DefaultButton>
                 </RecommendTitleWrap>
 
-                <ContainerItemsWrap>
-                    <RecommendItemsWrap>
-                        {
-                            bestRestaurant.map((value, index) => {
-                                return (
-                                    <RecommendImageWrap onClick={routerFood}>
-                                        <img src={image2} className='itemImage' />
-                                        <img src={IconClipW} className='flagIcon' />
-                                        <span className='itemsName'>{value}</span>
-                                    </RecommendImageWrap>
-                                )
-                            })
-                        }
-                    </RecommendItemsWrap>
-                </ContainerItemsWrap>
+                <CardContainer className="card-container">
+                    {bestRestaurant.map(card => (
+                        <RestaurantCardButton
+                            title={card.restaurantTitle}
+                        />
+                    ))}
+                </CardContainer>
             </RecommendContainer>
         </>
     )

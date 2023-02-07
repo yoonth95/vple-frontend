@@ -1,6 +1,6 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
 import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
-import CardButton from '../../components/cardButton/CardButton';
+import CardButton from '../../components/guideCardButton/GuideCardButton';
 import {UlStyle} from '../../styles/UlStyle';
 
 export default function ViewAllRestaurant() {

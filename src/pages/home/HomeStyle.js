@@ -53,7 +53,7 @@ export const CardSection = styled.article`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 310px;
+  height: 270px;
   background-color: #F8F8F8;
   //border: solid 1px red;
 `;
@@ -90,8 +90,7 @@ export const CardContainer = styled.ul`
   width: 100%;
   height: 100%;
   cursor: pointer;
-  overflow: auto;
-  padding: 20px;
+  overflow: auto hidden;
 `;
 
 export const CardWrap = styled.div`
@@ -144,7 +143,7 @@ export const RecommendTitleWrap = styled.div`
   display: flex;
   width: 90%;
   height: 40px;
-  margin-top: 40px;
+  margin-top: 25px;
   margin-left: 10px;
   //border: solid 1px red;
   

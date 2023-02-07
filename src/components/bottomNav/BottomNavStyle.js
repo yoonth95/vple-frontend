@@ -5,8 +5,8 @@ export const Container = styled.header`
   flex-direction: row;
   align-items: center;
   background-color: white;
+  box-shadow: 0px 0px 5px #C5C5C5;
   max-width: 500px;
-  z-index: 1;
   position: fixed;
   bottom: 0;
   right: 0;
