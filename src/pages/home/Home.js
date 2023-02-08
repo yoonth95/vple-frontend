@@ -69,13 +69,22 @@ const Home = () => {
                     </DefaultButton>
                 </TitleWrap>
 
+
+
                 <CardContainer className="card-container">
+
                     {bestGuide.map(card => (
-                        <GuideCardButton
-                            title={card.guideTitle}
-                        />
+                        <CardWrap>
+                            <GuideCardButton
+                                title={card.guideTitle}
+                            />
+                        </CardWrap>
+
                     ))}
+
+
                 </CardContainer>
+
             </CardSection>
 
             <RecommendContainer>
@@ -89,12 +98,16 @@ const Home = () => {
 
                 <CardContainer className="card-container">
                     {bestRestaurant.map(card => (
-                        <RestaurantCardButton
-                            title={card.restaurantTitle}
-                        />
+                        <CardWrap>
+                            <RestaurantCardButton
+                                title={card.restaurantTitle}
+                            />
+                        </CardWrap>
+
                     ))}
                 </CardContainer>
             </RecommendContainer>
+
         </>
     )
 }

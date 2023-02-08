@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function RestaurantCardButton({ title }) {
 
-    const [isClip, setClip] = useState(false);
+    // const [isClip, setClip] = useState(false);
 
     const navigate = useNavigate();
     const move = () => {
@@ -27,11 +27,11 @@ export default function RestaurantCardButton({ title }) {
 
     return (
         <CardButtonStyle>
-
+{/* 
             <DefaultButton onClick={() => setClip(!isClip)}>
-                {isClip ? <ClipButtonG /> : <ClipButtonW />}
+                {isClip ? <ClipButtonG /> : <ClipButtonW />} */}
 
-                <div onClick={move}>
+                 <div onClick={move}>
 
                     <StyledImgDiv />
                     <StyledContentDiv>
@@ -39,9 +39,8 @@ export default function RestaurantCardButton({ title }) {
                     </StyledContentDiv>
 
                 </div>
-
-            </DefaultButton>
-
+{/* 
+            </DefaultButton> */}
 
         </CardButtonStyle>
 

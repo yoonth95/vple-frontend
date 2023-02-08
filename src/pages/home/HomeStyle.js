@@ -55,7 +55,6 @@ export const CardSection = styled.article`
   width: 100%;
   height: 270px;
   background-color: #F8F8F8;
-  //border: solid 1px red;
 `;
 
 export const TitleWrap = styled.div`
@@ -90,42 +89,24 @@ export const CardContainer = styled.ul`
   width: 100%;
   height: 100%;
   cursor: pointer;
-  overflow: auto hidden;
+  overflow: auto;
+  gap: 5px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const CardWrap = styled.div`
-  width: 167px;
-  height: 229px;
-  flex: 0 0 auto;
-  margin-left: 26px;
-  border-radius: 10px 10px 10px 10px;
-  box-shadow: rgba(50, 50, 93, 0.25)
-  0px 2px 5px -1px, rgba(0, 0, 0, 0.3)
-  0px 1px 3px -1px;
-  
-  .tourImage {
-    border-radius: 10px 10px 0px 0px;
-    width: 100%;
-    height: 77%;
-    background-color: gainsboro;
-  }
 
-  .cardInfoWrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    width: 100%;
-    height: 20%;
-    background-color: white;
-    border-radius: 0px 0px 10px 10px;
-    .cardTitle {
-      margin: 4px;
-    }
-    .cardRecommend {
-      margin: 4px;
-      color: #ababab;
-      font-size: 4px;
-    }
+  width: 167px;
+  flex: auto;
+  
+  :first-child{
+    margin-left: 20px;
+  }
+  :last-child {
+    margin-right: 20px;
   }
 `;
 
@@ -134,7 +115,7 @@ export const RecommendContainer = styled.article`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   height: 213px;
   background-color: white;
 `;
