@@ -5,22 +5,26 @@ import { useLocation } from 'react-router-dom';
 import Review from '../../components/review/Review';
 
 import {
-    ImageWrap,
-    InfoDiv,
+    ImageContainer,
+    WrapInfo,
     TagContainer,
     ClipDiv,
     ClipButtonW,
     ClipButtonG,
-    WrapInformation,
+    WrapIconText,
     WrapRunTime,
-    MenuDiv,
+    WrapMenu,
     MenuTitle,
-    MoreButton,
-    ReviewDiv,
+    WrapCards,
+    WrapCard,
+    WrapButton,
+    ReviewContainer,
     ReviewTitle,
     WriteReviewBtn,
+    WrapReviewBars,
     ReviewBar,
     PercentBar,
+    WrapReviews,
     TagDiv,
     UpButton,
 
@@ -32,6 +36,7 @@ import IconClock from '../../asset/IconClock.png';
 import MenuCardButton from '../../components/menuCardButton/MenuCardButton';
 import IconMore from '../../asset/IconMore.png';
 import IconUp from '../../asset/IconUp.png';
+import arrow from '../../asset/arrow.png';
 
 export default function GuideDetail() {
 
@@ -49,9 +54,6 @@ export default function GuideDetail() {
         { review1: 1 },
         { review2: 2 },
         { review1: 3 },
-        { review2: 4 },
-        { review1: 5 },
-        { review2: 6 },
     ];
 
     //스크롤
@@ -60,102 +62,112 @@ export default function GuideDetail() {
         reviewRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
-
     return (
         <>
             <DetailHeader title="식당" />
-            <ImageWrap>
+
+            <ImageContainer>
                 <img src={tempGuide} className='guide-image' />
-            </ImageWrap>
-            <InfoDiv>
-                <div className="titleWrap">{"[위샐러듀]"}</div>
-                <ClipDiv>
-                    <ButtonStyle onClick={() => setClip(!isClip)}>
-                        {isClip ? <ClipButtonG /> : <ClipButtonW />}
-                    </ButtonStyle>
+            </ImageContainer>
+
+            <WrapInfo>
+                <div className="titleWrap">{"연회바루"}</div>
+                <ClipDiv
+                    onClick={() => setClip(!isClip)}>
+                    {isClip ? <ClipButtonG /> : <ClipButtonW />}
                 </ClipDiv>
                 <TagContainer>
-                    <TagDiv>비건</TagDiv>
-                    <TagDiv>락토</TagDiv>
+                    <div className='tag'>비건</div>
+                    <div className='tag'>락토</div>
                 </TagContainer>
                 <div className="writerWrap">{"위샐러듀는 그리스, 이스라엘, 레바논등의 가정식 전문점으로 한끼 건강한 지중해 가정식을 제공하기 위해 노력합니다. 위샐러듀는 그리스, 이스라엘, 레바논등의 가정식 전문점입니다."}</div>
                 <div className="partition" />
 
-                <WrapInformation>
+                <WrapIconText>
                     <img src={IconMapPointer} className="icon" />
-                    <div className="info">서울 서대문구 이화여대길 52-31</div>
-                </WrapInformation>
-                <WrapInformation>
+                    <div className="text">서울 서대문구 이화여대길 52-31</div>
+                </WrapIconText>
+                <WrapIconText>
                     <img src={IconClock} className="icon" />
-                    <div className="info">영업시간</div>
+                    <div className="text">영업시간</div>
                     <WrapRunTime>
                         <p className="day">월 - 토</p><p className="hour">10:00 - 20:00</p>
                     </WrapRunTime>
                     <WrapRunTime>
                         <p className="day">일요일</p><p className="hour">휴무</p>
                     </WrapRunTime>
-                </WrapInformation>
-            </InfoDiv>
+                </WrapIconText>
+            </WrapInfo>
 
-
-            <MenuDiv>
+            <WrapMenu>
                 <MenuTitle>
                     <div className='titleDeco' />
                     <h3 className='recommendTitle'>메뉴</h3>
+                    <img src={arrow} className='arrow-btn' />
                 </MenuTitle>
-                <ul>
-                    {cards.map(card => (
-                        <MenuCardButton
-                            menu={card.menu}
-                            price={card.price}
-                        />
-                    ))}
-                </ul>
-                <MoreButton><img src={IconMore} className="iconMore" />더보기</MoreButton>
-            </MenuDiv>
+                <WrapCards>
+                    {
+                        cards.map((value, index) => {
+                            return (
+                                <WrapCard>
+                                    <img className='img-photo' />
+                                    <div className='div-content'>
+                                        <span className='plan-title'>{value.menu}</span>
+                                    </div>
+                                </WrapCard>
+                            )
+                        })
+                    }
+                </WrapCards>
+                <WrapButton>
+                    <img src={IconMore} className="iconMore" />더보기
+                </WrapButton>
+            </WrapMenu>
 
-            <ReviewDiv ref={reviewRef}>
+            <ReviewContainer ref={reviewRef}>
                 <div className='container'>
                     <ReviewTitle>
                         <div className='titleDeco' />
                         <h3 className='recommendTitle'>후기</h3>
                         <p className='number'>(14)</p>
                     </ReviewTitle>
-                    <div className='align-right'>
-                        
-                    <WriteReviewBtn>작성하기</WriteReviewBtn>
+                    <div className='write-btn'>
+                        <WriteReviewBtn>작성하기</WriteReviewBtn>
                     </div>
                 </div>
 
-                <ReviewBar>
-                    <PercentBar count={80}>
-                        <div className='review'> 😊 "음식이 맛있어요"</div>
-                    </PercentBar>
-                </ReviewBar>
-                <ReviewBar>
-                    <PercentBar count={60}>
-                        <div className='review'> 🌿 “재료가 신선해요”</div>
-                    </PercentBar>
-                </ReviewBar>
-                <ReviewBar>
-                    <PercentBar count={30}>
-                        <div className='review'> 💖 “친절해요”</div>
-                    </PercentBar>
-                </ReviewBar>
+                <WrapReviewBars>
+
+                    <ReviewBar>
+                        <PercentBar count={80}>
+                            <div className='review'> 😊 "음식이 맛있어요"</div>
+                        </PercentBar>
+                    </ReviewBar>
+                    <ReviewBar>
+                        <PercentBar count={60}>
+                            <div className='review'> 🌿 “재료가 신선해요”</div>
+                        </PercentBar>
+                    </ReviewBar>
+                    <ReviewBar>
+                        <PercentBar count={30}>
+                            <div className='review'> 💖 “친절해요”</div>
+                        </PercentBar>
+                    </ReviewBar>
+
+                </WrapReviewBars>
 
                 <div className="partition" />
-                {reviews.map(review => (
-                    <Review />
-                ))}
+                <WrapReviews>
+                    {reviews.map(review => (
+                        <Review />
+                    ))}
+                </WrapReviews>
 
                 <UpButton onClick={scrollToUp}>
                     <img src={IconUp} className='icon' /> 맨 위로
                 </UpButton>
 
-
-            </ReviewDiv>
-
-
+            </ReviewContainer>
         </>
     );
 }

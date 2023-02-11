@@ -70,8 +70,6 @@ const Home = () => {
                     </DefaultButton>
                 </TitleWrap>
 
-
-
                 <CardContainer className="card-container">
 
                     {bestGuide.map(card => (

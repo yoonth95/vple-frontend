@@ -4,16 +4,16 @@ import IconClipG from '../../asset/IconClipG.png';
 import { ButtonStyle } from '../../styles/ButtonStyle';
 
 
-export const ImageWrap = styled.div`
+export const ImageContainer = styled.div`
     .guide-image{
-        width: 500px;
+        width: 100%;
         height: 202px;
         object-fit: cover;
     }
 `;
 
-export const InfoDiv = styled.div`
-    padding: 30px 30px 20px 30px;
+export const WrapInfo = styled.div`
+    padding: 30px 25px 20px 25px;
     background-color: white;
 
     .titleWrap{
@@ -22,14 +22,12 @@ export const InfoDiv = styled.div`
         text-align: left;
         display: inline;
     }
-
     .writerWrap{
         font-size: 12px;
         color: #A3A3A3;
         text-align: left;
         padding-top: 20px;
     }
-
     .partition{
         margin-top: 20px;
         margin-bottom: 20px;
@@ -41,6 +39,14 @@ export const InfoDiv = styled.div`
 export const ClipDiv = styled.div`
     display: inline;
     float: right;
+
+    &:hover{
+        opacity:0.8;
+    }
+    border: none;
+    background-color: transparent;
+    font-size: 11px;
+    color: #B5B5B5;
 `;
 export const ClipButtonW = styled(ButtonStyle)`
     background-image: url(${IconClipW});
@@ -60,36 +66,36 @@ export const ClipButtonG = styled(ButtonStyle)`
 export const TagContainer = styled.div`
     display: flex;
     margin-top: 10px;
-`;
-export const TagDiv = styled.div`
-    width: 65px;
-    height: 22px;
-    background-color: #758B6F;
-    background-size: 65px 22px;
-    color: white;
-    font-size: 14px;
-    text-align: center;
-    border-radius: 23px;
-    line-height: 23px;
-    
-    margin-right: 5px;
+
+    .tag {
+        width: 65px;
+        height: 22px;
+        background-color: #758B6F;
+        background-size: 65px 22px;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        border-radius: 23px;
+        line-height: 23px;
+        
+        margin-right: 5px;
+    }
 `;
 
-export const WrapInformation = styled.div`
+export const WrapIconText = styled.div`
 
     margin-top: 10px;
 
     .icon{
         margin-bottom: -4px; 
     }
-    .info{
+    .text{
         font-size: 14px;
         display: inline;
         margin-left: 10px;
     }
     
 `;
-
 export const WrapRunTime = styled.div`
     margin-top: 10px;
     margin-left: 27px;
@@ -106,34 +112,77 @@ export const WrapRunTime = styled.div`
     }
 `;
 
-export const MenuDiv = styled.div`
+export const WrapMenu = styled.div`
+    padding: 25px 30px 10px 30px;
     background-color: #F8F8F8;
     text-align: center;
 `;
 export const MenuTitle = styled.div`
-    padding: 25px 30px 10px 30px;
     display: flex;
+    align-items: center;
 
+    .titleDeco {
+        width: 6px;
+        height: 18px;
+        background-color: #C9C9C9;
+        margin-right: 10px;
+    }
     .recommendTitle {
         font-weight: initial;
         font-size: 16px;
     }
-
-    .titleDeco {
-        width: 3.85px;
-        height: 16.67px;
-        background-color: #C9C9C9;
-        margin-right: 10px;
+    .arrow-btn {
+        width: 9px;
+        height: 15px;
+        margin-left: 7px;
+        margin-bottom: 2px;
     }
 `;
-export const MoreButton = styled(ButtonStyle)`
-    width: 438.28px;
+
+export const WrapCards = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+  margin-top: 20px;
+`;
+export const WrapCard = styled.div`
+    display: inline-flex;
+    flex-direction: column;
+    width: 30%;
+    margin-bottom: 20px;
+
+    box-shadow: 0px 0px 3px #C5C5C5;
+    border-radius: 10px;
+
+    .img-photo {
+        display: inline-flex;
+        height: 80px;
+        background-color: #F8F8F8;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .div-content {
+        display: inline-flex;
+        height: 38px;
+        background-color: #FFFFFF;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .div-content span {
+        font-size: 13px;
+        color: #414141;
+        padding: 13px 0px 0px 7px;
+        text-align: left;
+        text-decoration: none;
+    }
+`;
+export const WrapButton = styled(ButtonStyle)`
+    display: inline-block;
+    width: 100%;
     height: 46px;
     color: black;
     font-size: 14px;
     background-color: white;
-    display: inline-block;
-    margin-top: 10px;
     border-radius: 5px;
     border: solid 1px #DEDEDE;
 
@@ -143,15 +192,14 @@ export const MoreButton = styled(ButtonStyle)`
     }
 `;
 
-export const ReviewDiv = styled.div`
-    padding-top: 20px;
+export const ReviewContainer = styled.div`
+    padding: 25px 30px 10px 30px;
     background-color: #F8F8F8;
     text-align: center;
-    padding-bottom: 30px;
-
+    padding-bottom: 35%;
 
     .partition{
-        width: 440px;
+        width: 100%;
         display: inline-block;
         margin-top: 20px;
         border-top: solid 1px #C9C9C9;
@@ -161,51 +209,48 @@ export const ReviewDiv = styled.div`
         display: flex;
     }
 
-    .align-right{
+    .write-btn{
         margin-left: auto;
     }
 
 `;
 export const ReviewTitle = styled.div`
-    padding: 25px 0px 20px 30px;
     display: flex;
 
+    .titleDeco {
+        width: 6px;
+        height: 18px;
+        background-color: #C9C9C9;
+        margin-right: 10px;
+    }
     .recommendTitle {
         font-weight: initial;
         font-size: 16px;
     }
-
-    .titleDeco {
-        width: 3.85px;
-        height: 16.67px;
-        background-color: #C9C9C9;
-        margin-right: 10px;
-    }
-
     .number{
         margin-top: 3px;
-        margin-left: 5px;
+        margin-left: 8px;
         font-size: 12px;
         color: #ABABAB;
     }
-`
+`;
 export const WriteReviewBtn = styled(ButtonStyle)`
     width: 80px;
-    height: 25px;
+    height: 30px;
     background-color: white;
     font-size: 14px;
     color: black;
     box-shadow: 0px 0px 2px #C5C5C5;
     border-radius: 6px;
-
-    margin-right: 30px;
-    margin-top: 22px;
 `;
 
+export const WrapReviewBars = styled.div`
+    padding: 10px 0px 0 0px;
+`;
 export const ReviewBar = styled.div`
-    background-color: white;
-    width: 438.28px;
+    width: 100%;
     height: 42.31px;
+    background-color: white;
     border-radius: 8px;
     display: inline-block;
     box-shadow: 0px 0px 2px #C5C5C5;
@@ -222,6 +267,10 @@ export const PercentBar = styled(ReviewBar)`
         margin-top: 12px;
         margin-left: 15px;
     }
+`;
+
+export const WrapReviews = styled.div `
+
 `;
 
 export const UpButton = styled(ButtonStyle)`

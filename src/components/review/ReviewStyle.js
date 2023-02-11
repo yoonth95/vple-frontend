@@ -4,11 +4,13 @@ import { ButtonStyle } from "../../styles/ButtonStyle";
 
 export const ReviewButton = styled(ButtonStyle)`
     text-align: left;
-    width: 438px;
+    width: 100%;
     height: 150px;
     background-color: #F8F8F8;
     border-bottom: solid 1px #C9C9C9;
     position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     .text-div{
         display: inline-block;
@@ -27,7 +29,7 @@ export const ReviewButton = styled(ButtonStyle)`
         font-size: 12px;
         color: #7C7C7C;
 
-        width: 300px;
+        width: 100%;
         display: inline-block;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -39,9 +41,7 @@ export const ReviewButton = styled(ButtonStyle)`
         font-size: 10px;
         color: #7C7C7C;
     }
-
 `;
-
 
 export const ImgDiv = styled.div`
     width: 93.59px;
