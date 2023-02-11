@@ -1,29 +1,57 @@
 import styled from "styled-components";
 
-import { ButtonStyle } from '../../styles/ButtonStyle';
-
-export const ProfileContainer = styled.div`
-    text-align: center;
+export const ProfileContainer = styled.section`
+    display: flex;
+    margin-top: 20px;
     background-color: white;
+    align-items: center;
+    position: relative;
 
-    .mate-name{
-        margin-top: 5px;
-        font-size: 16.94px;
-        font-weight: 500;
+    div {
+        flex-direction: column;
     }
 
-    .greeting{
-        margin-top: 3px;
-        font-size: 12px;
-        color #7D7D7D;
+    .user-name{
+        font-size: 24px;
+        font-weight: 500;
+        margin-left: 25px;
+    }
+
+    .tag-div {
+        width: 78px;
+        height: 30px;
+        background-color: white;
+        background-size: 65px 22px;
+        color: #758B6F;
+        border: solid 1px #758B6F;
+        border-radius: 23px;
+
+        display: inline-flex;
+        margin-top: 10px;
+        margin-left: 20px;
+        justify-content: center;
+
+        font-size: 20px;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    .setting-btn {
+        position: absolute;
+        right: 0;
+        top: 5px;
+        margin-right: 20px;
+        width: 45px;
     }
 `;
 
+
 export const WrapProfilePhoto = styled.div`
-    width: 93.05px;
-    height: 93.05px;
+    width: 87px;
+    height: 87px;
     border-radius: 100%;
     display: inline-block;
+    margin-left: 20px;
 
     .photo{
     width: 100%;
@@ -33,96 +61,36 @@ export const WrapProfilePhoto = styled.div`
     };
 `;
 
-export const TagContainer = styled.div`
-    display: flex;
-    margin-top: 10px;
-    justify-content: center;
-`;
-export const TagDiv = styled.div`
-    width: 65px;
-    height: 22px;
-    background-color: white;
-    background-size: 65px 22px;
-    color: #758B6F;
-    border: solid 1px #758B6F;
-    border-radius: 23px;
+export const MyPlanContainer = styled.section`
+    margin-top: 40px;
 
-
-    font-size: 14px;
-    text-align: center;
-    line-height: 25px;
-`;
-
-export const WrapButton = styled.div`
-    background-color: white;
-    justify-content: center;
-    padding: 20px 0px;
-    display: flex;
-`;
-
-export const EditButton = styled(ButtonStyle)`
-    width: 156.64px;
-    height: 38.77px;
-    background-color: #EDEDED;
-    border-radius: 6.05px;
-    margin-right: 15px;
-
-    color: black;
-    font-size: 16px;
-
-`;
-
-export const SettingButton = styled(ButtonStyle)`
-    width: 156.64px;
-    height: 38.77px;
-    background-color: #EDEDED;
-    border-radius: 6.05px;
-
-    color: black;
-    font-size: 16px;
-
-`;
-
-export const StateContainer = styled.div`
-    padding: 20px 40px 20px 40px;
-    background-color: white;
-    text-align: center;
-
-
-
-    .partition{
-        border-top: solid 1px #737373;
+    .wrap-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
     }
-`;
-export const ContainButton = styled(ButtonStyle)`
-    padding-bottom: 20px;
-    margin: 0px 53px;
-    display: inline-block;
-
-    .number{
-        font-size: 16px;
-        color: black;
-
-    }
-    .name{
-        padding-top: 7px;
-        font-size: 14px;
-        color: #7D7D7D;
+    .wrap-title > span {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 20px;
+        color: #6C6C6C;
+        font-size: 15px;
     }
 
+    .arrow-btn {
+        width: 9px;
+        height: 13px;
+        margin-left: 5px;
+        margin-bottom: 2px;
+    }
+
+
 `;
 
-export const ContentsContainer = styled.div`
-    background-color: white;
-
-    .plan{
-        padding-bottom: 300px;
-        padding: 10px 30px;
-        text-align: center;
-    }
-    .follow{
-        padding-bottom: 30px;
-        inline: inline-block;
-        position: relative;
-    }
+export const SmallTitle = styled.div`
+    display: inline-flex;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 20px;
 `;
