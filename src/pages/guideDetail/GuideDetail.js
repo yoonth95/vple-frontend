@@ -1,24 +1,40 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
 import tempGuide from '../../asset/temp/tempGuide.png';
+import Delete from '../../asset/IconRedDelete.png';
 import { useLocation } from 'react-router-dom';
 import React, { useState } from "react";
 
 import {
-    ImageWrap,
-    ContentDiv,
+    ImageContainer,
+    ContentContainer,
+    WrapClip,
     ClipButtonW,
     ClipButtonG,
     EditButton,
-    ClipDiv,
+    WrapTime,
+    CardSection,
+    WrapCard,
+
+    TimeButton,
+    CardDiv,
+
 
 } from '../../pages/guideDetail/GuideDetailStyle';
-import { ButtonStyle } from '../../styles/ButtonStyle';
+
+//플랜 카드
+const cards = [
+    { title: "장", time: "1시간 0분" },
+    { title: "장소", time: "2시간 0분" },
+    { title: "장소이름", time: "3시간 0분" },
+    { title: "장소이름", time: "4시간 0분" },
+    { title: "장소이름", time: "5시간 0분" },
+]
 
 export default function GuideDetail() {
 
     const location = useLocation();
 
-    const detailTitle = location.state.guideTitle;
+    // const detailTitle = location.state.guideTitle;
     const detailContent = location.state.content;
 
     const [isClip, setClip] = useState(false);
@@ -26,20 +42,38 @@ export default function GuideDetail() {
     return (
         <>
             <DetailHeader title="추천 가이드" />
-            <ImageWrap>
+
+            <ImageContainer>
                 <img src={tempGuide} className='guide-image' />
-            </ImageWrap>
-            <ContentDiv>
-                <div className="titleWrap">{detailTitle}</div>
-                <ClipDiv>
-                    <ButtonStyle onClick={() => setClip(!isClip)}>
-                        {isClip ? <ClipButtonG /> : <ClipButtonW />}
-                    </ButtonStyle>
-                </ClipDiv>
+            </ImageContainer>
+
+            <ContentContainer>
+                <div className="titleWrap">{"2박 3일 경주 여행"}</div>
+                <WrapClip
+                    onClick={() => setClip(!isClip)}>
+                    {isClip ? <ClipButtonG /> : <ClipButtonW />}
+                </WrapClip>
                 <div className="writerWrap">{detailContent}</div>
                 <EditButton>플랜 수정</EditButton>
-            </ContentDiv>
 
+                <WrapTime>
+                    <p className='start_time'>일정 시작 |
+                        <span className='time-btn'>오전 10:00</span></p>
+                </WrapTime>
+
+                <CardSection>
+                    {cards.map(card => (
+                        <WrapCard>
+                            <img className='plan-img' />
+                            <div>
+                                <p className='spot-name'>{card.title}</p>
+                                <p className='time'>소요 시간 | <span className='time-btn'>{card.time}</span></p>
+                            </div>
+                            <img src={Delete}className='delete-btn' />
+                        </WrapCard>
+                    ))}
+                </CardSection>
+            </ContentContainer>
         </>
     );
 }
