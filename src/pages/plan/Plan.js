@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Calendar from 'react-calendar';
-import Header from '../header/Header'
+import Header from '../../components/header/Header'
 import {
     CalendarWrap,
     CountContainer,

@@ -11,7 +11,7 @@ import PlanMap from './pages/planMap/PlanMap'
 import Login from "./pages/login/Login";
 import ViewAllGuide from "./pages/viewAllGuide/ViewAllGuide";
 import ViewAllRestaurant from "./pages/viewAllRestaurant/ViewAllRestaurant";
-import Plan from "./components/plan/Plan";
+import Plan from "./pages/plan/Plan";
 import Home from "./pages/home/Home";
 import GuideDetail from './pages/guideDetail/GuideDetail';
 import RestaurantDetail from './pages/restaurantDetail/RestaurantDetail';

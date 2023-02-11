@@ -95,7 +95,6 @@ export const WrapCards = styled.div`
     display: flex;
     gap: 2vw;
     margin: 20px 20px;
-    gird-template-columns: 1fr 1fr 1fr;
 `;
 export const WrapCard = styled.div`
     display: inline-flex;
