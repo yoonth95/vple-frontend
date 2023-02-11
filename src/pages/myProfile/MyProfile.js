@@ -9,8 +9,9 @@ import {
     WrapProfilePhoto,
     MyPlanContainer,
     SmallTitle,
-
-
+    WrapCards,
+    WrapCard,
+    WrapMenuContainer,
 
 } from './MyProfileStyle';
 
@@ -20,6 +21,11 @@ import arrow from '../../asset/arrow.png';
 
 export default function MyProfile() {
 
+    const myPlanCards = [
+        '2박 3일 경주 여행',
+        '1박 2일 부산 여행',
+        '가을 여행',
+    ]
 
     const planCards = [
         '뚜벅이 경주 맛집',
@@ -60,7 +66,7 @@ export default function MyProfile() {
                 <div className='follow'>
                     {followings.map((mate) => {
                         return (
-                            <ProfileFollow mate={mate} editMode={false}/>
+                            <ProfileFollow mate={mate} editMode={false} />
                         )
                     }
                     )}
@@ -71,7 +77,7 @@ export default function MyProfile() {
                 <div className='follow'>
                     {follows.map((mate) => {
                         return (
-                            <ProfileFollow mate={mate} editMode={false}/>
+                            <ProfileFollow mate={mate} editMode={false} />
                         )
                     }
                     )}
@@ -89,7 +95,7 @@ export default function MyProfile() {
     const moveEditPage = () => {
         navigate('/myProfile/edit', {
             state: {
-                
+
             }
         });
     }
@@ -114,15 +120,34 @@ export default function MyProfile() {
                     <SmallTitle>나의 플랜</SmallTitle>
                     <span>
                         <span>플랜 전체보기</span>
-                        <img src={arrow} className='arrow-btn'/>
+                        <img src={arrow} className='arrow-btn' />
                     </span>
                 </div>
 
-                
-                
+                <WrapCards>
+                    {
+                        myPlanCards.map((value, index) => {
+                            return (
+                                <WrapCard>
+                                    <img className='img-photo'/>
+                                    <div className='div-content'>
+                                        <span className='plan-title'>{value}</span>
+                                    </div>
+                                </WrapCard>
+                            )
+                        })
+                    }
+                </WrapCards>
             </MyPlanContainer>
 
-            
+            <WrapMenuContainer>
+                <div className='menu'>최근 본 가이드<img src={arrow} className='arrow-btn'/></div>
+                <div className='menu'>최근 본 식당<img src={arrow} className='arrow-btn'/></div>
+                <div className='menu'>작성한 후기<img src={arrow} className='arrow-btn'/></div>
+                <div className='menu'>버전<span>1.0.0</span></div>
+            </WrapMenuContainer>
+
+
         </>
     );
 }

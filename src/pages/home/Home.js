@@ -49,7 +49,6 @@ const Home = () => {
 
     return (
         <>
-        
             <Header />
             <SearchContainer>
                 <p className='userWrap'>

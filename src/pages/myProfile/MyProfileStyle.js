@@ -44,8 +44,6 @@ export const ProfileContainer = styled.section`
         width: 45px;
     }
 `;
-
-
 export const WrapProfilePhoto = styled.div`
     width: 87px;
     height: 87px;
@@ -60,6 +58,7 @@ export const WrapProfilePhoto = styled.div`
     border-radius: 100%;
     };
 `;
+
 
 export const MyPlanContainer = styled.section`
     margin-top: 40px;
@@ -85,12 +84,71 @@ export const MyPlanContainer = styled.section`
         margin-bottom: 2px;
     }
 
-
 `;
-
 export const SmallTitle = styled.div`
     display: inline-flex;
     font-size: 20px;
     font-weight: 400;
     margin-left: 20px;
+`;
+export const WrapCards = styled.div`
+    display: flex;
+    gap: 2vw;
+    margin: 20px 20px;
+    gird-template-columns: 1fr 1fr 1fr;
+`;
+export const WrapCard = styled.div`
+    display: inline-flex;
+    flex-direction: column;
+    flex: 1;
+
+    box-shadow: 0px 0px 3px #C5C5C5;
+    border-radius: 10px;
+
+    .img-photo {
+        display: inline-flex;
+        height: 100px;
+        background-color: #F8F8F8;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .div-content {
+        display: inline-flex;
+        height: 38px;
+        background-color: #FFFFFF;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .div-content span {
+        font-size: 13px;
+        color: #414141;
+        padding: 13px 0px 0px 7px;
+        text-align: left;
+        text-decoration: none;
+    }
+`;
+
+export const WrapMenuContainer = styled.section`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50vh;
+    background-color: #F8F8F8;
+    margin-top: 30px;
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1em;
+        margin: 25px 25px;
+    }
+    .menu .arrow-btn {
+        width: 10px;
+        height: 17px;
+    }
+    .menu span {
+        color: #989898;
+    }
+
 `;
