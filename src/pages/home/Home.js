@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header";
 import {
+    ResponsiveDiv,
     SearchContainer,
     ButtonWrap,
     ItemsBtn,
@@ -48,6 +49,7 @@ const Home = () => {
 
     return (
         <>
+        
             <Header />
             <SearchContainer>
                 <p className='userWrap'>
@@ -107,7 +109,8 @@ const Home = () => {
                     ))}
                 </CardContainer>
             </RecommendContainer>
-
+            
+            <ResponsiveDiv/>
         </>
     )
 }

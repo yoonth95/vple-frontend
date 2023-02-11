@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+export const ResponsiveDiv = styled.footer`
+
+  @media (max-height: 740px) {
+    display: inline-flex;
+    width: 100%;
+    height: 75px;
+    background-color: white;
+
+  }
+`;
+
 export const SearchContainer = styled.section`
   display: flex;
   justify-content: center;
@@ -115,7 +126,7 @@ export const RecommendContainer = styled.article`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   height: 213px;
   background-color: white;
 `;
@@ -194,3 +205,6 @@ export const RecommendImageWrap = styled.div`
     font-size: 13px;
   }
 `;
+
+
+

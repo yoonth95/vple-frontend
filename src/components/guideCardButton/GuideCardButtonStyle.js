@@ -15,8 +15,8 @@ export const CardButtonStyle = styled(DefaultButton)`
 `;
 
 export const StyledImgDiv = styled.div`
-    width : 40vw;
-    height: 15vh;
+    width : 150px;
+    height: 130px;
     //background-size: 35vw;, 141.16px;
     background-color: #F8F8F8;
     border-top-left-radius: 10px;
@@ -25,8 +25,8 @@ export const StyledImgDiv = styled.div`
 `;
 
 export const StyledContentDiv = styled.div`
-    width: 40vw;
-    height: 5.5vh;
+    width: 150px;
+    height: 45px;
     //background-size: 132.76px, 42.02px;
     background-color: #FFFFFF;
     border-bottom-left-radius: 10px;
