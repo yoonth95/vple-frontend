@@ -92,12 +92,9 @@ export default function MyProfile() {
 
     //프로필 편집
     const navigate = useNavigate();
-    const moveEditPage = () => {
-        navigate('/myProfile/edit', {
-            state: {
-
-            }
-        });
+    const routerMyPlan = () => {
+        navigate('/view/myplan')
+        window.scrollTo(0, 0)
     }
 
     return (
@@ -118,7 +115,7 @@ export default function MyProfile() {
             <MyPlanContainer>
                 <div className="wrap-title">
                     <SmallTitle>나의 플랜</SmallTitle>
-                    <span>
+                    <span onClick={routerMyPlan}>
                         <span>플랜 전체보기</span>
                         <img src={arrow} className='arrow-btn' />
                     </span>

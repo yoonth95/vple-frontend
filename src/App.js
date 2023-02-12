@@ -11,6 +11,7 @@ import PlanMap from './pages/planMap/PlanMap'
 import Login from "./pages/login/Login";
 import ViewAllGuide from "./pages/viewAllGuide/ViewAllGuide";
 import ViewAllRestaurant from "./pages/viewAllRestaurant/ViewAllRestaurant";
+import ViewAllMyyPlan from './pages/viewAllMyPlan/ViewAllMyPlan';
 import Plan from "./pages/plan/Plan";
 import Home from "./pages/home/Home";
 import GuideDetail from './pages/guideDetail/GuideDetail';
@@ -30,6 +31,7 @@ function App() {
                     <Route path='/login' element={<Login/>}/>
                     <Route path='/view/guide' element={<ViewAllGuide/>}/>
                     <Route path='/view/restaurant' element={<ViewAllRestaurant/>}/>
+                    <Route path='/view/myplan' element={<ViewAllMyyPlan/>}/>
                     <Route path='/guide/detail' element={<GuideDetail/>} />
                     <Route path='/restaurant/detail' element={<RestaurantDetail/>} />
                     <Route path='/myProfile' element={<MyProfile/>} />
