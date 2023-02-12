@@ -3,6 +3,7 @@ import tempGuide from '../../asset/temp/tempGuide.png';
 import React, { useRef, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import Review from '../../components/review/Review';
+import ReviewBoard from '../../components/reviewBoard/ReviewBoard';
 
 import {
     ImageContainer,
@@ -27,7 +28,6 @@ import {
     WrapReviews,
     TagDiv,
     UpButton,
-
 
 } from '../../pages/restaurantDetail/RestaurantDetailStyle';
 import { ButtonStyle } from '../../styles/ButtonStyle';
@@ -57,16 +57,18 @@ export default function GuideDetail() {
     ];
 
     //스크롤
-    const reviewRef = useRef(null);
+    const scrollRef = useRef(null);
     const scrollToUp = () => {
-        reviewRef.current.scrollIntoView({ behavior: 'smooth' });
+        scrollRef.current.scrollIntoView({ behavior: 'smooth' });
     };
+
+    const [visible, setVisible] = useState(false);
 
     return (
         <>
             <DetailHeader title="식당" />
 
-            <ImageContainer>
+            <ImageContainer ref={scrollRef}>
                 <img src={tempGuide} className='guide-image' />
             </ImageContainer>
 
@@ -124,7 +126,7 @@ export default function GuideDetail() {
                 </WrapButton>
             </WrapMenu>
 
-            <ReviewContainer ref={reviewRef}>
+            <ReviewContainer>
                 <div className='container'>
                     <ReviewTitle>
                         <div className='titleDeco' />
@@ -132,9 +134,13 @@ export default function GuideDetail() {
                         <p className='number'>(14)</p>
                     </ReviewTitle>
                     <div className='write-btn'>
-                        <WriteReviewBtn>작성하기</WriteReviewBtn>
+                        <WriteReviewBtn onClick={() => {
+                            setVisible(!visible);
+                        }}> {visible ? "취소하기" : "작성하기"}</WriteReviewBtn>
                     </div>
                 </div>
+
+                {visible && <ReviewBoard />}
 
                 <WrapReviewBars>
 
@@ -156,12 +162,9 @@ export default function GuideDetail() {
 
                 </WrapReviewBars>
 
-                <div className="partition" />
-                <WrapReviews>
-                    {reviews.map(review => (
-                        <Review />
-                    ))}
-                </WrapReviews>
+                {reviews.map(review => (
+                    <Review />
+                ))}
 
                 <UpButton onClick={scrollToUp}>
                     <img src={IconUp} className='icon' /> 맨 위로

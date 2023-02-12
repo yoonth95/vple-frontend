@@ -3,52 +3,55 @@ import styled from "styled-components";
 import { ButtonStyle } from "../../styles/ButtonStyle";
 
 export const ReviewButton = styled(ButtonStyle)`
-    text-align: left;
+    display: flex;
     width: 100%;
     height: 150px;
+    align-items: center;
+
+    text-align: left;
     background-color: #F8F8F8;
     border-bottom: solid 1px #C9C9C9;
-    position: relative;
-    overflow: hidden;
-    text-overflow: ellipsis;
 
     .text-div{
-        display: inline-block;
-        margin-left: 30px;
-        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-left: 20px;
     }
 
     h4{
+        display: inlie-flex;
         color: black;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 400;
+        margin-bottom: 5px;
     }
 
     .content{
-        padding-top: 5px;
+        height: 5vh;
+        display: inline-flex;
+        overflow: hidden;
+
         font-size: 12px;
         color: #7C7C7C;
-
-        width: 100%;
-        display: inline-block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
 
     .writer-date{
-        padding-top: 45px;
+        display: inline-flex;
+        margin-top: 5px;
         font-size: 10px;
+        margin-left: auto;
         color: #7C7C7C;
     }
 `;
 
 export const ImgDiv = styled.div`
-    width: 93.59px;
-    height: 93.59px;
+    display: inline-block;
+    width: 200px;
+    // width: 93.59px;
+    // height: 93.59px;
     box-shadow: 0px 0px 5px #C5C5C5;
     border-radius: 8px;
-    display: inline-block;
 
     .review-img{
         width: 100%;

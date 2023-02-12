@@ -243,7 +243,6 @@ export const WriteReviewBtn = styled(ButtonStyle)`
     box-shadow: 0px 0px 2px #C5C5C5;
     border-radius: 6px;
 `;
-
 export const WrapReviewBars = styled.div`
     padding: 10px 0px 0 0px;
 `;
@@ -267,10 +266,6 @@ export const PercentBar = styled(ReviewBar)`
         margin-top: 12px;
         margin-left: 15px;
     }
-`;
-
-export const WrapReviews = styled.div `
-
 `;
 
 export const UpButton = styled(ButtonStyle)`
