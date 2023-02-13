@@ -1,60 +1,35 @@
 import React, { useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from '../../asset/logo.png';
+import kakao from '../../asset/kakao.png';
 import {
-    StyledTopMargin, StyledLogo, StyledDiv, Interval, InputDiv, StyledIconEmail, StyledInputEmail,
-    StyledIconLock, StyledInputPassword, RevealButton, StyledFilledButton, LoginOptionButton, StyledButtonG, StyledBar,
-    StyledKaKaoButton, HideButton
+    Container,
+    WrapLogin,
 } from './LoginStyle';
-import { ButtonStyle } from '../../styles/ButtonStyle';
+
 
 export default function Login() {
 
     let navigate = useNavigate();
     const onClickBackHome = () => {
-        navigate('/') 
+        navigate('/')
         window.scrollTo(0, 0)
     };
 
-    const [showPassword, setShowPassword] = useState(false)
-    const changeShowPassword = () => {
-        setShowPassword(!showPassword)
-    }
-
     return (
-        <StyledTopMargin>
+        <>
+            <Container>
+                <span className='no-login'>둘러보기</span>
 
-            <img src={Logo} className='logoIcon' onClick={onClickBackHome}/>
-            <StyledDiv>플랜부터 플래그까지, 비건 여행을 위한 VPLE</StyledDiv>
-
-            <Interval>
-                <InputDiv>
-                    <StyledIconEmail /> <StyledInputEmail placeholder="이메일"></StyledInputEmail>
-                </InputDiv>
-                <InputDiv>
-                    <StyledIconLock /> <StyledInputPassword placeholder="비밀번호"
-                        type={showPassword ? "text" : "password"}></StyledInputPassword>
-                    <ButtonStyle
-                        onClick={changeShowPassword}
-                    > {showPassword ? <HideButton /> : <RevealButton />}
-                    </ButtonStyle>
-                </InputDiv>
-            </Interval>
-
-
-            <StyledFilledButton>로그인</StyledFilledButton>
-
-            <br />
-            <LoginOptionButton>아이디 찾기</LoginOptionButton>
-            <StyledBar>|</StyledBar>
-            <LoginOptionButton>비밀번호 찾기</LoginOptionButton>
-            <StyledBar>|</StyledBar>
-            <StyledButtonG>회원가입</StyledButtonG>
-
-            <br />
-            <StyledKaKaoButton />
-
-        </StyledTopMargin>
+                <WrapLogin>
+                    <img src={Logo} className='logo-icon' onClick={onClickBackHome} />
+                    <div className='catchphrase'>플랜부터 플래그까지, 비건 여행을 위한 VPLE</div>
+                    <div className='login-btn'>
+                        <img src={kakao} className='kakao' /><span>카카오톡으로 로그인</span>
+                    </div>
+                </WrapLogin>
+            </Container>
+        </>
     );
 
 
