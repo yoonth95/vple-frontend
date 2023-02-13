@@ -18,22 +18,21 @@ export const WrapLogin = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    padding-top: 20vh;
+    padding-top: 17vh;
     
     .logo-icon {
-        width: 35vw;
+        width: 140px;
     }
     .catch-phrase {
         
     }
     .kakao {
         width: 30px;
-        
     }
     .login-btn {
         display: flex;
         gap: 4px;
-        width: 80vw;
+        width: 300px;
         height: 50px;
         border-radius: 8px;
         background-color: #FFEB3B;

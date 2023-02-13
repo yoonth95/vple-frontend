@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 export const ResponsiveDiv = styled.footer`
 
+  width: 100%;
+  height: 90px;
+
   @media (max-height: 740px) {
     display: inline-flex;
-    width: 100%;
-    height: 75px;
+    padding-bottom: 10px;
     background-color: white;
 
   }
