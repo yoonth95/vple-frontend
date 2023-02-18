@@ -20,17 +20,17 @@ import {Map, MapMarker} from "react-kakao-maps-sdk";
 import prevBtn from '../../asset/prevBtn.png';
 import nextBtn from '../../asset/nextBtn.png';
 import iconLineLock from '../../asset/IconLineLock.png';
-import Axios from 'axios';
+// import Axios from 'axios';
 
 
-class ApiClient {
+// class ApiClient {
 
-    async searchApi(keyword) {
-        return await Axios.get(`https://vple-backend.all.gagark.shop/api/map/search?keyword=${keyword}`)
-    }
-}
+//     async searchApi(keyword) {
+//         return await Axios.get(`https://vple-backend.all.gagark.shop/api/map/search?keyword=${keyword}`)
+//     }
+// }
 
-const client = new ApiClient()
+// const client = new ApiClient()
 const PlanMap = () => {
     //시트
     const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -84,30 +84,30 @@ const PlanMap = () => {
         setSearchItem(e.target.value);
     }
 
-    const onClickListener = () => {
-        if (!isRequesting) {
-            if (searchItem != '') {
-                setIsRequesting(true)
-                client.searchApi(searchItem).then((res) => {
-                    const places = res.data
-                    setPlaces(places);
-                    const lates = places.map((place) => Number(place.latitude))
-                    const lat = (lates.reduce((a, b) => a + b, 0)) / lates.length
-                    const longs = places.map((place) => Number(place.longitude))
-                    const lng = (longs.reduce((a, b) => a + b, 0)) / longs.length
+    // const onClickListener = () => {
+    //     if (!isRequesting) {
+    //         if (searchItem != '') {
+    //             setIsRequesting(true)
+    //             client.searchApi(searchItem).then((res) => {
+    //                 const places = res.data
+    //                 setPlaces(places);
+    //                 const lates = places.map((place) => Number(place.latitude))
+    //                 const lat = (lates.reduce((a, b) => a + b, 0)) / lates.length
+    //                 const longs = places.map((place) => Number(place.longitude))
+    //                 const lng = (longs.reduce((a, b) => a + b, 0)) / longs.length
 
 
-                    setCenterCoordinate(
-                        {
-                            lat: lng,
-                            lng: lat,
-                        }
-                    )
-                    setIsRequesting(false)
-                })
-            }
-        }
-    }
+    //                 setCenterCoordinate(
+    //                     {
+    //                         lat: lng,
+    //                         lng: lat,
+    //                     }
+    //                 )
+    //                 setIsRequesting(false)
+    //             })
+    //         }
+    //     }
+    // }
 
 
     return (
@@ -117,7 +117,9 @@ const PlanMap = () => {
                 <InputContainer>
                     <input type='text' placeholder='일정에 추가할 장소를 검색하세요' className='search-location'
                            onChange={onChangeSearch}/>
-                    <button className='search-btn' onClick={() => onClickListener()}>검색</button>
+                    <button className='search-btn' 
+                    // onClick={() => onClickListener()}
+                    >검색</button>
                 </InputContainer>
                 <Map // 지도를 표시할 Container
                     center={centerCoordinate}

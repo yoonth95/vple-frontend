@@ -57,7 +57,7 @@ export const ShowMoreButton = styled(ButtonStyle)`
   border-radius: 20px;
   z-index: 2;
   position: absolute;
-  top: 780px;
+  top: 600px;
   left: 200px;
 `;
 
