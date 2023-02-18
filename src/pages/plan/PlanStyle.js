@@ -5,21 +5,12 @@ export const PlanContainer = styled.div`
   background-color: #ffffff;
   padding-left: 26px;
   padding-right: 26px;
-  height: 100vh;
-  
-  .basic-setting{
-    color: #000000;
-    font-size: 18px;
-    font-weight: bold;
-    margin-left: 4px;
-    padding-top: 30px;
-    margin-bottom: 30px;
-  };
+  margin-top: 10px;
 `;
 
 export const SetLocationWrap = styled.div`
   width: 100%;
-  height: 119px;
+  height: 113px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -30,7 +21,7 @@ export const SetLocationWrap = styled.div`
     font-size: 16px;
     margin-top: 20px;
     margin-left: 17px;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
   };
 `;
 
@@ -43,7 +34,7 @@ export const SelectLocationOption = styled.div`
   .select-box{
     color: #A5A5A5;
     font-size: 13px;
-    padding-left: 78px;
+    padding-left: 15px;
     margin-top: 6px;
     width: 44%;
     height: 36px;
@@ -51,6 +42,7 @@ export const SelectLocationOption = styled.div`
     outline: none;
     border: solid 0.5px #858585;
     appearance:none;
+
     .option{
       padding-left: 10px;
       color: #858585;
@@ -60,7 +52,7 @@ export const SelectLocationOption = styled.div`
 
 export const CalendarWrap = styled.div`
   width: 100%;
-  height: 374px;
+  height: 344px;
   border-radius: 10px;
   margin-top: 19px;
   margin-bottom: 19px;
@@ -68,24 +60,21 @@ export const CalendarWrap = styled.div`
 `;
 
 export const CountWrap = styled.div`
-  width: 100%;
   height: 60px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  .people{
-  };
-
+  justify-content: space-between;
+  padding: 0 20px;
 `;
 
 export const CountContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 30%;
-  margin-left: 200px;
+
   .set-btn{
     font-size: 25px;
     line-height: 27px;
@@ -95,18 +84,13 @@ export const CountContainer = styled.div`
     border-radius: 50px;
     border: solid 0.5px black;
   };
-  .count{};
-  //.plus-btn{
-  //  width: 24px;
-  //  height: 24px;
-  //  border-radius: 50px;
-  //  border: solid 0.5px black;
-  //};
+  .count{
+    padding: 0 10px;
+  }
 `;
 
 export const SubmitButton = styled.div`
   margin-top: 20px;
-  margin-bottom: 20px;
   width: 100%;
   height: 61px;
   border-radius: 10px;

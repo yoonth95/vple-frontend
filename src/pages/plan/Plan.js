@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Calendar from 'react-calendar';
-import Header from '../../components/header/Header'
+import TitleHeader from '../../components/titleHeader/TitleHeader';
+
 import {
     CalendarWrap,
     CountContainer,
@@ -34,9 +35,8 @@ const Plan = () => {
     const locationList = ['김포시','의정부시','인천광역시','부산','목포시','강릉시','대구광역시'];
     return(
         <>
-            <Header/>
+            <TitleHeader title="플랜 기본 설정"/>
             <PlanContainer>
-                <p className='basic-setting'>기본 설정</p>
                 <SetLocationWrap>
                     <p className='trip-location'>여행지</p>
                     <SelectLocationOption>
