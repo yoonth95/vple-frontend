@@ -20,15 +20,22 @@ import MyProfile from './pages/myProfile/MyProfile';
 import MyProfileEdit from './pages/myProfileEdit/MyProfileEdit';
 import BottomNav from './components/bottomNav/BottomNav';
 
+import KakaoAuthHandle from './KaKaoAuthHandle';
+
 function App() {
     return (
         <div className="App">
             <Router>
                 <Routes>
+                    <Route path='/login' element={<Login/>}/>
+                    <Route
+                        exact
+                        path="/user/kakao/callback"
+                        component={KakaoAuthHandle}
+                    />
                     <Route path='/' element={<Home/>}/>
                     <Route path='/plan' element={<Plan/>}/>
                     <Route path='/plan/map' element={<PlanMap/>}/>
-                    <Route path='/login' element={<Login/>}/>
                     <Route path='/view/guide' element={<ViewAllGuide/>}/>
                     <Route path='/view/restaurant' element={<ViewAllRestaurant/>}/>
                     <Route path='/view/myplan' element={<ViewAllMyyPlan/>}/>
