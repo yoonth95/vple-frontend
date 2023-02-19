@@ -9,7 +9,7 @@ margin-left: 4px;
 line-height: 14px;
 `;
 export const CardDiv = styled.div`
-width: 420.51px;
+// width: 1fr;
 height: 92.31px;
 background-size: 420.51px, 92.31px;
 box-shadow: 0px 0px 5px #C5C5C5;

@@ -47,29 +47,38 @@ export const InputContainer = styled.div`
   };
 `;
 
-export const ShowMoreButton = styled(ButtonStyle)`
-  width: 100px;
-  height: 30px;
+export const WrapMoreButton = styled.div`
+  display: flex;
+  justify-content: center;
+  
+  width: 52%;
+  height: 47px;
   background-color: #758B6F;
-  background-size: 300px 50px;
-  color: white;
-  font-size: 14px;
-  border-radius: 20px;
-  z-index: 2;
+  border-radius: 50px;
+
   position: absolute;
-  top: 600px;
-  left: 200px;
+  z-index: 1;
+  top: 78%;
+  left: 24%;
+
+  .button {
+    font-size: 16px;
+    color: white;
+    letter-spacing: 0.1em;
+    line-height: 47px;
+  }
 `;
 
 export const CustomSheet = styled(Sheet)`
-    width: 500px;
-    height: 400px;
+    width: 100%;
+    max-width: 500px;
+    height: 50vh;
     margin: auto;
     margin-bottom: 0px;
-
     
     .react-modal-sheet-container {
-   
+      
+      
     }
 
     .react-modal-sheet-header {
@@ -82,16 +91,14 @@ export const CustomSheet = styled(Sheet)`
 
     .react-modal-sheet-content {
 
-        padding: 0px 20px;
-
         .list{
             font-size: 16px;
-            margin: 15px 0px;
+            // margin: 15px 0px;
         }
 
     }
     .react-modal-sheet-backdrop {
-      width: 500px;
+      width: 100%;
     }
 `;
 
@@ -123,7 +130,7 @@ export const WrapTitle = styled.div`
 
 
 export const PlanDiv = styled.div`
-    padding: 0px 40px 40px 20px;
+    // padding: 0 10px;
     background-color: white;
 
     margin-top: 10px;
@@ -151,7 +158,6 @@ export const SaveButton = styled(ButtonStyle)`
     height: 27px;
     border-radius: 6px;
     background-color: #758B6F;
-
 
     color: white;
     font-size: 14px;

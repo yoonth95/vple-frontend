@@ -3,9 +3,10 @@ import {getMapItems} from '../../recoil/state';
 import Header from '../../components/header/Header';
 import TimePicker from '../../components/timePicker/TimePicker';
 import PlanCard from '../../components/planCard/PlanCard';
-
+import TitleHeader from '../../components/titleHeader/TitleHeader';
 import {
     ContainerMap,
+    WrapMoreButton,
     InputContainer,
     ShowMoreButton,
     CustomSheet,
@@ -112,7 +113,7 @@ const PlanMap = () => {
 
     return (
         <>
-            <Header/>
+            <TitleHeader title="플랜 세우기"/>
             <ContainerMap className='map-container'>
                 <InputContainer>
                     <input type='text' placeholder='일정에 추가할 장소를 검색하세요' className='search-location'
@@ -141,8 +142,11 @@ const PlanMap = () => {
                     }
 
                 </Map>
-                <ShowMoreButton onClick={openSheet}>플랜 세우기</ShowMoreButton>
+                <WrapMoreButton>
+                    <div className='button' onClick={openSheet}>🌱 비건 여행 플랜 시작</div>
+                </WrapMoreButton>
             </ContainerMap>
+
             <CustomSheet isOpen={isSheetOpen} onClose={closeSheet}>
                 <CustomSheet.Container>
                     <CustomSheet.Header/>
