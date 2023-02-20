@@ -8,19 +8,12 @@ import {
     ContainerMap,
     WrapMoreButton,
     InputContainer,
-    ShowMoreButton,
-    CustomSheet,
-    WrapTitle,
-    PlanDiv,
-    TimeButton,
-    SaveButton,
-    DeleteAllButton,
-
 } from "./PlanMapStyle";
 import {Map, MapMarker} from "react-kakao-maps-sdk";
 import prevBtn from '../../asset/prevBtn.png';
 import nextBtn from '../../asset/nextBtn.png';
 import iconLineLock from '../../asset/IconLineLock.png';
+import BottomSheet from '../../components/bottomSheet/BottomSheet';
 // import Axios from 'axios';
 
 
@@ -35,9 +28,11 @@ import iconLineLock from '../../asset/IconLineLock.png';
 const PlanMap = () => {
     //시트
     const [isSheetOpen, setIsSheetOpen] = useState(false);
-    const [searchItem, setSearchItem] = useState('');
     const openSheet = () => setIsSheetOpen(true);
     const closeSheet = () => setIsSheetOpen(false);
+
+
+    const [searchItem, setSearchItem] = useState('');
 
     //플랜
     const [cards, setCards] = useState([
@@ -144,33 +139,15 @@ const PlanMap = () => {
                 </Map>
                 <WrapMoreButton>
                     <div className='button' onClick={openSheet}>🌱 비건 여행 플랜 시작</div>
-                </WrapMoreButton>
-            </ContainerMap>
 
-            <CustomSheet isOpen={isSheetOpen} onClose={closeSheet}>
-                <CustomSheet.Container>
-                    <CustomSheet.Header/>
-                    <CustomSheet.Content>
-                        <WrapTitle>
-                            <img src={prevBtn} className='prev_button'/>
-                            <p className='day'>DAY 1</p>
-                            <img src={nextBtn} className='next_button'/>
-                        </WrapTitle>
-                        <PlanDiv>
-                            <p className='start_time'>일정 시작 |
-                                <TimeButton onClick={openModal}>{time} {hour}:{minute}</TimeButton></p>
-                            {isModalOpen === true ?
-                                <TimePicker open={isModalOpen} close={closeModal}/> : null}
-                            <SaveButton>저장</SaveButton>
-                            <img src={iconLineLock} className='icon_lock'/>
-                            <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>
-                            {cards.map(card => (
-                                <PlanCard card={card} onRemove={onRemove}/>
-                            ))}
-                        </PlanDiv>
-                    </CustomSheet.Content>
-                </CustomSheet.Container>
-            </CustomSheet>
+                    {isModalOpen} && <BottomSheet/>
+                </WrapMoreButton>
+                    
+            </ContainerMap>
+            
+            
+
+
         </>
     )
 }

@@ -7,7 +7,7 @@ import {
     WrapLogin,
 } from './LoginStyle';
 
-import {KAKAO_AUTH_URL} from '../../kakaoAuth';
+// import {KAKAO_AUTH_URL} from '../../kakaoAuth';
 
 export default function Login() {
 
@@ -17,6 +17,7 @@ export default function Login() {
         window.scrollTo(0, 0)
     };
 
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id={9bace5ab316d4073d7412f542dd4f2c8}&redirect_uri={http://localhost:3000/user/kakao/callback}&response_type=code`;
     const kakaoLogin = () => {
         window.location.href = KAKAO_AUTH_URL;
     }
