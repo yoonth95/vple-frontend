@@ -3,6 +3,7 @@ import TitleHeader from '../../components/titleHeader/TitleHeader'
 import ProfilePlan from '../../components/profilePlan/ProfilePlan';
 import ProfileFollow from '../../components/profileFollow/ProfileFollow';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 import {
     ProfileContainer,
@@ -20,6 +21,22 @@ import settingButton from '../../asset/profile/setting.png';
 import arrow from '../../asset/arrow.png';
 
 export default function MyProfile() {
+
+    const [myInfo, setMyInfo] = useState([]);
+    
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+            headers: {
+                Authorization: token
+            }
+        })
+        .then(response => {
+            setMyInfo(response.data);
+            console.log(myInfo);
+        });
+    }, []);
 
     const myPlanCards = [
         '2박 3일 경주 여행',
@@ -106,7 +123,7 @@ export default function MyProfile() {
                     <img className='photo' src={tempProfile} />
                 </WrapProfilePhoto>
                 <div>
-                    <h4 className='user-name'>김비플</h4>
+                    <h4 className='user-name'>{myInfo.nickname}</h4>
                     <div className="tag-div">페스코</div>
                 </div>
                 <img className='setting-btn' src={settingButton} />
