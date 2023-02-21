@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import Sheet from 'react-modal-sheet';
 
-const ButtonStyle = styled.button`
-    &:hover{
-        opacity:0.8;
-    }
-    border: none;
-    background-color: transparent;
-    font-size: 11px;
-    color: #B5B5B
-`;
+// const ButtonStyle = styled.button`
+//     &:hover{
+//         opacity:0.8;
+//     }
+//     border: none;
+//     background-color: transparent;
+//     font-size: 11px;
+//     color: #B5B5B
+// `;
+
 
 export const ContainerMap = styled.div`
   width: 100%;

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {getMapItems} from '../../recoil/state';
+import React, { useEffect, useState } from 'react';
+import { getMapItems } from '../../recoil/state';
 import Header from '../../components/header/Header';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
 import {
@@ -7,7 +7,7 @@ import {
     WrapMoreButton,
     InputContainer,
 } from "./PlanMapStyle";
-import {Map, MapMarker} from "react-kakao-maps-sdk";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 import prevBtn from '../../asset/prevBtn.png';
 import nextBtn from '../../asset/nextBtn.png';
 import iconLineLock from '../../asset/IconLineLock.png';
@@ -34,11 +34,11 @@ const PlanMap = () => {
 
     //플랜
     const [cards, setCards] = useState([
-        {id: 1, title: "장", time: "1시간 0분"},
-        {id: 2, title: "장소", time: "2시간 0분"},
-        {id: 3, title: "장소이름", time: "3시간 0분"},
-        {id: 4, title: "장소이름", time: "4시간 0분"},
-        {id: 5, title: "장소이름", time: "5시간 0분"},
+        { id: 1, title: "장", time: "1시간 0분" },
+        { id: 2, title: "장소", time: "2시간 0분" },
+        { id: 3, title: "장소이름", time: "3시간 0분" },
+        { id: 4, title: "장소이름", time: "4시간 0분" },
+        { id: 5, title: "장소이름", time: "5시간 0분" },
     ]);
 
     // places
@@ -106,12 +106,12 @@ const PlanMap = () => {
 
     return (
         <>
-            <TitleHeader title="플랜 세우기"/>
+            <TitleHeader title="플랜 세우기" />
             <ContainerMap className='map-container'>
                 <InputContainer>
                     <input type='text' placeholder='일정에 추가할 장소를 검색하세요' className='search-location'
-                           onChange={onChangeSearch}/>
-                    <button className='search-btn' 
+                        onChange={onChangeSearch} />
+                    <button className='search-btn'
                     // onClick={() => onClickListener()}
                     >검색</button>
                 </InputContainer>
@@ -135,15 +135,21 @@ const PlanMap = () => {
                     }
 
                 </Map>
+
                 <WrapMoreButton>
                     <div className='button' onClick={openSheet}>🌱 비건 여행 플랜 시작</div>
-{/* 
-                    {isModalOpen} && <BottomSheet/> */}
                 </WrapMoreButton>
-                    
+
+                {isSheetOpen && 
+                    <BottomSheet
+                        title="플랜 작성하기" 
+                        closeSheet={() => setIsSheetOpen(false)}
+                        />
+                }
+
             </ContainerMap>
-            
-            
+
+
 
 
         </>

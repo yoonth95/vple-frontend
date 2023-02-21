@@ -134,6 +134,7 @@ export const WrapMenuContainer = styled.section`
     height: 50vh;
     background-color: #F8F8F8;
     margin-top: 30px;
+    padding-bottom: 10vh;
 
     .menu {
         display: flex;

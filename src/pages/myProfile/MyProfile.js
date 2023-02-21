@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import TitleHeader from '../../components/titleHeader/TitleHeader';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -13,6 +12,7 @@ import {
     WrapMenuContainer,
 
 } from './MyProfileStyle';
+import TitleHeader from '../../components/titleHeader/TitleHeader';
 
 import tempProfile from '../../asset/profile/tempProfile.jpeg';
 import settingButton from '../../asset/profile/setting.png';
@@ -36,21 +36,13 @@ export default function MyProfile() {
         });
     }, []);
 
+
+
     const myPlanCards = [
         '2박 3일 경주 여행',
         '1박 2일 부산 여행',
         '가을 여행',
     ]
-
-    const planCards = [
-        '뚜벅이 경주 맛집',
-        '뚜벅이 경주 맛집',
-        '뚜벅이 경주 맛집',
-        '뚜벅이 경주 맛집',
-        '뚜벅이 경주 맛집',
-        '뚜벅이 경주 맛집',
-    ]
-
 
     //프로필 편집
     const navigate = useNavigate();
@@ -103,9 +95,9 @@ export default function MyProfile() {
                 <div className='menu'>최근 본 가이드<img src={arrow} className='arrow-btn'/></div>
                 <div className='menu'>최근 본 식당<img src={arrow} className='arrow-btn'/></div>
                 <div className='menu'>작성한 후기<img src={arrow} className='arrow-btn'/></div>
+                <div className='menu'>로그아웃<img src={arrow} className='arrow-btn'/></div>
                 <div className='menu'>버전<span>1.0.0</span></div>
             </WrapMenuContainer>
-
 
         </>
     );

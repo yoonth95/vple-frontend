@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Sheet from 'react-modal-sheet';
+// import Sheet from 'react-modal-sheet';
 
 const ButtonStyle = styled.button`
     &:hover{
@@ -155,47 +155,47 @@ export const EidtMode = styled.div`
 `
 
 
-export const CustomPhotoSheet = styled(Sheet)`
+// export const CustomPhotoSheet = styled(Sheet)`
 
-    width: 500px;
-    height: 170px;
-    margin: auto;
+//     width: 500px;
+//     height: 170px;
+//     margin: auto;
 
-    margin-bottom: 2px;
-
-
-
-    .react-modal-sheet-container {
-    }
-    .react-modal-sheet-content {
-
-        padding: 0px 20px;
-
-        .list{
-            font-size: 16px;
-            margin: 15px 0px;
-        }
-
-    }
-`;
-export const CustomTypeSheet = styled(Sheet)`
-
-    width: 500px;
-    height: 275px;
-    margin: auto;
-    margin-bottom: 2px;
+//     margin-bottom: 2px;
 
 
-    .react-modal-sheet-container {
-    }
-    .react-modal-sheet-content {
 
-        padding: 0px 20px;
+//     .react-modal-sheet-container {
+//     }
+//     .react-modal-sheet-content {
 
-        .list{
-            font-size: 16px;
-            margin: 15px 0px;
-        }
+//         padding: 0px 20px;
 
-    }
-`;
+//         .list{
+//             font-size: 16px;
+//             margin: 15px 0px;
+//         }
+
+//     }
+// `;
+// export const CustomTypeSheet = styled(Sheet)`
+
+//     width: 500px;
+//     height: 275px;
+//     margin: auto;
+//     margin-bottom: 2px;
+
+
+//     .react-modal-sheet-container {
+//     }
+//     .react-modal-sheet-content {
+
+//         padding: 0px 20px;
+
+//         .list{
+//             font-size: 16px;
+//             margin: 15px 0px;
+//         }
+
+//     }
+// `;
