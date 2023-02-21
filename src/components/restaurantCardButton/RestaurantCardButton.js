@@ -1,6 +1,5 @@
 
 import React, { useState } from "react";
-import DefaultButton from '../DefaultButton';
 import {
     CardButtonStyle,
     StyledImgDiv,

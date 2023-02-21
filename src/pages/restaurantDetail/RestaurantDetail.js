@@ -1,5 +1,4 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
-import tempGuide from '../../asset/temp/tempGuide.png';
 import React, { useRef, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import Review from '../../components/review/Review';
@@ -30,12 +29,10 @@ import {
     UpButton,
 
 } from '../../pages/restaurantDetail/RestaurantDetailStyle';
-import { ButtonStyle } from '../../styles/ButtonStyle';
 import IconMapPointer from '../../asset/IconMapPointer.png';
 import IconClock from '../../asset/IconClock.png';
-import MenuCardButton from '../../components/menuCardButton/MenuCardButton';
-import IconMore from '../../asset/IconMore.png';
-import IconUp from '../../asset/IconUp.png';
+import IconMore from '../../asset/restaurant/IconMore.png';
+import IconUp from '../../asset/restaurant/IconUp.png';
 import arrow from '../../asset/arrow.png';
 
 export default function GuideDetail() {
@@ -69,7 +66,7 @@ export default function GuideDetail() {
             <DetailHeader title="식당" />
 
             <ImageContainer ref={scrollRef}>
-                <img src={tempGuide} className='guide-image' />
+                <img className='guide-image' />
             </ImageContainer>
 
             <WrapInfo>

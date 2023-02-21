@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { ButtonStyle } from "../../styles/ButtonStyle";
 import {
     CardImg,
     WrapPlanTitle,
     
 } from './ProfilePlanEditStyle';
 import IconDelete from '../../asset/IconDelete.png';
-
-import TempImg from '../../asset/temp/tempImg.jpeg';
 
 export default function ProfilePlanEdit() {
 
@@ -16,10 +13,10 @@ export default function ProfilePlanEdit() {
     return (
         <>
             <CardImg>
-                <img src={TempImg} className='card-image' />
-                <ButtonStyle>
+                <img className='card-image' />
+                <button>
                     <img src={IconDelete} className='icon-delete'/>
-                </ButtonStyle>
+                </button>
                 <WrapPlanTitle>
                     <span className='plan-title'>뚜벅이 경주 맛집</span>
                 </WrapPlanTitle>

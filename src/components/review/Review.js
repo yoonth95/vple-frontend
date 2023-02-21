@@ -6,7 +6,7 @@ import {
 
 } from './ReviewStyle';
 
-import tempProfile from '../../asset/temp/tempProfile.jpeg';
+import tempProfile from '../../asset/profile/tempProfile.jpeg';
 
 export default function Review() {
     return (

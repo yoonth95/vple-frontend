@@ -1,9 +1,16 @@
 import styled from "styled-components";
-import DefaultButton from '../DefaultButton';
-import IconClipW from '../../asset/IconClipW.png';
-import IconClipG from '../../asset/IconClipG.png';
 
-export const CardButtonStyle = styled(DefaultButton)`
+const ButtonStyle = styled.button`
+    &:hover{
+        opacity:0.8;
+    }
+    border: none;
+    background-color: transparent;
+    font-size: 11px;
+    color: #B5B5B5;
+`;
+
+export const CardButtonStyle = styled(ButtonStyle)`
     box-shadow: 0px 0px 5px #C5C5C5;
     border-radius: 10px;
     margin: 5px;
@@ -31,29 +38,6 @@ export const StyledContentDiv = styled.div`
     background-color: #FFFFFF;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-`;
-
-export const ClipButtonW = styled(DefaultButton)`
-    background-image: url(${IconClipW});
-    background-size: 17px 20px;
-    width: 17px;
-    height: 20px;
-    background-repeat: no-repeat;
-    
-    position: absolute;
-    top: 13px;
-    right: 13px;
-`;
-export const ClipButtonG = styled(DefaultButton)`
-    background-image: url(${IconClipG});
-    background-size: 17px 20px;
-    width: 17px;
-    height: 20px;
-    background-repeat: no-repeat;
-
-    position: absolute;
-    top: 13px;
-    right: 13px;
 `;
 
 export const StyledTitleFont = styled.div`

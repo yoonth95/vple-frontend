@@ -1,5 +1,4 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
-import tempGuide from '../../asset/temp/tempGuide.png';
 import Delete from '../../asset/IconRedDelete.png';
 import { useLocation } from 'react-router-dom';
 import React, { useState } from "react";
@@ -14,10 +13,6 @@ import {
     WrapTime,
     CardSection,
     WrapCard,
-
-    TimeButton,
-    CardDiv,
-
 
 } from '../../pages/guideDetail/GuideDetailStyle';
 
@@ -44,7 +39,7 @@ export default function GuideDetail() {
             <DetailHeader title="추천 가이드" />
 
             <ImageContainer>
-                <img src={tempGuide} className='guide-image' />
+                <img className='guide-image' />
             </ImageContainer>
 
             <ContentContainer>

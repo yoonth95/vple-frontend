@@ -8,16 +8,13 @@ import {
     ItemsBtn,
     CardSection,
     TitleWrap,
+    WrapBackButton,
     CardContainer,
     CardWrap,
     RecommendContainer,
     RecommendTitleWrap,
-    RecommendImageWrap,
-    ContainerItemsWrap,
-    RecommendItemsWrap
 } from "./HomeStyle";
 import arrow from '../../asset/arrow.png'
-import DefaultButton from '../../components/DefaultButton';
 import GuideCardButton from '../../components/guideCardButton/GuideCardButton';
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
 import axios from 'axios'
@@ -83,9 +80,9 @@ const Home = () => {
                 <TitleWrap>
                     <div className='titleDeco' />
                     <h3 className='recommendGuide'>추천 가이드</h3>
-                    <DefaultButton onClick={routerGuide}>
+                    <WrapBackButton onClick={routerGuide}>
                         <img src={arrow} className='arrow' />
-                    </DefaultButton>
+                    </WrapBackButton>
                 </TitleWrap>
 
                 <CardContainer className="card-container">
@@ -108,9 +105,9 @@ const Home = () => {
                 <RecommendTitleWrap>
                     <div className='titleDeco' />
                     <h3 className='recommendTitle'>추천 식당</h3>
-                    <DefaultButton onClick={routerFood}>
+                    <WrapBackButton onClick={routerFood}>
                         <img src={arrow} className='arrow' />
-                    </DefaultButton>
+                    </WrapBackButton>
                 </RecommendTitleWrap>
 
                 <CardContainer className="card-container">

@@ -1,6 +1,15 @@
 import styled from "styled-components";
-import IconSearch from '../../asset/IconSearch.png';
-import { ButtonStyle} from '../../styles/ButtonStyle';
+import icon_search from '../../asset/search.png';
+
+const ButtonStyle = styled.button`
+    &:hover{
+        opacity:0.8;
+    }
+    border: none;
+    background-color: transparent;
+    font-size: 11px;
+    color: #B5B5B5;
+`;
 
 export const StyledGreyDiv = styled.div`
     width: 500px;
@@ -34,7 +43,7 @@ export const StyledInput = styled.input`
 export const StyledSearchButton = styled(ButtonStyle)`
     width: 14.64px;
     height: 14.61px;
-    background-image: url(${IconSearch});
+    background-image: url(${icon_search});
     background-size: 14.64px, 14.61px;
     margin-left: 10px;
 `;

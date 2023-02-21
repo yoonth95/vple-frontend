@@ -1,7 +1,15 @@
 import styled from "styled-components";
 import Sheet from 'react-modal-sheet';
 
-import { ButtonStyle } from '../../styles/ButtonStyle';
+const ButtonStyle = styled.button`
+    &:hover{
+        opacity:0.8;
+    }
+    border: none;
+    background-color: transparent;
+    font-size: 11px;
+    color: #B5B5B5;
+`;
 
 export const ProfileContainer = styled.div`
     text-align: center;

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {getMapItems} from '../../recoil/state';
 import Header from '../../components/header/Header';
-import TimePicker from '../../components/timePicker/TimePicker';
-import PlanCard from '../../components/planCard/PlanCard';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
 import {
     ContainerMap,
@@ -52,14 +50,14 @@ const PlanMap = () => {
     const [places, setPlaces] = useState([])
 
     //timepicker
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const closeModal = () => {
-        setIsModalOpen(false);
-    }
-    const openModal = () => {
-        setIsModalOpen(true);
-    }
-    const [isRequesting, setIsRequesting] = useState(false)
+    // const [isModalOpen, setIsModalOpen] = useState(false)
+    // const closeModal = () => {
+    //     setIsModalOpen(false);
+    // }
+    // const openModal = () => {
+    //     setIsModalOpen(true);
+    // }
+    // const [isRequesting, setIsRequesting] = useState(false)
 
     // //일정 시작 시간 설정
     const [time, setTime] = useState('오전')
@@ -139,8 +137,8 @@ const PlanMap = () => {
                 </Map>
                 <WrapMoreButton>
                     <div className='button' onClick={openSheet}>🌱 비건 여행 플랜 시작</div>
-
-                    {isModalOpen} && <BottomSheet/>
+{/* 
+                    {isModalOpen} && <BottomSheet/> */}
                 </WrapMoreButton>
                     
             </ContainerMap>

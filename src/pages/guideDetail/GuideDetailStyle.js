@@ -1,8 +1,16 @@
 import styled from "styled-components";
 import IconClipW from '../../asset/IconClipW.png';
 import IconClipG from '../../asset/IconClipG.png';
-import { ButtonStyle } from '../../styles/ButtonStyle';
 
+const ButtonStyle = styled.button`
+    &:hover{
+        opacity:0.8;
+    }
+    border: none;
+    background-color: transparent;
+    font-size: 11px;
+    color: #B5B5B5;
+`;
 
 export const ImageContainer = styled.div`
     .guide-image{

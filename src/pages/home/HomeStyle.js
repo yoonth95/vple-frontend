@@ -95,6 +95,16 @@ export const TitleWrap = styled.div`
   }
 `;
 
+export const WrapBackButton = styled.button`
+    &:hover{
+        opacity:0.8;
+    }
+    border: none;
+    background-color: transparent;
+    font-size: 11px;
+    color: #B5B5B
+`;
+
 export const CardContainer = styled.ul`
   display: flex;
   align-items: center;
@@ -156,55 +166,6 @@ export const RecommendTitleWrap = styled.div`
     margin-left: 5px;
     width: 10px;
     height: 15px;
-  }
-`;
-
-export const ContainerItemsWrap = styled.div`
-  width: 100%;
-  background-color: white;
-  
-`;
-
-export const RecommendItemsWrap = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  overflow: auto;
-  width: 100%;
-  height: 180px;
-  //border: solid 1px red;
-`;
-
-export const RecommendImageWrap = styled.div`
-  flex: 0 0 auto;
-  margin-left: 26px;
-  width: 167px;
-  height: 134px;
-  border-radius: 10px 10px 10px 10px;
-  cursor: pointer;
-  
-  .itemImage {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    border-radius: 10px 10px 10px 10px;
-  }
-
-  .flagIcon {
-    position: relative;
-    bottom: 95%;
-    left: 86%;
-    right: 15%;
-    width: 12px;
-    height: 14px;
-  }
-
-  .itemsName {
-    z-index: 0;
-    position: relative;
-    bottom: 24%;
-    color: white;
-    font-size: 13px;
   }
 `;
 

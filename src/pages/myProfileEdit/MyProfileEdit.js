@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TitleHeader from '../../components/titleHeader/TitleHeader'
 import ProfilePlanEdit from '../../components/profilePlanEdit/ProfilePlanEdit';
-import ProfileFollow from '../../components/profileFollow/ProfileFollow';
 
 import {
     ProfileContainer,
@@ -21,8 +20,7 @@ import {
 } from './MyProfileEditStyle';
 import IconPhoto from '../../asset/IconPhoto.png';
 
-import tempProfile from '../../asset/temp/tempProfile.jpeg';
-import { ButtonStyle } from '../../styles/ButtonStyle';
+import tempProfile from '../../asset/profile/tempProfile.jpeg';
 
 export default function MyProfile() {
 
@@ -34,62 +32,7 @@ export default function MyProfile() {
         '뚜벅이 경주 맛집',
         '뚜벅이 경주 맛집',
     ]
-    const follows = [
-        { name: "팔로우", greeting: "자기소개/한줄소개" },
-        { name: "팔로우", greeting: "자기소개/한줄소개" },
-        { name: "팔로우", greeting: "자기소개/한줄소개" },
-        { name: "팔로우", greeting: "자기소개/한줄소개" },
-    ]
-    const followings = [
-        { name: "팔로잉", greeting: "자기소개/한줄소개" },
-        { name: "팔로잉", greeting: "자기소개/한줄소개" },
-        { name: "팔로잉", greeting: "자기소개/한줄소개" },
-        { name: "팔로잉", greeting: "자기소개/한줄소개" },
-    ]
-
-    const editMode = true;
-
-    //메뉴 리스트
-    const menuList = [
-        {
-            content:
-                <div className='plan'>
-                    {planCards.map((title) => {
-                        return (
-                            <ProfilePlanEdit />
-                        )
-                    }
-                    )}
-                </div>
-        },
-        {
-            content:
-                <div className='follow'>
-                    {followings.map((mate) => {
-                        return (
-                            <ProfileFollow mate={mate} editMode={true} btnMsg={"팔로잉"} />
-                        )
-                    }
-                    )}
-                </div>
-        },
-        {
-            content:
-                <div className='follow'>
-                    {follows.map((mate) => {
-                        return (
-                            <ProfileFollow mate={mate} editMode={true} btnMsg={"취소"} />
-                        )
-                    }
-                    )}
-                </div>
-        },
-    ]
-    //메뉴
-    const [menu, setMenu] = useState(0);
-    const changeMenu = (menuIndex) => {
-        setMenu(menuIndex)
-    }
+    
 
     //프로필 편집 버튼 정보 받기
     //const location = useLocation();
@@ -125,7 +68,7 @@ export default function MyProfile() {
 
     return (
         <>
-            <TitleHeader title="" />
+            {/* <TitleHeader title="" />
             <ProfileContainer>
                 <WrapProfilePhoto>
                     <img className='photo' src={tempProfile} />
@@ -189,7 +132,7 @@ export default function MyProfile() {
                     </CustomTypeSheet.Content>
                 </CustomTypeSheet.Container>
                 <CustomTypeSheet.Backdrop onClick={closeTypeSheet} />
-            </CustomTypeSheet>
+            </CustomTypeSheet> */}
 
             
         </>

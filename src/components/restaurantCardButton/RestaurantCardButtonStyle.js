@@ -1,7 +1,17 @@
 import styled from "styled-components";
-import DefaultButton from '../DefaultButton';
 
-export const CardButtonStyle = styled(DefaultButton)`
+const ButtonStyle = styled.button`
+    &:hover{
+        opacity:0.8;
+    }
+    border: none;
+    background-color: transparent;
+    font-size: 11px;
+    color: #B5B5B5;
+`;
+
+
+export const CardButtonStyle = styled(ButtonStyle)`
     box-shadow: 0px 0px 5px #C5C5C5;
     border-radius: 10px;
     margin: 5px;

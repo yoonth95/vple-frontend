@@ -1,12 +1,7 @@
-
-import React, { useState } from "react";
-import DefaultButton from '../DefaultButton';
 import {
-    CardButtonStyle, 
-    StyledImgDiv, 
-    ClipButtonG, 
-    ClipButtonW,
-    StyledContentDiv, 
+    CardButtonStyle,
+    StyledImgDiv,
+    StyledContentDiv,
     StyledTitleFont,
 } from './GuideCardButtonStyle'
 
@@ -27,22 +22,14 @@ export default function GuideCardButton({ title }) {
 
     return (
         <CardButtonStyle>
+            <div onClick={move}>
 
-            {/* <DefaultButton onClick={() => setClip(!isClip)}>
-                {isClip ? <ClipButtonG /> : <ClipButtonW />} */}
+                <StyledImgDiv />
+                <StyledContentDiv>
+                    <StyledTitleFont>{title}</StyledTitleFont>
+                </StyledContentDiv>
 
-                <div onClick={move}>
-
-                    <StyledImgDiv />
-                    <StyledContentDiv>
-                        <StyledTitleFont>{title}</StyledTitleFont>
-                    </StyledContentDiv>
-
-                </div>
-
-            {/* </DefaultButton> */}
-
-
+            </div>
         </CardButtonStyle>
 
     );
