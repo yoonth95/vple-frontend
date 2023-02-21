@@ -20,8 +20,26 @@ import arrow from '../../asset/arrow.png'
 import DefaultButton from '../../components/DefaultButton';
 import GuideCardButton from '../../components/guideCardButton/GuideCardButton';
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
+import axios from 'axios'
+import { useState, useEffect } from 'react';
 
 const Home = () => {
+
+    const [myInfo, setMyInfo] = useState([]);
+    
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+            headers: {
+                Authorization: token
+            }
+        })
+        .then(response => {
+            setMyInfo(response.data);
+            console.log(myInfo);
+        });
+    }, []);
 
     const bestGuide = [
         { guideTitle: '2박 3일 경주 여행' },
@@ -52,7 +70,7 @@ const Home = () => {
             <Header />
             <SearchContainer>
                 <p className='userWrap'>
-                    <span>김비플</span> 님,
+                    <span>{myInfo.nickname}</span> 님,
                 </p>
                 <p className='textWrap'>비플 함께 친환경 여행을 떠나보세요!</p>
             </SearchContainer>

@@ -20,7 +20,7 @@ import MyProfile from './pages/myProfile/MyProfile';
 import MyProfileEdit from './pages/myProfileEdit/MyProfileEdit';
 import BottomNav from './components/bottomNav/BottomNav';
 
-import KakaoAuthHandle from './KaKaoAuthHandle';
+import KakaoAuthHandle from './pages/login/KakaoAuthHandle';
 
 function App() {
     return (
@@ -30,8 +30,8 @@ function App() {
                     <Route path='/login' element={<Login/>}/>
                     <Route
                         exact
-                        path="/user/kakao/callback"
-                        component={KakaoAuthHandle}
+                        path='/user/kakao/callback'
+                        element={<KakaoAuthHandle/>}
                     />
                     <Route path='/' element={<Home/>}/>
                     <Route path='/plan' element={<Plan/>}/>
