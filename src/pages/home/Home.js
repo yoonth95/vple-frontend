@@ -62,6 +62,7 @@ const Home = () => {
         window.scrollTo(0, 0)
     }
 
+
     return (
         <>
             <Header />
@@ -114,6 +115,7 @@ const Home = () => {
                     {restaurantInfo.content.map(restaurant => (
                         <CardWrap>
                             <RestaurantCardButton
+                                id={restaurant.id}
                                 title={restaurant.name}
                                 image={restaurant.image}
                             />

@@ -19,7 +19,6 @@ export const CardButtonStyle = styled(ButtonStyle)`
     .link{
         text-decoration-line: none;
     }
-
 `;
 
 export const StyledImgDiv = styled.div`

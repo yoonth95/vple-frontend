@@ -9,13 +9,13 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
-export default function RestaurantCardButton({ title, image }) {
+export default function RestaurantCardButton({ id, title, image }) {
 
     const navigate = useNavigate();
     const move = () => {
         navigate('/restaurant/detail', {
             state: {
-                title: title,
+                id: id,
             }
         });
     }

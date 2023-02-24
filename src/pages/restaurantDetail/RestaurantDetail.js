@@ -1,6 +1,10 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { getAllRecommandRestaurantUrl } from '../../recoil/state';
+import restaurantId from '../../recoil/state';
+import axios from 'axios';
 import Review from '../../components/review/Review';
 import ReviewBoard from '../../components/reviewBoard/ReviewBoard';
 
@@ -31,13 +35,12 @@ import {
 } from '../../pages/restaurantDetail/RestaurantDetailStyle';
 import IconMapPointer from '../../asset/IconMapPointer.png';
 import IconClock from '../../asset/IconClock.png';
+
 import IconMore from '../../asset/restaurant/IconMore.png';
 import IconUp from '../../asset/restaurant/IconUp.png';
 import arrow from '../../asset/arrow.png';
 
-export default function GuideDetail() {
-
-    //const location = useLocation();
+export default function RestaurantDetail() {
 
     const [isClip, setClip] = useState(false);
 
@@ -61,6 +64,21 @@ export default function GuideDetail() {
 
     const [visible, setVisible] = useState(false);
 
+    //식당 상세 정보 url 받아오기
+    const location = useLocation();
+    const id = location.state.id;
+
+    const [detailRestaurant, setDetailRestaurant] = useState([]);
+    const [menu, setMenu] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/' + id)
+            .then(response => {
+                setDetailRestaurant(response.data);
+                setMenu(response.data.menus);
+            });
+    }, []);
+
     return (
         <>
             <DetailHeader title="식당" />
@@ -70,27 +88,32 @@ export default function GuideDetail() {
             </ImageContainer>
 
             <WrapInfo>
-                <div className="titleWrap">{"연회바루"}</div>
+                <div className="titleWrap">{detailRestaurant.name}</div>
                 <ClipDiv
                     onClick={() => setClip(!isClip)}>
                     {isClip ? <ClipButtonG /> : <ClipButtonW />}
                 </ClipDiv>
                 <TagContainer>
-                    <div className='tag'>비건</div>
-                    <div className='tag'>락토</div>
+                    {
+                        detailRestaurant.veganTypes && detailRestaurant.veganTypes.map((type, index) => {
+                            return (
+                                <div className='tag'>{type}</div>
+                            )
+                        })
+                    }
                 </TagContainer>
-                <div className="writerWrap">{"위샐러듀는 그리스, 이스라엘, 레바논등의 가정식 전문점으로 한끼 건강한 지중해 가정식을 제공하기 위해 노력합니다. 위샐러듀는 그리스, 이스라엘, 레바논등의 가정식 전문점입니다."}</div>
+                <div className="writerWrap">{detailRestaurant.introduction}</div>
                 <div className="partition" />
 
                 <WrapIconText>
                     <img src={IconMapPointer} className="icon" />
-                    <div className="text">서울 서대문구 이화여대길 52-31</div>
+                    <div className="text">{detailRestaurant.address}</div>
                 </WrapIconText>
                 <WrapIconText>
                     <img src={IconClock} className="icon" />
                     <div className="text">영업시간</div>
                     <WrapRunTime>
-                        <p className="day">월 - 토</p><p className="hour">10:00 - 20:00</p>
+                        <p className="day">{detailRestaurant.openTime}</p><p className="hour">10:00 - 20:00</p>
                     </WrapRunTime>
                     <WrapRunTime>
                         <p className="day">일요일</p><p className="hour">휴무</p>
@@ -106,12 +129,12 @@ export default function GuideDetail() {
                 </MenuTitle>
                 <WrapCards>
                     {
-                        cards.map((value, index) => {
+                        menu.map((value, index) => {
                             return (
                                 <WrapCard>
-                                    <img className='img-photo' />
+                                    <img className='img-photo' src={value.image} />
                                     <div className='div-content'>
-                                        <span className='plan-title'>{value.menu}</span>
+                                        <span className='plan-title'>{value.name}</span>
                                     </div>
                                 </WrapCard>
                             )
@@ -128,7 +151,7 @@ export default function GuideDetail() {
                     <ReviewTitle>
                         <div className='titleDeco' />
                         <h3 className='recommendTitle'>후기</h3>
-                        <p className='number'>(14)</p>
+                        <p className='number'>({detailRestaurant.rating})</p>
                     </ReviewTitle>
                     <div className='write-btn'>
                         <WriteReviewBtn onClick={() => {
