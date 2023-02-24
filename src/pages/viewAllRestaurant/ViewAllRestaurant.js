@@ -1,6 +1,7 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
 import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
 import CardButton from '../../components/guideCardButton/GuideCardButton';
+import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { getAllRecommandRestaurantUrl } from '../../recoil/state';
 
@@ -10,8 +11,10 @@ import {
     CardContainer,
     WrapCards,
     WrapCard,
+    CardWrap,
 
 } from './ViewAllRestaurantStyle';
+import { useNavigate } from 'react-router-dom';
 
 function ViewAllRestaurant() {
 
@@ -56,22 +59,42 @@ function ViewAllRestaurant() {
                 </WrapSelection>
             </SearchContainer>
 
+            <CardContainer className="card-container">
+                    {restaurantInfo.content.map(restaurant => (
+                        <CardWrap>
+                            <RestaurantCardButton
+                                id={restaurant.id}
+                                title={restaurant.name}
+                                image={restaurant.image}
+                            />
+                        </CardWrap>
+
+                    ))}
+                </CardContainer>
+{/* 
             <CardContainer>
                 <WrapCards>
                     {
-                        restaurantInfo.content.map((restaurant, index) => {
-                            return (
-                                <WrapCard>
-                                    <img className='img-photo' src={restaurant.image} />
-                                    <div className='div-content'>
-                                        <span className='restaurant-title'>{restaurant.name}</span>
-                                    </div>
-                                </WrapCard>
-                            )
+                        restaurantInfo.content.map(restaurant => {
+                            
+                                    <RestaurantCardButton
+                                        id={restaurant.id}
+                                        title={restaurant.name}
+                                        image={restaurant.image}
+                                    />
+
+                            // return (
+                                // <WrapCard>
+                                //     <img className='img-photo' src={restaurant.image} />
+                                //     <div className='div-content'>
+                                //         <span className='restaurant-title'>{restaurant.name}</span>
+                                //     </div>
+                                // </WrapCard>
+                            // )
                         })
                     }
                 </WrapCards>
-            </CardContainer>
+            </CardContainer> */}
         </>
     );
 }

@@ -36,45 +36,17 @@ export const WrapSelection = styled.div`
 
 export const CardContainer = styled.section`
     display: flex;
+    flex-wrap: wrap;
+    gap: 1%;
     width: 100%;
-    background-color: white;
     padding-bottom: 20%;
-`;
-export const WrapCards = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5%;
-  margin: 20px 20px;
-`;
-export const WrapCard = styled.div`
-    display: inline-flex;
-    flex-direction: column;
-    width: 30%;
-    margin-bottom: 20px;
+    justify-content: center;
 
-    box-shadow: 0px 0px 3px #C5C5C5;
-    border-radius: 10px;
+    background-color: white;
 
-    .img-photo {
-        display: inline-flex;
-        height: 80px;
-        background-color: #F8F8F8;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        object-fit: cover;
-    }
-    .div-content {
-        display: inline-flex;
-        height: 38px;
-        background-color: #FFFFFF;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-    .div-content .restaurant-title {
-        font-size: 13px;
-        color: #414141;
-        padding: 13px 0px 0px 7px;
-        text-align: left;
-        text-decoration: none;
-    }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+export const CardWrap = styled.div`
 `;
