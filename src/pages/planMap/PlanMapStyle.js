@@ -13,10 +13,11 @@ import styled from "styled-components";
 
 export const ContainerMap = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 91vh;
   background-color: #ffffff;
 
   position: relative;
+  overflow: hidden;
   
   .map-container{
     position: relative;
@@ -67,7 +68,7 @@ export const WrapMoreButton = styled.div`
 
   position: absolute;
   z-index: 1;
-  top: 78%;
+  bottom: 8%;
   left: 24%;
 
   .button {

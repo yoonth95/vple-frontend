@@ -61,6 +61,7 @@ export const WrapCard = styled.div`
         background-color: #F8F8F8;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
+        object-fit: cover;
     }
     .div-content {
         display: inline-flex;
@@ -69,7 +70,7 @@ export const WrapCard = styled.div`
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
-    .div-content span {
+    .div-content .restaurant-title {
         font-size: 13px;
         color: #414141;
         padding: 13px 0px 0px 7px;

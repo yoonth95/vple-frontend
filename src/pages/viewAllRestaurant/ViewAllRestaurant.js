@@ -1,6 +1,8 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
 import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
 import CardButton from '../../components/guideCardButton/GuideCardButton';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { getAllRecommandRestaurantUrl } from '../../recoil/state';
 
 import {
     SearchContainer,
@@ -33,6 +35,8 @@ function ViewAllRestaurant() {
     const provinceList = ['서울', '경기도', '인천', '충청북도', '충청남도', '전라북도', '전라남도,', '강원도', '경상북도', '경상남도'];
     const locationList = ['김포시', '의정부시', '인천광역시', '부산', '목포시', '강릉시', '대구광역시'];
 
+    const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
+
     return (
         <>
             <DetailHeader title="추천 식당 전체 보기" />
@@ -55,12 +59,12 @@ function ViewAllRestaurant() {
             <CardContainer>
                 <WrapCards>
                     {
-                        cards.map((value, index) => {
+                        restaurantInfo.content.map((restaurant, index) => {
                             return (
                                 <WrapCard>
-                                    <img className='img-photo' />
+                                    <img className='img-photo' src={restaurant.image} />
                                     <div className='div-content'>
-                                        <span className='plan-title'>{value}</span>
+                                        <span className='restaurant-title'>{restaurant.name}</span>
                                     </div>
                                 </WrapCard>
                             )

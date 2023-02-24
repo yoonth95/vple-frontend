@@ -142,7 +142,7 @@ const PlanMap = () => {
 
                 {isSheetOpen && 
                     <BottomSheet
-                        title="플랜 작성하기" 
+                        title="플랜 작성하기"
                         closeSheet={() => setIsSheetOpen(false)}
                         />
                 }

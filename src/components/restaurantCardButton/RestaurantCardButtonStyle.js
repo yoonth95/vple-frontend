@@ -23,12 +23,15 @@ export const CardButtonStyle = styled(ButtonStyle)`
 `;
 
 export const StyledImgDiv = styled.div`
-    width : 150px;
-    height: 80px;
-    //background-size: 35vw;, 141.16px;
-    background-color: #F8F8F8;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    .img{
+        width : 150px;
+        height: 80px;
+        //background-size: 35vw;, 141.16px;
+        background-color: #F8F8F8;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        object-fit: cover;
+    }
 
 `;
 

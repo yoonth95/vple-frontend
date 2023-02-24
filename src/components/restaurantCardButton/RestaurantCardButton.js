@@ -9,7 +9,7 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
-export default function RestaurantCardButton({ title }) {
+export default function RestaurantCardButton({ title, image }) {
 
     const navigate = useNavigate();
     const move = () => {
@@ -23,7 +23,9 @@ export default function RestaurantCardButton({ title }) {
     return (
         <CardButtonStyle>
             <div onClick={move}>
-                <StyledImgDiv />
+                <StyledImgDiv>
+                    <img className="img" src={image}/>
+                </StyledImgDiv>
                 <StyledContentDiv>
                     <StyledTitleFont>{title}</StyledTitleFont>
                 </StyledContentDiv>
