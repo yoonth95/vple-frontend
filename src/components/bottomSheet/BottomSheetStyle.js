@@ -32,29 +32,17 @@ export const ContainerSheet = styled.div`
 
   animation-name: ${slideUp};
   animation-duration: 0.2s;
-
-  // .open-sheet {
-  //   // transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
-
-  // }
-  // .close-sheet {
-  //   animation-name: ${slideDown};
-  //   animation-duration: 0.2s;
-  // }
 `;
 
 export const SheetHeader = styled.div`
-  width: 100%;
   height: 40px;
-  border-bottom: 0.5px solid #C5C5C5; 
+  border-bottom: 0.5px solid #C5C5C5;
+
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
 
   text-align: center;
   line-height: 45px;
   font-size: 13px;
-
-  .btn {
-    float: left;
-    margin-left: 20px;
-    margin-right: -20px;
-  }
 `;

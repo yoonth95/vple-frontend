@@ -10,7 +10,7 @@ export const headerListState = atom({
 export const getAllRecommandRestaurantUrl = selector({
     key: 'getAllRecommandRestaurantUrl',
     get: async ({get}) => {
-        const res = await axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant');
+        const res = await axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant?page=1');
         return res.data
     },
 })

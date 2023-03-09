@@ -12,6 +12,8 @@ import prevBtn from '../../asset/prevBtn.png';
 import nextBtn from '../../asset/nextBtn.png';
 import iconLineLock from '../../asset/IconLineLock.png';
 import BottomSheet from '../../components/bottomSheet/BottomSheet';
+
+import { keyframes } from 'styled-components';
 // import Axios from 'axios';
 
 
@@ -24,6 +26,7 @@ import BottomSheet from '../../components/bottomSheet/BottomSheet';
 
 // const client = new ApiClient()
 const PlanMap = () => {
+
     //시트
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     const openSheet = () => setIsSheetOpen(true);
