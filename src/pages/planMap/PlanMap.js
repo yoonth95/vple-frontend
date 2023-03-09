@@ -76,7 +76,6 @@ const PlanMap = () => {
         setCards(empty);
     }
 
-
     const onChangeSearch = (e) => {
         setSearchItem(e.target.value);
     }

@@ -6,11 +6,12 @@ import React, { useState } from 'react';
 //   SheetHeader,
 
 // } from './BottomSheetStyle';
+
 import styled, { keyframes } from "styled-components";
 
 
 const BottomSheet = (props) => {
-
+  
   const slideDown = keyframes`
     from {
       transform: translateY(80vh);
@@ -51,7 +52,7 @@ const BottomSheet = (props) => {
     position: fixed;
     bottom: 0;
 
-    transition: all 0.2;
+    transition: all 0.2s;
 
     animation-name: ${slideUp};
     animation-duration: 0.2s;
@@ -72,7 +73,7 @@ const BottomSheet = (props) => {
 
   return (
     <>
-      <ContainerSheet>
+      <ContainerSheet id="sheet">
         <SheetHeader>
           <span onClick={props.closeSheet}>❎</span>
           <span className="title">{props.title}</span>

@@ -42,7 +42,7 @@ function ViewAllRestaurant() {
 
     const [items, setItems] = useState([]);
     const [target, setTarget] = useState(null);
-    let page = 1;
+    let page = 0;
     
     const fetchData = async() => {
 
