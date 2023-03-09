@@ -9,14 +9,14 @@ import {
     SearchContainer,
     WrapSelection,
     CardContainer,
-    WrapCards,
-    WrapCard,
-    CardWrap,
+    UpButton,
 
 } from './ViewAllRestaurantStyle';
 import { useNavigate } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+
+import IconUp from '../../asset/restaurant/IconUp.png';
 
 function ViewAllRestaurant() {
 
@@ -58,7 +58,6 @@ function ViewAllRestaurant() {
         if(target) {
             const onIntersect = async ([entry], observer) => {
                 if(entry.isIntersecting) {
-                    console.log("is interSecting");
                     observer.unobserve(entry.target);
                     await fetchData();
                     observer.observe(entry.target);
@@ -70,9 +69,15 @@ function ViewAllRestaurant() {
         return () => observer && observer.disconnect();
     }, [target]);
 
+    const scrollToUp = () => {
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
     return (
         <>
-            <DetailHeader title="추천 식당 전체 보기" />
+            <DetailHeader title="추천 식당 전체 보기"/>
 
             <SearchContainer>
                 <WrapSelection>
@@ -91,17 +96,18 @@ function ViewAllRestaurant() {
 
             <CardContainer className="card-container">
                 {items.map(restaurant => (
-                    <CardWrap>
+                    <div>
                         <RestaurantCardButton
                             id={restaurant.id}
                             title={restaurant.name}
                             image={restaurant.image}
                         />
-                    </CardWrap>
+                    </div>
                 ))}
-                <div ref={setTarget}>타겟</div>
+                <div ref={setTarget}/>
             </CardContainer>
 
+            <UpButton onClick={scrollToUp} />
         </>
     );
 }

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import IconUp from '../../asset/restaurant/IconUp.png';
 
 export const SearchContainer = styled.section`
   display: flex;
@@ -48,5 +49,21 @@ export const CardContainer = styled.section`
     display: none;
   }
 `;
-export const CardWrap = styled.div`
+
+export const UpButton = styled.div`
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: white;
+  background-image: url(${IconUp});
+  background-size: 24px 23px;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  box-shadow: 0px 0px 5px #C5C5C5;
+
+  position: sticky;
+  bottom: 110px;
+  left: 85%;
+
 `;

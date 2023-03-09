@@ -56,11 +56,12 @@ export default function RestaurantDetail() {
         { review1: 3 },
     ];
 
-    //스크롤
-    const scrollRef = useRef(null);
     const scrollToUp = () => {
-        scrollRef.current.scrollIntoView({ behavior: 'smooth' });
-    };
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
 
     const [visible, setVisible] = useState(false);
 
@@ -83,7 +84,7 @@ export default function RestaurantDetail() {
         <>
             <DetailHeader title="식당" />
 
-            <ImageContainer ref={scrollRef}>
+            <ImageContainer>
                 <img className='guide-image' />
             </ImageContainer>
 
