@@ -6,10 +6,6 @@ export const headerListState = atom({
     default: ['홈 화면', '플랜 세우기', '저장', '마이페이지'],
 });
 
-export const restaurantId = atom({
-    key: 'restaurantId',
-    default: 1,
-})
 //추천식당
 export const getAllRecommandRestaurantUrl = selector({
     key: 'getAllRecommandRestaurantUrl',
@@ -18,3 +14,5 @@ export const getAllRecommandRestaurantUrl = selector({
         return res.data
     },
 })
+
+

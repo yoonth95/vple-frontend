@@ -18,7 +18,7 @@ import arrow from '../../asset/arrow.png'
 import GuideCardButton from '../../components/guideCardButton/GuideCardButton';
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
 import axios from 'axios'
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { getAllRecommandRestaurantUrl } from '../../recoil/state';
 import { useState, useEffect } from 'react';
 
@@ -36,7 +36,7 @@ const Home = () => {
         })
         .then(response => {
             setMyInfo(response.data);
-            console.log(myInfo);
+            //console.log(myInfo);
         });
     }, []);
 
@@ -45,8 +45,9 @@ const Home = () => {
         { guideTitle: '1박 2일 부산 여행' },
         { guideTitle: '2박 3일 경주 여행' },
         { guideTitle: '1박 2일 부산 여행' },];
-
+    
    const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
+   
 
     let navigate = useNavigate();
     const routerPlan = () => {

@@ -15,6 +15,8 @@ import {
 
 } from './ViewAllRestaurantStyle';
 import { useNavigate } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
 
 function ViewAllRestaurant() {
 
@@ -38,7 +40,35 @@ function ViewAllRestaurant() {
     const provinceList = ['서울', '경기도', '인천', '충청북도', '충청남도', '전라북도', '전라남도,', '강원도', '경상북도', '경상남도'];
     const locationList = ['김포시', '의정부시', '인천광역시', '부산', '목포시', '강릉시', '대구광역시'];
 
-    const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
+    const [items, setItems] = useState([]);
+    const [target, setTarget] = useState(null);
+    let page = 1;
+    
+    const fetchData = async() => {
+
+        const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant?page=${page}`);
+        const data = await response.json();
+        setItems((prev) => prev.concat(data.content));
+
+        page++;
+    };
+
+    useEffect(() => {
+        let observer;
+        if(target) {
+            const onIntersect = async ([entry], observer) => {
+                if(entry.isIntersecting) {
+                    console.log("is interSecting");
+                    observer.unobserve(entry.target);
+                    await fetchData();
+                    observer.observe(entry.target);
+                }
+            };
+            observer = new IntersectionObserver(onIntersect, {threshold: 1});
+            observer.observe(target);
+        }
+        return () => observer && observer.disconnect();
+    }, [target]);
 
     return (
         <>
@@ -60,41 +90,18 @@ function ViewAllRestaurant() {
             </SearchContainer>
 
             <CardContainer className="card-container">
-                    {restaurantInfo.content.map(restaurant => (
-                        <CardWrap>
-                            <RestaurantCardButton
-                                id={restaurant.id}
-                                title={restaurant.name}
-                                image={restaurant.image}
-                            />
-                        </CardWrap>
+                {items.map(restaurant => (
+                    <CardWrap>
+                        <RestaurantCardButton
+                            id={restaurant.id}
+                            title={restaurant.name}
+                            image={restaurant.image}
+                        />
+                    </CardWrap>
+                ))}
+                <div ref={setTarget}>타겟</div>
+            </CardContainer>
 
-                    ))}
-                </CardContainer>
-{/* 
-            <CardContainer>
-                <WrapCards>
-                    {
-                        restaurantInfo.content.map(restaurant => {
-                            
-                                    <RestaurantCardButton
-                                        id={restaurant.id}
-                                        title={restaurant.name}
-                                        image={restaurant.image}
-                                    />
-
-                            // return (
-                                // <WrapCard>
-                                //     <img className='img-photo' src={restaurant.image} />
-                                //     <div className='div-content'>
-                                //         <span className='restaurant-title'>{restaurant.name}</span>
-                                //     </div>
-                                // </WrapCard>
-                            // )
-                        })
-                    }
-                </WrapCards>
-            </CardContainer> */}
         </>
     );
 }
