@@ -1,9 +1,5 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
-import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
-import CardButton from '../../components/guideCardButton/GuideCardButton';
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { getAllRecommandRestaurantUrl } from '../../recoil/state';
 
 import {
     SearchContainer,
@@ -12,11 +8,8 @@ import {
     UpButton,
 
 } from './ViewAllRestaurantStyle';
-import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useState, useRef } from 'react';
-import axios from 'axios';
 
-import IconUp from '../../asset/restaurant/IconUp.png';
 
 function ViewAllRestaurant() {
 
@@ -41,12 +34,18 @@ function ViewAllRestaurant() {
         { city: '충북', province: ['전체', '단양군', '영동군', '음성군', '제천시', '청주시', '충주시',] },
     ]
     const [provinceList, setProvinceList] = useState(['전체']);
-    const getList = () => {
-        var index = locationList.findIndex((prop) => {
-            if (prop.city == document.getElementById('selected_city').value) return true
-        })
-        setProvinceList(locationList[index].province);
-    }
+    const [isChange, setIsChange] = useState(false);
+    // const [selectedCity, setSelectedCity] = useState('전체');
+    let selectedCity = '전체';
+    let selectedProvince = '전체';
+    // const [selectedProvince, setSelectedProvince] = useState('전체');
+    // const getList = async () => {
+    //     setIsChange(true);
+    //     var index = locationList.findIndex((prop) => {
+    //         if (prop.city == document.getElementById('selected_city').value) return true
+    //     })
+    //     setProvinceList(locationList[index].province);
+    // }
 
 
     const [items, setItems] = useState([]);
@@ -55,13 +54,29 @@ function ViewAllRestaurant() {
 
     const fetchData = async () => {
 
-        // ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=전북&city=전체&page=0
+        var index = locationList.findIndex((prop) => {
+            if (prop.city == document.getElementById('selected_city').value) return true;
+        })
+        setProvinceList(locationList[index].province);
 
-        const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant?page=${page}`);
+        if(document.getElementById('selected_city').value !== selectedCity || 
+            document.getElementById('selected_province').value !== selectedProvince) {
+
+            selectedCity = document.getElementById('selected_city').value;
+            selectedProvince = document.getElementById('selected_province').value;
+            
+            setIsChange(true);
+            setItems([]);
+            setIsChange(false);
+        }
+
+        const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${document.getElementById('selected_city').value}&city=${document.getElementById('selected_province').value}&page=${page}`);
+
         const data = await response.json();
         setItems((prev) => prev.concat(data.content));
         page++;
     };
+
 
     useEffect(() => {
         let observer;
@@ -93,12 +108,12 @@ function ViewAllRestaurant() {
 
             <SearchContainer>
                 <WrapSelection>
-                    <select className='select-box' id="selected_city" onChange={getList}>
+                    <select className='select-box' id="selected_city" onChange={fetchData}>
                         {locationList.map((region) => {
                             return <option className='option'>{region.city}</option>
                         })}
                     </select>
-                    <select className='select-box'>
+                    <select className='select-box' id="selected_province" onChange={fetchData}>
                         {provinceList.map((location) => {
                             return <option className='option'>{location}</option>
                         })}
