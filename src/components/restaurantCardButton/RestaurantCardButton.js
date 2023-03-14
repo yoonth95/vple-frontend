@@ -9,7 +9,7 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
-export default function RestaurantCardButton({ id, title, image }) {
+export default function RestaurantCardButton({ id, title, image,  }) {
 
     const navigate = useNavigate();
     const move = () => {
@@ -18,6 +18,7 @@ export default function RestaurantCardButton({ id, title, image }) {
                 id: id,
             }
         });
+        window.scrollTo(0,0)
     }
 
     return (

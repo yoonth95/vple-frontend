@@ -7,7 +7,11 @@ export const SearchContainer = styled.section`
   width: 100%;
   height: 75px;
   background-color: #F8F8F8;
+  position: sticky;
+  top: 0px;
+  z-index: 3;
 `;
+
 export const WrapSelection = styled.div`
   width: 100%;
   display: flex;
@@ -19,6 +23,7 @@ export const WrapSelection = styled.div`
     margin-top: 6px;
     width: 47%;
     height: 36px;
+    // size: "5";
 
     color: #A5A5A5;
     font-size: 13px;

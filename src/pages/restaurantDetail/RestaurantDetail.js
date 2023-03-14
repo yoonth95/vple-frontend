@@ -85,7 +85,7 @@ export default function RestaurantDetail() {
             <DetailHeader title="식당" />
 
             <ImageContainer>
-                <img className='guide-image' />
+                <img className='guide-image' src={detailRestaurant.image}/>
             </ImageContainer>
 
             <WrapInfo>

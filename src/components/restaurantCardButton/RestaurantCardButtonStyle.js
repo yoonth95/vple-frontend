@@ -47,7 +47,7 @@ export const StyledContentDiv = styled.div`
 export const StyledTitleFont = styled.div`
     font-size: 16px;
     color: #414141;
-    padding: 13px 0px 0px 5px;
+    padding: 5px 0px 0px 5px;
     text-align: left;
     text-decoration: none;
 `;
