@@ -1,48 +1,54 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+
+export const WrapContent = styled.div`
+  margin-top: 30px;
+
+  height: 100%;
+  overflow: auto;
 
 
-const slideDown = keyframes`
-  from {
-    transform: translateY(0);
+  .edit-plan {
+    margin-left: 30px;
   }
-  to {
-    transform: translateY(40vh);
+  .make-plan {
+    margin-left: 30px;
+  }
+
+  .temp {
+    width: 100%;
+    height: 20%;
   }
 `;
-const slideUp = keyframes`
-  from {
-    transform: translateY(40vh);
-  }
-  to {
-    transform: translateY(0);
-  }
-`;
 
-export const ContainerSheet = styled.div`
-  width: 100%;
-  height: 40vh;
+export const EditBtn = styled.div`
+  width: 333px;
+  height: 45px;
   background-color: white;
-  box-shadow: 0px 0px 5px #C5C5C5;
-  border-radius: 15px 15px 0 0;
+  border: solid 1px #758B6F;
+  border-radius: 5px;
 
-  z-index: 4;
-
-  position: fixed;
-  bottom: 0;
-
-  animation-name: ${slideUp};
-  animation-duration: 0.2s;
+  font-size: 14px;
+  color: #758B6F;
+  line-height: 45px;
+  text-align: center;
+  
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 30px;
 `;
 
-export const SheetHeader = styled.div`
-  height: 40px;
-  border-bottom: 0.5px solid #C5C5C5;
+export const NewBtn = styled.div`
+  width: 333px;
+  height: 45px;
+  background-color: #758B6F;
+  border-radius: 5px;
 
-  display: flex;
-  justify-content: space-between;
-  margin: 0 20px;
-
-  text-align: center;
+  font-size: 14px;
+  color: white;
   line-height: 45px;
-  font-size: 13px;
+  text-align: center;
+
+  margin: 0 auto;
+  margin-top: 10px;
+
 `;

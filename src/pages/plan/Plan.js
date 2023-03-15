@@ -61,7 +61,7 @@ const Plan = () => {
         })
         setProvinceList(locationList[index].province);
     }
-
+    
     return(
         <>
             <TitleHeader title="플랜 기본 설정"/>

@@ -1,17 +1,21 @@
 import { transform } from 'framer-motion';
 import React, { useState } from 'react';
+import IconBreif from '../../asset/IconBreif.png';
+import IconClose from '../../asset/IconClose.png';
+import IconSpread from '../../asset/IconSpread.png';
 
-// import {
-//   ContainerSheet,
-//   SheetHeader,
+import {
+  WrapContent,
+  EditBtn,
+  NewBtn,
 
-// } from './BottomSheetStyle';
+} from './BottomSheetStyle';
 
 import styled, { keyframes } from "styled-components";
 
 
 const BottomSheet = (props) => {
-  
+
   const slideDown = keyframes`
     from {
       transform: translateY(80vh);
@@ -69,16 +73,67 @@ const BottomSheet = (props) => {
     text-align: center;
     line-height: 45px;
     font-size: 13px;
+
+    .spread-btn {
+      width: 25px;
+      height: 18px;
+      margin: auto 0;
+    }
+    .close-btn {
+      width: 18px;
+      height: 18px;
+      margin: auto 0;
+    }
   `;
+
+
+  const [step, setStep] = useState(0);
+  const changeContent = (index) => {
+    setStep(index)
+  }
+  const contents = [
+    {
+      content:
+        <div>
+          <span
+            className='edit-plan'
+            onClick={changeContent(1)}> ✔️ 저장한 플랜이 있어요!</span>
+          <EditBtn>기존 플랜 수정하기</EditBtn>
+          <span
+            className='make-plan'
+            onClick={changeContent(2)}> ✨ 플랜을 만들래요!</span>
+          <NewBtn>새롭게 플랜 세우기</NewBtn>
+        </div>
+    },
+    {
+      content:
+        <div>
+          <span
+            className='edit-plan'> ✔️ 저장한 플랜이 있어요!</span>
+          <EditBtn>기존 플랜 수정하기</EditBtn>
+          
+        </div>
+    },
+  ]
 
   return (
     <>
       <ContainerSheet id="sheet">
         <SheetHeader>
-          <span onClick={props.closeSheet}>❎</span>
-          <span className="title">{props.title}</span>
-          <span onClick={isHigh ? setHeightLower : setHeightHigher}>👆</span>
+          <img
+            className='spread-btn'
+            onClick={isHigh ? setHeightLower : setHeightHigher}
+            src={isHigh ? IconBreif : IconSpread} />
+          {/* <span className="title">{props.title}</span> */}
+          <img
+            className='close-btn'
+            onClick={props.closeSheet}
+            src={IconClose} />
         </SheetHeader>
+
+        <WrapContent>
+          {contents[0].content}
+        </WrapContent>
 
       </ContainerSheet>
     </>
