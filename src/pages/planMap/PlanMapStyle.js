@@ -25,31 +25,38 @@ export const ContainerMap = styled.div`
 `;
 
 export const InputContainer = styled.div`
+  display: flex;
+  margin: 0 5%;
+  justify-content: space-between;
+
   position: absolute;
   top: 20px;
   z-index: 2;
-  width: 68%;
+  width: 90%;
   
   .search-btn {
-    width: 100px;
+    width: 20%;
     height: 30px;
+
     position: relative;
+    // left: 200px;
+    // top: 20px;
+
     border: none;
     border-radius: 20px;
     background-color: #758B6F;
     color: #ffffff;
-    left: 200px;
-    top: 20px;
   }
   
   .search-location{
     padding-left: 10px;
-    width: 447px;
+    width: 75%;
     @media screen and (max-width: 500px) {
-      width: 81vw;
+      width: 75%;
     }
-    margin-left: 20px;
+    // margin-left: 20px;
     height: 32px;
+
     border-radius: 20px;
     outline: none;
     border: none;
