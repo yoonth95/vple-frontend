@@ -12,7 +12,6 @@ import {
   EditBtn,
   NewBtn,
   WrapCard,
-  SavedPlanCard,
   WrapTop,
   WrapTitle,
   PlanDiv,
@@ -28,6 +27,7 @@ import {
 
 } from './BottomSheetStyle';
 import PlanCard from '../../components/planCard/PlanCard';
+import SavedPlanCard from '../../components/savedPlanCard/SavedPlanCard';
 
 import styled, { keyframes } from "styled-components";
 
@@ -144,19 +144,16 @@ const BottomSheet = (props) => {
     {
       content:
         <div>
+          <WrapTop>
+            <p className='saved-plan'>저장된 나의 플랜</p>
+          </WrapTop>
           <span
             className='edit-plan-small'>수정할 플랜을 선택해주세요.</span>
           <WrapCard>
-
-            <SavedPlanCard>
-              <div className='image'>
-
-              </div>
-            </SavedPlanCard>
-
-            <SavedPlanCard></SavedPlanCard>
+            {cards.map(card => (
+              <SavedPlanCard card={card} onRemove={onRemove} />
+            ))}
           </WrapCard>
-
         </div>
     },
     {

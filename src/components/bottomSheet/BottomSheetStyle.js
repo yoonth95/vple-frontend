@@ -61,16 +61,9 @@ export const NewBtn = styled.div`
 export const WrapCard = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin: 20px 30px;
+  margin: 0px 30px;
 
-`;
-
-export const SavedPlanCard = styled.div`
-  width: 100%;
-  height: 60px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 5px #C5C5C5;
+  margin-bottom: 30%;
 `;
 
 
@@ -98,6 +91,14 @@ export const WrapTop = styled.div`
       height: 25px;
 
       display: inline-block;
+    }
+    .saved-plan {
+      color: #758B6F;
+      font-weight: 700;
+
+      display: inline-block;
+      margin: 0px 18px;
+      margin-bottom: 15px;
     }
 `;
 export const WrapTitle = styled.div`
