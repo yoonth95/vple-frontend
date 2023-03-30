@@ -89,6 +89,17 @@ export const CountContainer = styled.div`
   }
 `;
 
+export const SubmitButtonActive = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  height: 61px;
+  border-radius: 10px;
+  background-color: #758B6F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+`;
 export const SubmitButton = styled.div`
   margin-top: 20px;
   width: 100%;
