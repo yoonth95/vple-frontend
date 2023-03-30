@@ -13,8 +13,12 @@ import nextBtn from '../../asset/nextBtn.png';
 import iconLineLock from '../../asset/IconLineLock.png';
 import BottomSheet from '../../components/bottomSheet/BottomSheet';
 
+
+
+
+
+
 import { keyframes } from 'styled-components';
-// import Axios from 'axios';
 
 
 // class ApiClient {
@@ -145,7 +149,7 @@ const PlanMap = () => {
                 {isSheetOpen && 
                     <BottomSheet
                         title="플랜 작성하기"
-                        closeSheet={() => setIsSheetOpen(false)}
+                        closeSheet={() => closeSheet()}
                         />
                 }
 

@@ -16,6 +16,11 @@ export const ProfileContainer = styled.section`
         font-weight: 500;
         margin-left: 25px;
     }
+    .user-name-logout{
+        font-size: 22px;
+        font-weight: 500;
+        margin-left: 25px;
+    }
 
     .tag-div {
         width: 78px;
@@ -34,6 +39,25 @@ export const ProfileContainer = styled.section`
         font-size: 20px;
         text-align: center;
         line-height: 30px;
+    }
+    .tag-div-logout {
+        width: 88px;
+        height: 30px;
+        background-color: #758B6F;
+        background-size: 65px 22px;
+        color: white;
+        border: solid 1px #758B6F;
+        border-radius: 23px;
+
+        display: inline-flex;
+        margin-top: 12px;
+        margin-left: 20px;
+        justify-content: center;
+
+        font-size: 15px;
+        text-align: center;
+        line-height: 30px;
+        letter-spacing: 1px;
     }
 
     .setting-btn {
@@ -95,6 +119,35 @@ export const WrapCards = styled.div`
     display: flex;
     gap: 2vw;
     margin: 20px 20px;
+
+    .my-plan-logout {
+
+        margin-left: 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        
+        .arrow-btn {
+            width: 50px;
+            height: 50px;
+            box-shadow: 0px 0px 3px #C5C5C5;
+            border-radius: 50%;
+
+            text-align: center;
+            line-height: 55px;
+
+            .arrow-img {
+                width: 20px;
+                
+                
+            }
+        }
+        .text {
+            font-size: 13px;
+            color: #6C6C6C;
+            margin-top: 15px;
+        }
+    }
+    
 `;
 export const WrapCard = styled.div`
     display: inline-flex;

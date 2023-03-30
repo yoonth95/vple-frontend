@@ -13,7 +13,15 @@ import {
 import 'react-calendar/dist/Calendar.css';
 import './CalendarCustom.css';
 import {useNavigate} from "react-router-dom";
+
+
+
+import axios from 'axios';
+
+
+
 const Plan = () => {
+
     const [date, setDate] = useState(new Date);
     let [count, setCount] = useState(1);
     const onClickPlus = () => {
@@ -25,11 +33,6 @@ const Plan = () => {
         } else {
             setCount(prevCount => prevCount-1);
         }
-    }
-
-    let navigate = useNavigate();
-    const onClickRouteMap = () => {
-        navigate('/plan/map')
     }
 
     const locationList = [
@@ -55,13 +58,73 @@ const Plan = () => {
     ]
     const [provinceList, setProvinceList] = useState(['전체']);
 
+    
+    let [selectedCity, setSelectedCity] = useState('전체');
+    let [selectedProvince, setSelectedProvince] = useState('전체');
+
     const getList = () => {
         var index = locationList.findIndex((prop) => {
             if (prop.city == document.getElementById('selected_city').value) return true;
         })
         setProvinceList(locationList[index].province);
+
+        setSelectedCity(document.getElementById('selected_city').value);
+        setSelectedProvince(document.getElementById('selected_province').value);
     }
+
+    const postUrl = "http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan";
+
+    const planSetting = {
+        "title" : "",
+        "startDate" : "2023-03-01",
+        "endDate" : "2023-03-07",
+        "district" : selectedCity,
+        "city" : selectedProvince,
+        "peopleNum" : count,
+
+        
+    }
+    const token = localStorage.getItem('token');
+
+    let navigate = useNavigate();
+    const onClickRouteMap = () => {
+        
+
+
+        //
+
+
+        axios.post(postUrl, planSetting, 
+            {
+                headers: {
+                    Authorization: token
+                },
+            })
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        });
+
+        navigate('/plan/map');
+
+    }
+
+    // const postSetting = () => {
+    //     setSelectedCity(document.getElementById('selected_city').value);
+    //     setSelectedProvince(document.getElementById('selected_province').value);
+
+    //     //
+
+    //     Axios.post(postUrl, planSetting)
+    //     .then(res => {
+    //         console.log(res);
+    //     }).catch(err => {
+    //         console.log(err.response.planSetting.message);
+    //     });
+    // }
     
+
     return(
         <>
             <TitleHeader title="플랜 기본 설정"/>
