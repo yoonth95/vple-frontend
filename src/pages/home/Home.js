@@ -25,21 +25,22 @@ import { useState, useEffect } from 'react';
 const Home = () => {
 
     const [myInfo, setMyInfo] = useState([]);
-    
     const token = localStorage.getItem('token');
 
     useEffect(() => {
 
-        
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
-            headers: {
-                Authorization: token
-            }
-        })
-        .then(response => {
-            setMyInfo(response.data);
-            //console.log(myInfo);
-        });
+        if (token != "null") {
+            axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+                headers: {
+                    Authorization: token
+                }
+            })
+                .then(response => {
+                    setMyInfo(response.data);
+                    //console.log(myInfo);
+                });
+        }
+
     }, []);
 
     const bestGuide = [
@@ -47,9 +48,9 @@ const Home = () => {
         { guideTitle: '1박 2일 부산 여행' },
         { guideTitle: '2박 3일 경주 여행' },
         { guideTitle: '1박 2일 부산 여행' },];
-    
-   const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
-   
+
+    const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
+
 
     let navigate = useNavigate();
     const routerPlan = () => {
@@ -69,6 +70,8 @@ const Home = () => {
     return (
         <>
             <Header />
+
+
             <SearchContainer>
                 <p className='userWrap'>
                     <span>{myInfo.nickname}</span> 님,
@@ -127,8 +130,8 @@ const Home = () => {
                     ))}
                 </CardContainer>
             </RecommendContainer>
-            
-            <ResponsiveDiv/>
+
+            <ResponsiveDiv />
         </>
     )
 }

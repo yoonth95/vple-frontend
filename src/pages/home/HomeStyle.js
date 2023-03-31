@@ -151,6 +151,7 @@ export const RecommendTitleWrap = styled.div`
   margin-left: 10px;
   //border: solid 1px red;
   
+  
   .recommendTitle {
     font-weight: initial;
   }
@@ -164,6 +165,7 @@ export const RecommendTitleWrap = styled.div`
 
   .arrow{
     margin-left: 5px;
+    margin-bottom: 5px;
     width: 10px;
     height: 15px;
   }

@@ -64,6 +64,27 @@ export const InputContainer = styled.div`
   };
 `;
 
+export const WrapSavedButton = styled.div`
+  position: absolute;
+  top: 65px;
+  right: 20px;
+  z-index: 5;
+
+  text-align: center;
+
+  .background-circle {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 3px #C5C5C5;
+  }
+  .clip-img {
+    width: 15px;
+    margin-top: 12px;
+  }
+`;
+
 export const WrapMoreButton = styled.div`
   display: flex;
   justify-content: center;

@@ -4,6 +4,7 @@ import Header from '../../components/header/Header';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
 import {
     ContainerMap,
+    WrapSavedButton,
     WrapMoreButton,
     InputContainer,
 } from "./PlanMapStyle";
@@ -11,6 +12,8 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 import prevBtn from '../../asset/prevBtn.png';
 import nextBtn from '../../asset/nextBtn.png';
 import iconLineLock from '../../asset/IconLineLock.png';
+import IconClipG from '../../asset/IconClipG.png';
+
 import BottomSheet from '../../components/bottomSheet/BottomSheet';
 
 
@@ -29,6 +32,7 @@ import { keyframes } from 'styled-components';
 // }
 
 // const client = new ApiClient()
+
 const PlanMap = () => {
 
     //시트
@@ -114,6 +118,8 @@ const PlanMap = () => {
         <>
             <TitleHeader title="플랜 세우기" />
             <ContainerMap className='map-container'>
+
+
                 <InputContainer>
                     <input type='text' placeholder='일정에 추가할 장소를 검색하세요' className='search-location'
                         onChange={onChangeSearch} />
@@ -121,6 +127,17 @@ const PlanMap = () => {
                     // onClick={() => onClickListener()}
                     >검색</button>
                 </InputContainer>
+
+                {isSheetOpen ?
+                    <WrapSavedButton>
+                        <div className='background-circle'>
+                            <img src={IconClipG} alt="저장 목록 보기 버튼" className='clip-img' />
+                        </div>
+                    </WrapSavedButton>
+                    :
+                    <></>
+                }
+
                 <Map // 지도를 표시할 Container
                     center={centerCoordinate}
                     style={{
@@ -146,11 +163,11 @@ const PlanMap = () => {
                     <div className='button' onClick={openSheet}>🌱 비건 여행 플랜 시작</div>
                 </WrapMoreButton>
 
-                {isSheetOpen && 
+                {isSheetOpen &&
                     <BottomSheet
                         title="플랜 작성하기"
                         closeSheet={() => closeSheet()}
-                        />
+                    />
                 }
 
             </ContainerMap>

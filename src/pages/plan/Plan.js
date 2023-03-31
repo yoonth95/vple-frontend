@@ -14,9 +14,7 @@ import {
 } from "./PlanStyle";
 import 'react-calendar/dist/Calendar.css';
 import './CalendarCustom.css';
-import { useNavigate } from "react-router-dom";
-
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Plan = () => {
 
@@ -116,32 +114,6 @@ const Plan = () => {
         "peopleNum": count,
     }
 
-    const postUrl = "http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan";
-    const token = localStorage.getItem('token');
-    let navigate = useNavigate();
-    const onClickRouteMap = () => {
-
-        axios.post(postUrl, planSetting,
-            {
-                headers: {
-                    Authorization: token
-                },
-            })
-            .then(res => {
-
-                //작업중===============================
-
-
-
-                console.log("res", res);
-
-
-            }).catch(err => {
-                console.log(err);
-            });
-        navigate('/plan/map');
-
-    }
 
     useEffect(() => {
 
@@ -153,7 +125,17 @@ const Plan = () => {
 
     }, [date])
 
+    const navigate = useNavigate();
+    const onClickRouteMap = () => {
 
+        navigate('/plan/map', {
+            state : {
+                planSetting: planSetting,
+            }
+        });
+
+    }
+  
     // const postSetting = () => {
     //     setSelectedCity(document.getElementById('selected_city').value);
     //     setSelectedProvince(document.getElementById('selected_province').value);

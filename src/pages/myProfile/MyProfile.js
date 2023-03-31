@@ -36,12 +36,16 @@ export default function MyProfile() {
             })
                 .then(response => {
                     setMyInfo(response.data);
+
                 });
         }
 
     }, []);
 
     useEffect (() => {
+
+
+        // console.log(myInfo);
 
         if(myInfo.length !== 0) {
 
@@ -60,7 +64,11 @@ export default function MyProfile() {
 
     const navigate = useNavigate();
     const routerMyPlan = () => {
-        navigate('/view/myplan')
+        navigate('/view/myplan', {
+            state: {
+                list: myInfo.myPlans.reverse(),
+            }
+        });
         window.scrollTo(0, 0)
     }
     const routerLogin = () => {
@@ -80,7 +88,7 @@ export default function MyProfile() {
                 <div>
                     <ProfileContainer>
                         <WrapProfilePhoto>
-                            <img className='photo' src={tempProfile} />
+                            <img className='photo' src={myInfo.image} />
                         </WrapProfilePhoto>
                         <div>
                             <h4 className='user-name'>{myInfo.nickname}</h4>

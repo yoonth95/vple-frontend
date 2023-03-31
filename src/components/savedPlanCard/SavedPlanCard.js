@@ -15,8 +15,8 @@ export default function SavedPlanCard({ card, onRemove }) {
     return (
         <CardDiv>
             <WrapImage>
-                <img src={tempImg} className='plan_img1'/>
-                <img src={tempImg} className='plan_img2'/>
+                <img src={card.image} className='plan_img1'/>
+                <img src={card.image} className='plan_img2'/>
             </WrapImage>
             
 

@@ -1,5 +1,8 @@
 import { transform } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+
 import IconBreif from '../../asset/IconBreif.png';
 import IconClose from '../../asset/IconClose.png';
 import IconSpread from '../../asset/IconSpread.png';
@@ -105,6 +108,58 @@ const BottomSheet = (props) => {
     }
   `;
 
+  const [myInfo, setMyInfo] = useState([]);
+  useEffect(() => {
+
+    if (token !== "null") {
+
+      axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+        headers: {
+          Authorization: token,
+        }
+      })
+        .then(response => {
+          setMyInfo(response.data);
+
+        });
+    }
+
+    // console.log(myInfo);
+  }, []);
+
+
+  const location = useLocation();
+  const planSetting = location.state.planSetting;
+
+  const postUrl = "http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan";
+  const token = localStorage.getItem('token');
+  const postPlanData = () => {
+
+
+
+    //myInfo에 해당 id 값을 가진 플랜이 없으면!
+    console.log(myInfo);
+
+
+    axios.post(postUrl, planSetting,
+      {
+        headers: {
+          Authorization: token
+        },
+      })
+      .then(res => {
+
+        changeContent(2);
+
+        console.log("res", res);
+
+
+      }).catch(err => {
+        console.log(err);
+      });
+
+  }
+
 
   const [step, setStep] = useState(0);
   const changeContent = (index) => {
@@ -138,7 +193,7 @@ const BottomSheet = (props) => {
           <EditBtn onClick={() => changeContent(1)}>기존 플랜 수정하기</EditBtn>
           <span
             className='make-plan'> ✨ 플랜을 만들래요!</span>
-          <NewBtn onClick={() => changeContent(2)}>새롭게 플랜 세우기</NewBtn>
+          <NewBtn onClick={() => postPlanData()}>새롭게 플랜 세우기</NewBtn>
         </div>
     },
     {
@@ -150,7 +205,7 @@ const BottomSheet = (props) => {
           <span
             className='edit-plan-small'>수정할 플랜을 선택해주세요.</span>
           <WrapCard>
-            {cards.map(card => (
+            {myInfo.myPlans && myInfo.myPlans.map(card => (
               <SavedPlanCard card={card} onRemove={onRemove} />
             ))}
           </WrapCard>

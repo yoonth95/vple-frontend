@@ -1,6 +1,7 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
 import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
 import CardButton from '../../components/guideCardButton/GuideCardButton';
+import { useLocation } from 'react-router-dom';
 
 import {
     CardContainer,
@@ -11,19 +12,8 @@ import {
 
 function ViewAllMyPlan() {
 
-    const cards = [
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-    ];
+    const location = useLocation();
+    const myPlans = location.state.list;
 
     return (
         <>
@@ -32,12 +22,12 @@ function ViewAllMyPlan() {
             <CardContainer>
                 <WrapCards>
                     {
-                        cards.map((value, index) => {
+                        myPlans.map((value, index) => {
                             return (
                                 <WrapCard>
-                                    <img className='img-photo' />
+                                    <img className='img-photo' src={value.image} />
                                     <div className='div-content'>
-                                        <span className='plan-title'>{value}</span>
+                                        <span className='plan-title'>{value.title}</span>
                                     </div>
                                 </WrapCard>
                             )

@@ -77,6 +77,9 @@ export default function RestaurantDetail() {
             .then(response => {
                 setDetailRestaurant(response.data);
                 setMenu(response.data.menus);
+
+                console.log(response.data);
+                
             });
     }, []);
 
