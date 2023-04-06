@@ -32,7 +32,7 @@ export const TitleContainer = styled.div`
   flex: 10;
   text-align: center;
   width: 100%;
-  padding-right: 30px;
+  padding-right: 22px;
   
   h3{
     color: #758B6F;

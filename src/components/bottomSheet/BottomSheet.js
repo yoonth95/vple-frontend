@@ -124,7 +124,6 @@ const BottomSheet = (props) => {
         });
     }
 
-    // console.log(myInfo);
   }, []);
 
 
@@ -133,14 +132,13 @@ const BottomSheet = (props) => {
 
   const postUrl = "http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan";
   const token = localStorage.getItem('token');
+
+  const [id, setId] = useState(0);
   const postPlanData = () => {
-
-
 
     //myInfo에 해당 id 값을 가진 플랜이 없으면!
     console.log(myInfo);
-
-
+    
     axios.post(postUrl, planSetting,
       {
         headers: {
@@ -149,16 +147,20 @@ const BottomSheet = (props) => {
       })
       .then(res => {
 
+        setId(res.data.split(' ')[0]);
         changeContent(2);
-
-        console.log("res", res);
-
 
       }).catch(err => {
         console.log(err);
       });
 
   }
+
+  useEffect(() => {
+
+    console.log("id", id);
+
+  }, [id])
 
 
   const [step, setStep] = useState(0);

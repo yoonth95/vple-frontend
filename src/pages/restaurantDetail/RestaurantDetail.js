@@ -44,12 +44,6 @@ export default function RestaurantDetail() {
 
     const [isClip, setClip] = useState(false);
 
-    const cards = [
-        { menu: '징거', price: '165000' },
-        { menu: '뽀빠이', price: '13000' },
-        { menu: '레드풀', price: '12500' },
-    ];
-
     const reviews = [
         { review1: 1 },
         { review2: 2 },
