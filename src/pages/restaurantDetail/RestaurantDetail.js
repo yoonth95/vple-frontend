@@ -161,7 +161,6 @@ export default function RestaurantDetail() {
                 {visible && <ReviewBoard />}
 
                 <WrapReviewBars>
-
                     <ReviewBar>
                         <PercentBar count={80}>
                             <div className='review'> 😊 "음식이 맛있어요"</div>

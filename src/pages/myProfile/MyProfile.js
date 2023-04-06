@@ -65,9 +65,9 @@ export default function MyProfile() {
     const navigate = useNavigate();
     const routerMyPlan = () => {
         navigate('/view/myplan', {
-            state: {
-                list: myInfo.myPlans.reverse(),
-            }
+            // state: {
+            //     list: myInfo.myPlans.reverse(),
+            // }
         });
         window.scrollTo(0, 0)
     }
