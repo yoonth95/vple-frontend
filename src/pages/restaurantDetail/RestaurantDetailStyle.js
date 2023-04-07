@@ -251,6 +251,108 @@ export const WriteReviewBtn = styled(ButtonStyle)`
     box-shadow: 0px 0px 2px #C5C5C5;
     border-radius: 6px;
 `;
+
+export const WrapWriting = styled.div`
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 250px;
+  margin: 10px 0;
+  background-color: white;
+  border-radius: 5px;
+
+  .review-content {
+    display: felx;
+    justify-content: space-between;
+
+    margin: 25px 25px;
+
+    .camera {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 90px;
+        height: 90px;
+    
+        box-shadow: 0px 0px 4px #C5C5C5;
+        border-radius: 6px;
+
+        img {
+            width: 35px;
+        }
+    }
+    .wrap-text {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            width: 170px;
+            height: 25px;
+            padding-left: 5px;
+            border: none;
+        }
+        .title::placeholder {
+            color: black;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        .text {
+            width: 175px;
+            height: 60px;
+    
+            margin-top: 3px;
+            margin-left: 1px;
+
+            border: none;
+            resize: none;
+        }
+        .text::placeholder {
+            color: #7C7C7C;
+            padding: 3px 4px;
+            font-size: 11px;
+        }
+    }
+  }
+
+  .wrap-button {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0px 25px;
+
+    .review-button {
+
+        width: 30%;
+        height: 30px;
+    
+        border: solid 1px #758B6F;
+        border-radius: 8px;
+    
+        font-size: 10px;
+        line-height: 30px;
+    }
+  }
+
+  .submit {
+    height: 40px;
+    background-color: #758B6F;
+    border-radius: 8px;
+
+    color: white;
+    line-height: 40px;
+    font-size: 13px;
+
+    margin: 15px 25px;
+  }
+`;
+
 export const WrapReviewBars = styled.div`
     padding: 10px 0px 0 0px;
 `;

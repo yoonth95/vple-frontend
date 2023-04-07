@@ -24,6 +24,7 @@ import {
     WrapButton,
     ReviewContainer,
     ReviewTitle,
+    WrapWriting,
     WriteReviewBtn,
     WrapReviewBars,
     ReviewBar,
@@ -39,6 +40,8 @@ import IconClock from '../../asset/IconClock.png';
 import IconMore from '../../asset/restaurant/IconMore.png';
 import IconUp from '../../asset/restaurant/IconUp.png';
 import arrow from '../../asset/arrow.png';
+
+import camera from '../../asset/camera.png';
 
 export default function RestaurantDetail() {
 
@@ -158,7 +161,27 @@ export default function RestaurantDetail() {
                     </div>
                 </div>
 
-                {visible && <ReviewBoard />}
+                {visible && 
+                    <WrapWriting>
+                        <div className='review-content'>
+                            <div className='camera'>
+                                <img src={camera}/>
+                            </div>
+                            <div className='wrap-text'>
+                                <input className='title' placeholder='제목을 입력해 주세요'></input>
+                                <textarea className='text' placeholder='내용을 입력해 주세요'></textarea>
+                            </div>
+                        </div>
+
+                        <div className='wrap-button'>
+                            <div className='review-button'>"음식이 맛있어요"</div>
+                            <div className='review-button'>"재료가 신선해요"</div>
+                            <div className='review-button'>"직원이 친절해요"</div>
+                        </div>
+                        <div className='submit'>등록하기</div>
+                        
+                    </WrapWriting>
+                }
 
                 <WrapReviewBars>
                     <ReviewBar>
