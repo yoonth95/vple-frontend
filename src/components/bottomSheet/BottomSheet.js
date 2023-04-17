@@ -25,7 +25,7 @@ import {
   WrapBtn,
   TimeButton,
   DeleteAllButton,
-
+  WrapModal,
 
 
 } from './BottomSheetStyle';
@@ -73,7 +73,7 @@ const BottomSheet = (props) => {
     box-shadow: 0px 0px 5px #C5C5C5;
     border-radius: 15px 15px 0 0;
 
-    z-index: 4;
+    z-index: 5;
 
     position: fixed;
     bottom: 0;
@@ -129,7 +129,7 @@ const BottomSheet = (props) => {
 
   const location = useLocation();
   const planSetting = location.state.planSetting;
-  const [planData,setPlanData] = useState(planSetting);
+  const [planData, setPlanData] = useState(planSetting);
   // planData["likeCount"] = 0;
   // planData["opened"] = false;
   // planData["planTravels"] = [];
@@ -169,7 +169,7 @@ const BottomSheet = (props) => {
   }
 
   const setTitle = (newTitle) => {
-    
+
     planData.title = newTitle;
 
     axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
@@ -193,7 +193,7 @@ const BottomSheet = (props) => {
   const editPlan = (card) => {
 
     const plan = myInfo.myPlans.find((plan) => plan.id === card.id)
-    
+
     // console.log(plan);
     // planSetting.id = plan.id;
     // planSetting.image = plan.image;
@@ -207,9 +207,24 @@ const BottomSheet = (props) => {
       .then(response => {
         setPlanData(response.data);
       });
-  
+
     changeContent(2);
   }
+
+
+  const [isShowModal, setIsShowModal] = useState(false);
+  const showModal = () => {
+    setIsShowModal(true);
+  }
+  const hideModal = () => {
+    setIsShowModal(false);
+  }
+
+  const [deleteTitle, setDeleteTitle] = useState("무제");
+
+
+
+
 
   const [cards, setCards] = useState([
     { id: 1, title: "장", time: "1시간 0분" },
@@ -249,9 +264,23 @@ const BottomSheet = (props) => {
             className='edit-plan-small'>수정할 플랜을 선택해주세요.</span>
           <WrapCard>
             {myInfo.myPlans && myInfo.myPlans.slice(0).reverse().map(card => (
-              <SavedPlanCard card={card} onClick={()=>editPlan(card)} />
+              <SavedPlanCard card={card} onClick={() => editPlan(card)} showModal={showModal}/>
             ))}
           </WrapCard>
+          {isShowModal &&
+            <WrapModal>
+              <div className='modal-background'>
+                <div className='text'>{deleteTitle} 플랜을 <br />삭제하시겠습니까?</div>
+                <div className='line'/>
+                <div className='button'>
+                  <span onClick={hideModal}>취소</span><span className='between-btn'>|</span><span onClick={hideModal}>확인</span>
+                </div>
+
+              </div>
+            </WrapModal>
+          }
+
+
         </div>
     },
     {
@@ -295,7 +324,7 @@ const BottomSheet = (props) => {
           </WrapTop>
           <WrapTitle>
             <p className='title-p'>일정 시작</p>
-            <div className='save-btn' onClick={()=>changeContent(2)}>저장</div>
+            <div className='save-btn' onClick={() => changeContent(2)}>저장</div>
           </WrapTitle>
 
           <WrapTimeButton>

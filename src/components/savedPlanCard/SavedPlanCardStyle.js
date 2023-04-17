@@ -11,6 +11,8 @@ margin-top: 15px;
 display: flex;
 align-items: center;
 
+position: relative;
+
 .container{
     width: 100%;
     display: flex;
@@ -27,11 +29,7 @@ align-items: center;
         .spot_name{
             font-size: 14px;
         }
-        .delete_button{
-            width: 11.54px;
-            height: 11.54px;
-            margin-right: 7%;
-        }
+
         
     }
     
@@ -78,4 +76,17 @@ position: relative;
     bottom: 0;
     left: 0;
 }
+`;
+
+export const DeleteButton = styled.img`
+    position: absolute;
+
+    top: -10%;
+    right: 0%;
+
+    width: 11.54px;
+    height: 11.54px;
+
+    padding: 30px 20px;
+
 `;

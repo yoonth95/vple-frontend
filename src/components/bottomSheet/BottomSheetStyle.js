@@ -260,3 +260,51 @@ export const DeleteAllButton = styled.div`
     text-align: center;
     line-height: 46px;
 `;
+
+
+export const WrapModal = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .modal-background{
+        position: absolute;
+        // top: 30vh;
+
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        width: 200px;
+        height: 180px;
+        padding: 0px 20px;
+
+        background-color: white;
+        box-shadow: 0px 0px 3px #C5C5C5;
+        border-radius: 8px;
+
+        .text {
+            text-align: center;
+            margin-top: 40px;
+            line-height: 30px;
+        }
+        .line {
+            border-bottom: 1px solid lightgrey;
+            margin-bottom: 4px;
+        }
+        .button {
+            display: flex;
+            justify-content: space-around;
+        }
+        .between-btn {
+            color: lightgrey;
+        }
+    }
+    
+`;
