@@ -116,6 +116,7 @@ export const WrapTitle = styled.div`
     font-size: 14px;
 
     .title-input {
+      width: 50%;
       padding: 7px 7px 7px 2px;
       border: none;
     }

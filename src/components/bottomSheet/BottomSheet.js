@@ -129,6 +129,10 @@ const BottomSheet = (props) => {
 
   const location = useLocation();
   const planSetting = location.state.planSetting;
+  const [planData,setPlanData] = useState(planSetting);
+  // planData["likeCount"] = 0;
+  // planData["opened"] = false;
+  // planData["planTravels"] = [];
 
   const postUrl = "http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan";
   const token = localStorage.getItem('token');
@@ -136,9 +140,6 @@ const BottomSheet = (props) => {
   const [id, setId] = useState(0);
   const postPlanData = () => {
 
-    //myInfo에 해당 id 값을 가진 플랜이 없으면!
-    console.log(myInfo);
-    
     axios.post(postUrl, planSetting,
       {
         headers: {
@@ -146,7 +147,6 @@ const BottomSheet = (props) => {
         },
       })
       .then(res => {
-
         setId(res.data.split(' ')[0]);
         changeContent(2);
 
@@ -158,14 +158,57 @@ const BottomSheet = (props) => {
 
   useEffect(() => {
 
+    console.log("myInfo", myInfo);
     console.log("id", id);
 
   }, [id])
 
-
   const [step, setStep] = useState(0);
   const changeContent = (index) => {
     setStep(index);
+  }
+
+  const setTitle = (newTitle) => {
+    
+    planData.title = newTitle;
+
+    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
+      "title": planData.title,
+      "startDate": planData.startDate,
+      "endDate": planData.endDate,
+      "isOpened": "false"
+    },
+      {
+        headers: {
+          Authorization: token,
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+      }).catch(err => {
+        console.log(err);
+      })
+  }
+
+  const editPlan = (card) => {
+
+    const plan = myInfo.myPlans.find((plan) => plan.id === card.id)
+    
+    // console.log(plan);
+    // planSetting.id = plan.id;
+    // planSetting.image = plan.image;
+    // planSetting.title = plan.title;
+
+    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
+      headers: {
+        Authorization: token,
+      }
+    })
+      .then(response => {
+        setPlanData(response.data);
+      });
+  
+    changeContent(2);
   }
 
   const [cards, setCards] = useState([
@@ -175,7 +218,6 @@ const BottomSheet = (props) => {
     { id: 4, title: "장소이름", time: "4시간 0분" },
     { id: 5, title: "장소이름", time: "5시간 0분" },
   ]);
-
   //deleteButton
   const onRemove = id => {
     setCards(cards.filter(card => card.id !== id));
@@ -184,7 +226,6 @@ const BottomSheet = (props) => {
     const empty = [];
     setCards(empty);
   }
-
 
   const contents = [
     {
@@ -207,8 +248,8 @@ const BottomSheet = (props) => {
           <span
             className='edit-plan-small'>수정할 플랜을 선택해주세요.</span>
           <WrapCard>
-            {myInfo.myPlans && myInfo.myPlans.map(card => (
-              <SavedPlanCard card={card} onRemove={onRemove} />
+            {myInfo.myPlans && myInfo.myPlans.slice(0).reverse().map(card => (
+              <SavedPlanCard card={card} onClick={()=>editPlan(card)} />
             ))}
           </WrapCard>
         </div>
@@ -222,8 +263,8 @@ const BottomSheet = (props) => {
             <img src={nextBtn} className='next_button' />
           </WrapTop>
           <WrapTitle>
-            <input type="text" name="title" placeholder='플랜 제목을 입력해주세요.' className="title-input" />
-            <p>2023.02.25 ~ 02.28</p>
+            <input type="text" name="title" placeholder='플랜 제목을 입력해주세요.' className="title-input" defaultValue={planData.title} />
+            <p>{planData.startDate} ~ {planData.endDate}</p>
           </WrapTitle>
           <PlanDiv className="plan-div">
             <WrapLine>
@@ -233,7 +274,7 @@ const BottomSheet = (props) => {
               </WrapTime>
               <WrapBtn>
                 <img src={iconLineLock} className='icon_lock' />
-                <div className='save-btn'>저장</div>
+                <div className='save-btn' onClick={() => setTitle(document.querySelector('.title-input').value)}>저장</div>
               </WrapBtn>
             </WrapLine>
 
@@ -254,7 +295,7 @@ const BottomSheet = (props) => {
           </WrapTop>
           <WrapTitle>
             <p className='title-p'>일정 시작</p>
-            <div className='save-btn'>저장</div>
+            <div className='save-btn' onClick={()=>changeContent(2)}>저장</div>
           </WrapTitle>
 
           <WrapTimeButton>
