@@ -7,24 +7,13 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
-export default function GuideCardButton({ title, }) {
+export default function GuideCardButton({ title, onClick}) {
 
-    // const [isClip, setClip] = useState(false);
-
-    // const click = onClick;
-
-    const navigate = useNavigate();
-    // const move = () => {
-    //     navigate('/guide/detail', {
-    //         state: {
-    //             title: title,
-    //         }
-    //     });
-    // }
+    const click = onClick;
 
     return (
         <CardButtonStyle>
-            <div>
+            <div onClick={click}>
 
                 <StyledImgDiv />
                 <StyledContentDiv>

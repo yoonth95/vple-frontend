@@ -58,7 +58,7 @@ const Home = () => {
             });
 
     }, [recommendGuideList]);
-    
+
 
     let navigate = useNavigate();
     const routerPlan = () => {
@@ -69,12 +69,22 @@ const Home = () => {
         navigate('/view/guide', {
             state: {
                 recommandGuideList: recommendGuideList,
+                token: token,
             }
         })
         window.scrollTo(0, 0)
     }
     const routerFood = () => {
         navigate('/view/restaurant')
+        window.scrollTo(0, 0)
+    }
+    const routerGuideDetail = (id) => {
+        navigate('/guide/detail', {
+            state: {
+                id: id,
+                token: token,
+            }
+        })
         window.scrollTo(0, 0)
     }
 
@@ -110,7 +120,9 @@ const Home = () => {
                 <CardContainer className="card-container">
                     {recommendGuideList.content&&recommendGuideList.content.map(card => (
                         <CardWrap>
-                            <GuideCardButton title={card.title}
+                            <GuideCardButton 
+                                title={card.title} 
+                                onClick={()=>routerGuideDetail(card.id)}
                             />
                         </CardWrap>
                         

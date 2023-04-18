@@ -187,7 +187,7 @@ const BottomSheet = (props) => {
       "title": planData.title,
       "startDate": planData.startDate,
       "endDate": planData.endDate,
-      "isOpened": planData.isOpened,
+      "isOpened": planData.opened,
     },
       {
         headers: {
@@ -211,11 +211,15 @@ const BottomSheet = (props) => {
       }
     })
       .then(response => {
+        setId(plan.id);
         setPlanData(response.data);
       });
 
     changeContent(2);
   }
+  useEffect(()=> {
+    setIsOpen(planData.opened);
+  }, [planData])
 
 
   const [isShowModal, setIsShowModal] = useState(false);
@@ -264,15 +268,23 @@ const BottomSheet = (props) => {
     setIsShowModal(false);
   }
 
-  const [isLock, setIsLock] = useState(false);
-  const setPlanLock = () => {
-    setIsLock(true);
-    planData.isOpened = false;
+  const [isOpen, setIsOpen] = useState(planData.opened);
+  const setPlanOpen = () => {
+    setIsOpen(true);
+    planData.opened = true;
   }
-  const setPlanUnlock = () => {
-    setIsLock(false);
-    planData.isOpened = true;
+  const setPlanNotOpen = () => {
+    setIsOpen(false);
+    planData.opened = false;
   }
+
+
+
+
+
+
+
+
   
 
   const [cards, setCards] = useState([
@@ -352,27 +364,21 @@ const BottomSheet = (props) => {
               </WrapTime>
               <WrapBtn>
                 {
-                  isLock ?
-                  <img 
-                  src={iconLock} 
-                  className='icon_lock'
-                  onClick={setPlanUnlock}
-                  /> : 
+                  isOpen ?
                   <img 
                   src={iconUnlock} 
                   className='icon_unlock'
-                  onClick={setPlanLock}
+                  onClick={setPlanNotOpen}
+                  /> :
+                  <img 
+                  src={iconLock} 
+                  className='icon_lock'
+                  onClick={setPlanOpen}
                   />
                 }
                 <div 
                   className='save-btn' 
                   onClick={savePlanData}
-
-
-
-
-
-
                 >저장</div>
               </WrapBtn>
             </WrapLine>

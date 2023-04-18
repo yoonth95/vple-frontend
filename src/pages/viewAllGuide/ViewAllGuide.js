@@ -1,7 +1,7 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
 import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
 import CardButton from '../../components/guideCardButton/GuideCardButton';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {useState} from 'react';
 
 import {
@@ -17,6 +17,7 @@ function ViewAllGuide() {
 
     const location = useLocation();
     const recommandGuideList = location.state.recommandGuideList;
+    const token = location.state.token;
 
     const locationList = [
         { city: '전체', province: ['전체',] },
@@ -55,6 +56,17 @@ function ViewAllGuide() {
         setSelectedProvince(document.getElementById('selected_province').value);
     }
 
+    const navigate = useNavigate();
+    const routerGuideDetail = (id) => {
+        navigate('/guide/detail', {
+            state: {
+                id: id,
+                token: token,
+            }
+        })
+        window.scrollTo(0, 0)
+    }
+
     return (
         <>
             <DetailHeader title="추천 가이드 전체 보기" />
@@ -85,7 +97,7 @@ function ViewAllGuide() {
                     {
                         recommandGuideList.content.map((card) => {
                             return (
-                                <WrapCard>
+                                <WrapCard onClick={()=>routerGuideDetail(card.id)}>
                                     <img className='img-photo' />
                                     <div className='div-content'>
                                         <span className='plan-title'>{card.title}</span>

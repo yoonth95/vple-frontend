@@ -1,7 +1,8 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
 import Delete from '../../asset/IconRedDelete.png';
 import { useLocation } from 'react-router-dom';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 import {
     ImageContainer,
@@ -28,9 +29,24 @@ const cards = [
 export default function GuideDetail() {
 
     const location = useLocation();
+    const id = location.state.id;
+    const token = location.state.token;
 
-    // const detailTitle = location.state.guideTitle;
-    const detailContent = location.state.content;
+    const [guideData, setGuideData] = useState([]);
+
+    useEffect(() => {
+
+        axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
+            headers: {
+                Authorization: token
+            }
+        })
+            .then(response => {
+                setGuideData(response.data);
+                console.log(guideData);
+                // console.log(recommendGuideList);
+            });
+    }, [id])
 
     const [isClip, setClip] = useState(false);
 
@@ -43,12 +59,12 @@ export default function GuideDetail() {
             </ImageContainer>
 
             <ContentContainer>
-                <div className="titleWrap">{"2박 3일 경주 여행"}</div>
+                <div className="titleWrap">{guideData.title}</div>
                 <WrapClip
                     onClick={() => setClip(!isClip)}>
                     {isClip ? <ClipButtonG /> : <ClipButtonW />}
                 </WrapClip>
-                <div className="writerWrap">{detailContent}</div>
+                <div className="writerWrap">{guideData.district}  {guideData.city}</div>
                 <EditButton>플랜 수정</EditButton>
 
                 <WrapTime>
@@ -57,7 +73,7 @@ export default function GuideDetail() {
                 </WrapTime>
 
                 <CardSection>
-                    {cards.map(card => (
+                    {guideData.planTravels&&guideData.planTravels.map(card => (
                         <WrapCard>
                             <img className='plan-img' />
                             <div>
