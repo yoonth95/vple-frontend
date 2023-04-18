@@ -11,7 +11,7 @@ import {
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import prevBtn from '../../asset/prevBtn.png';
 import nextBtn from '../../asset/nextBtn.png';
-import iconLineLock from '../../asset/IconLineLock.png';
+import iconLock from '../../asset/IconLock.png';
 import IconClipG from '../../asset/IconClipG.png';
 
 import BottomSheet from '../../components/bottomSheet/BottomSheet';

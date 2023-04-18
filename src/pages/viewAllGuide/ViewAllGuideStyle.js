@@ -44,7 +44,7 @@ export const WrapCards = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 5%;
-  margin: 20px 20px;
+  margin: 10px 20px 25px 20px;
 `;
 export const WrapCard = styled.div`
     display: inline-flex;
@@ -72,7 +72,7 @@ export const WrapCard = styled.div`
     .div-content span {
         font-size: 13px;
         color: #414141;
-        padding: 13px 0px 0px 7px;
+        padding: 7px 0px 0px 7px;
         text-align: left;
         text-decoration: none;
     }

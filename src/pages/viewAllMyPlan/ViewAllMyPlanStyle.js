@@ -80,7 +80,7 @@ export const WrapCard = styled.div`
     }
     .div-content {
         display: inline-flex;
-        height: 38px;
+        height: 39px;
         background-color: #FFFFFF;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
@@ -88,7 +88,7 @@ export const WrapCard = styled.div`
     .div-content span {
         font-size: 13px;
         color: #414141;
-        padding: 13px 0px 0px 7px;
+        padding: 8px 0px 0px 7px;
         text-align: left;
         text-decoration: none;
     }

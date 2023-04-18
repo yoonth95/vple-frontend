@@ -8,7 +8,8 @@ import IconClose from '../../asset/IconClose.png';
 import IconSpread from '../../asset/IconSpread.png';
 import prevBtn from '../../asset/prevBtn.png';
 import nextBtn from '../../asset/nextBtn.png';
-import iconLineLock from '../../asset/IconLineLock.png';
+import iconLock from '../../asset/IconLock.png';
+import iconUnlock from '../../asset/IconUnlock.png';
 
 import {
   WrapContent,
@@ -168,15 +169,25 @@ const BottomSheet = (props) => {
     setStep(index);
   }
 
-  const setTitle = (newTitle) => {
+  const setTitle = () => {
+    let newTitle = document.querySelector('.title-input').value;
 
+    if(newTitle === "") {
+      newTitle = "(제목없음)";
+    }
+    
     planData.title = newTitle;
+  }
+
+  const savePlanData = () => {
+
+    setTitle();
 
     axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
       "title": planData.title,
       "startDate": planData.startDate,
       "endDate": planData.endDate,
-      "isOpened": "false"
+      "isOpened": planData.isOpened,
     },
       {
         headers: {
@@ -190,14 +201,9 @@ const BottomSheet = (props) => {
       })
   }
 
-  const editPlan = (card) => {
+  const getPlanData = (card) => {
 
     const plan = myInfo.myPlans.find((plan) => plan.id === card.id)
-
-    // console.log(plan);
-    // planSetting.id = plan.id;
-    // planSetting.image = plan.image;
-    // planSetting.title = plan.title;
 
     axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
       headers: {
@@ -213,18 +219,61 @@ const BottomSheet = (props) => {
 
 
   const [isShowModal, setIsShowModal] = useState(false);
-  const showModal = () => {
+  const showModal = (card) => {
+
     setIsShowModal(true);
+
+    setDeleteTitle(card.title);
+    setDeleteId(card.id);
   }
   const hideModal = () => {
     setIsShowModal(false);
   }
 
   const [deleteTitle, setDeleteTitle] = useState("무제");
+  const [deleteId, setDeleteId] = useState(-1);
+  const updateMyInfo = () => {
+    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(response => {
+        setMyInfo(response.data);
+      });
+  }
+  const deletePlanCard = () => {
 
+    const deleteUrl = `http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${deleteId}`;
 
+    axios.delete(deleteUrl,
+      {
+        headers: {
+          Authorization: token
+        },
+      })
+      .then(res => {
+        console.log(res);
+        updateMyInfo();
+        hideModal();
 
+      }).catch(err => {
+        console.log(err);
+      });
+      
+    setIsShowModal(false);
+  }
 
+  const [isLock, setIsLock] = useState(false);
+  const setPlanLock = () => {
+    setIsLock(true);
+    planData.isOpened = false;
+  }
+  const setPlanUnlock = () => {
+    setIsLock(false);
+    planData.isOpened = true;
+  }
+  
 
   const [cards, setCards] = useState([
     { id: 1, title: "장", time: "1시간 0분" },
@@ -264,16 +313,16 @@ const BottomSheet = (props) => {
             className='edit-plan-small'>수정할 플랜을 선택해주세요.</span>
           <WrapCard>
             {myInfo.myPlans && myInfo.myPlans.slice(0).reverse().map(card => (
-              <SavedPlanCard card={card} onClick={() => editPlan(card)} showModal={showModal}/>
+              <SavedPlanCard card={card} onClick={() => getPlanData(card)} showModal={() => showModal(card)} />
             ))}
           </WrapCard>
           {isShowModal &&
             <WrapModal>
               <div className='modal-background'>
                 <div className='text'>{deleteTitle} 플랜을 <br />삭제하시겠습니까?</div>
-                <div className='line'/>
+                <div className='line' />
                 <div className='button'>
-                  <span onClick={hideModal}>취소</span><span className='between-btn'>|</span><span onClick={hideModal}>확인</span>
+                  <span onClick={hideModal}>취소</span><span className='between-btn'>|</span><span onClick={deletePlanCard}>확인</span>
                 </div>
 
               </div>
@@ -302,8 +351,29 @@ const BottomSheet = (props) => {
                   <TimeButton onClick={() => changeContent(3)}>오전 10:00</TimeButton></p>
               </WrapTime>
               <WrapBtn>
-                <img src={iconLineLock} className='icon_lock' />
-                <div className='save-btn' onClick={() => setTitle(document.querySelector('.title-input').value)}>저장</div>
+                {
+                  isLock ?
+                  <img 
+                  src={iconLock} 
+                  className='icon_lock'
+                  onClick={setPlanUnlock}
+                  /> : 
+                  <img 
+                  src={iconUnlock} 
+                  className='icon_unlock'
+                  onClick={setPlanLock}
+                  />
+                }
+                <div 
+                  className='save-btn' 
+                  onClick={savePlanData}
+
+
+
+
+
+
+                >저장</div>
               </WrapBtn>
             </WrapLine>
 

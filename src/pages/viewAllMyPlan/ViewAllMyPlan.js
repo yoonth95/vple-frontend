@@ -91,7 +91,7 @@ function ViewAllMyPlan() {
                 },
             })
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 updateMyInfo();
                 hideModal();
                 changeMode(1);

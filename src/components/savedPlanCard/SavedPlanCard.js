@@ -17,7 +17,7 @@ export default function SavedPlanCard({ card, onClick, showModal }) {
     return (
         <CardDiv>
             <DeleteButton src={iconRedDelete} className='delete_button' onClick={cardDeleteModal}/>
-            <WrapImage>
+            <WrapImage onClick={cardClickEvent}>
                 <img src={card.image} className='plan_img1'/>
                 <img src={card.image} className='plan_img2'/>
             </WrapImage>

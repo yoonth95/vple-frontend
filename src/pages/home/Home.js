@@ -27,6 +27,9 @@ const Home = () => {
     const [myInfo, setMyInfo] = useState([]);
     const token = localStorage.getItem('token');
 
+    const [recommendGuideList, setRecommendGuide] = useState([]);
+    const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
+
     useEffect(() => {
 
         if (token != "null") {
@@ -43,14 +46,19 @@ const Home = () => {
 
     }, []);
 
-    const bestGuide = [
-        { guideTitle: '2박 3일 경주 여행' },
-        { guideTitle: '1박 2일 부산 여행' },
-        { guideTitle: '2박 3일 경주 여행' },
-        { guideTitle: '1박 2일 부산 여행' },];
+    useEffect(() => {
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/like', {
+            headers: {
+                Authorization: token
+            }
+        })
+            .then(response => {
+                setRecommendGuide(response.data);
+                // console.log(recommendGuideList);
+            });
 
-    const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
-
+    }, [recommendGuideList]);
+    
 
     let navigate = useNavigate();
     const routerPlan = () => {
@@ -58,7 +66,11 @@ const Home = () => {
         window.scrollTo(0, 0)
     }
     const routerGuide = () => {
-        navigate('/view/guide')
+        navigate('/view/guide', {
+            state: {
+                recommandGuideList: recommendGuideList,
+            }
+        })
         window.scrollTo(0, 0)
     }
     const routerFood = () => {
@@ -66,11 +78,14 @@ const Home = () => {
         window.scrollTo(0, 0)
     }
 
+    // const move = () => {
+    //     navigate('/guide/detail');
+    //     window.scrollTo(0, 0)
+    // }
 
     return (
         <>
             <Header />
-
 
             <SearchContainer>
                 <p className='userWrap'>
@@ -93,17 +108,13 @@ const Home = () => {
                 </TitleWrap>
 
                 <CardContainer className="card-container">
-
-                    {bestGuide.map(card => (
+                    {recommendGuideList.content&&recommendGuideList.content.map(card => (
                         <CardWrap>
-                            <GuideCardButton
-                                title={card.guideTitle}
+                            <GuideCardButton title={card.title}
                             />
                         </CardWrap>
-
+                        
                     ))}
-
-
                 </CardContainer>
 
             </CardSection>

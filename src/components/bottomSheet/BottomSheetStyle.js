@@ -208,6 +208,10 @@ export const WrapBtn = styled.div`
     width: 15.86px;
     height: 21.82px;
   }
+  .icon_unlock{
+    width: 21px;
+    height: 21.82px;
+  }
 
   .save-btn {
     width: 68px;

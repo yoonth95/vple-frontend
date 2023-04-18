@@ -1,6 +1,7 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
 import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
 import CardButton from '../../components/guideCardButton/GuideCardButton';
+import { useLocation } from 'react-router-dom';
 
 import {
     SearchContainer,
@@ -13,19 +14,8 @@ import {
 
 function ViewAllGuide() {
 
-    const cards = [
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-        '경주 여행 추천',
-    ];
+    const location = useLocation();
+    const recommandGuideList = location.state.recommandGuideList;
 
     const provinceList = ['서울', '경기도', '인천', '충청북도', '충청남도', '전라북도', '전라남도,', '강원도', '경상북도', '경상남도'];
     const locationList = ['김포시', '의정부시', '인천광역시', '부산', '목포시', '강릉시', '대구광역시'];
@@ -52,12 +42,12 @@ function ViewAllGuide() {
             <CardContainer>
                 <WrapCards>
                     {
-                        cards.map((value, index) => {
+                        recommandGuideList.content.map((card) => {
                             return (
                                 <WrapCard>
                                     <img className='img-photo' />
                                     <div className='div-content'>
-                                        <span className='plan-title'>{value}</span>
+                                        <span className='plan-title'>{card.title}</span>
                                     </div>
                                 </WrapCard>
                             )
