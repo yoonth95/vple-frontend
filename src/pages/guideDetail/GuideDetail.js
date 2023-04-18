@@ -31,10 +31,12 @@ export default function GuideDetail() {
     const location = useLocation();
     const id = location.state.id;
     const token = location.state.token;
+    const title = location.state.title;
 
     const [guideData, setGuideData] = useState([]);
 
     useEffect(() => {
+        console.log(location.state.title);
 
         axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
             headers: {
@@ -43,8 +45,7 @@ export default function GuideDetail() {
         })
             .then(response => {
                 setGuideData(response.data);
-                console.log(guideData);
-                // console.log(recommendGuideList);
+                // console.log(guideData);
             });
     }, [id])
 
@@ -52,7 +53,7 @@ export default function GuideDetail() {
 
     return (
         <>
-            <DetailHeader title="추천 가이드" />
+            <DetailHeader title={title} />
 
             <ImageContainer>
                 <img className='guide-image' />
@@ -75,9 +76,9 @@ export default function GuideDetail() {
                 <CardSection>
                     {guideData.planTravels&&guideData.planTravels.map(card => (
                         <WrapCard>
-                            <img className='plan-img' />
+                            <img className='plan-img'/>
                             <div>
-                                <p className='spot-name'>{card.title}</p>
+                                <p className='spot-name'>{card.name}</p>
                                 <p className='time'>소요 시간 | <span className='time-btn'>{card.time}</span></p>
                             </div>
                             <img src={Delete}className='delete-btn' />

@@ -83,6 +83,7 @@ const Home = () => {
             state: {
                 id: id,
                 token: token,
+                title: '추천 가이드',
             }
         })
         window.scrollTo(0, 0)

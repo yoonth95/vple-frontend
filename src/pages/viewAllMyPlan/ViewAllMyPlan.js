@@ -1,7 +1,5 @@
 import DetailHeader from '../../components/titleHeader/TitleHeader'
-import DetailSearchBar from '../../components/searchBar/DetailSearchBar'
-import CardButton from '../../components/guideCardButton/GuideCardButton';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -101,6 +99,17 @@ function ViewAllMyPlan() {
             });
         }
 
+        const navigate = useNavigate();
+        const routerGuideDetail = (id) => {
+            navigate('/guide/detail', {
+                state: {
+                    id: id,
+                    token: token,
+                    title: "나의 플랜",
+                }
+            })
+            window.scrollTo(0, 0)
+        }
 
 
         const contentMode = [
@@ -121,7 +130,7 @@ function ViewAllMyPlan() {
                                 {
                                     myPlans&&myPlans.slice(0).reverse().map((value, index) => {
                                         return (
-                                            <WrapCard>
+                                            <WrapCard onClick={()=>routerGuideDetail(value.id)}>
                                                 <img className='img-photo' src={value.image} />
                                                 <div className='div-content'>
                                                     <span className='plan-title'>{value.title}</span>
