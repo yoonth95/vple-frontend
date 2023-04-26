@@ -19,9 +19,7 @@ import { useNavigate } from 'react-router-dom';
 const Plan = () => {
 
     const [isAllChecked, setIsAllChecked] = useState(false);
-
     const [date, setDate] = useState(new Date, new Date);
-
 
     let [count, setCount] = useState(1);
     const onClickPlus = () => {

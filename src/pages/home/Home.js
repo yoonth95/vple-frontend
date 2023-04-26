@@ -47,7 +47,7 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/like', {
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/like', {
             headers: {
                 Authorization: token
             }
@@ -87,6 +87,14 @@ const Home = () => {
             }
         })
         window.scrollTo(0, 0)
+    }
+    const routerRestaurantDetail = (id) => {
+        navigate('/restaurant/detail', {
+            state: {
+                id: id,
+            }
+        });
+        window.scrollTo(0,0)
     }
 
     // const move = () => {
@@ -142,12 +150,13 @@ const Home = () => {
                 </RecommendTitleWrap>
 
                 <CardContainer className="card-container">
-                    {restaurantInfo.content.map(restaurant => (
+                    {restaurantInfo.content.map(card => (
                         <CardWrap>
                             <RestaurantCardButton
-                                id={restaurant.id}
-                                title={restaurant.name}
-                                image={restaurant.image}
+                                id={card.id}
+                                title={card.name}
+                                image={card.image}
+                                onClick={()=>routerRestaurantDetail(card.id)}
                             />
                         </CardWrap>
 

@@ -12,7 +12,7 @@ import {
 const DetailHeader = (props) => {
     let navigate = useNavigate();
     const onClickRouteBack = () => {
-        navigate(-1)
+        navigate(-1);
     }
 
     return (

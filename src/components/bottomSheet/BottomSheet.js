@@ -34,6 +34,8 @@ import PlanCard from '../../components/planCard/PlanCard';
 import SavedPlanCard from '../../components/savedPlanCard/SavedPlanCard';
 
 import styled, { keyframes } from "styled-components";
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { planIdState, } from '../../recoil/state';
 
 
 const BottomSheet = (props) => {
@@ -131,24 +133,20 @@ const BottomSheet = (props) => {
   const location = useLocation();
   const planSetting = location.state.planSetting;
   const [planData, setPlanData] = useState(planSetting);
-  // planData["likeCount"] = 0;
-  // planData["opened"] = false;
-  // planData["planTravels"] = [];
 
-  const postUrl = "http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan";
+  const planId = useRecoilState(planIdState);
+  const setPlanId = useSetRecoilState(planIdState);
+
   const token = localStorage.getItem('token');
-
-  const [id, setId] = useState(0);
   const postPlanData = () => {
-
-    axios.post(postUrl, planSetting,
+    axios.post("http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan", planSetting,
       {
         headers: {
           Authorization: token
         },
       })
       .then(res => {
-        setId(res.data.split(' ')[0]);
+        setPlanId(res.data.split(' ')[0]);
         changeContent(2);
 
       }).catch(err => {
@@ -157,12 +155,23 @@ const BottomSheet = (props) => {
 
   }
 
+
+
+
+
+  //확인용------------------------------------------------------------
   useEffect(() => {
 
     console.log("myInfo", myInfo);
-    console.log("id", id);
+    console.log("planId", planId);
+    console.log("planData", planData);
 
-  }, [id])
+  }, [planId])
+  //----------------------------------------------------------------
+
+
+
+
 
   const [step, setStep] = useState(0);
   const changeContent = (index) => {
@@ -172,10 +181,10 @@ const BottomSheet = (props) => {
   const setTitle = () => {
     let newTitle = document.querySelector('.title-input').value;
 
-    if(newTitle === "") {
+    if (newTitle === "") {
       newTitle = "(제목없음)";
     }
-    
+
     planData.title = newTitle;
   }
 
@@ -183,7 +192,7 @@ const BottomSheet = (props) => {
 
     setTitle();
 
-    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
+    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId}`, {
       "title": planData.title,
       "startDate": planData.startDate,
       "endDate": planData.endDate,
@@ -211,13 +220,18 @@ const BottomSheet = (props) => {
       }
     })
       .then(response => {
-        setId(plan.id);
+        setPlanId(plan.id);
         setPlanData(response.data);
+        planData.likesCount = response.data.likesCount;
+        planData.opened = response.data.opened;
+        planData.planTravels = response.data.planTravels;
       });
 
     changeContent(2);
   }
-  useEffect(()=> {
+
+  useEffect(() => {
+    countDays();
     setIsOpen(planData.opened);
   }, [planData])
 
@@ -264,7 +278,7 @@ const BottomSheet = (props) => {
       }).catch(err => {
         console.log(err);
       });
-      
+
     setIsShowModal(false);
   }
 
@@ -285,7 +299,7 @@ const BottomSheet = (props) => {
 
 
 
-  
+
 
   const [cards, setCards] = useState([
     { id: 1, title: "장", time: "1시간 0분" },
@@ -302,6 +316,59 @@ const BottomSheet = (props) => {
     const empty = [];
     setCards(empty);
   }
+
+
+
+
+
+
+
+  const [dayPageNum, setDayPageNum] = useState(1);
+  const [dayPageContent, setDayPageContent] = useState([]);
+  const goNextDayPage = () => {
+    if (dayPageNum < planData.days) {
+      setDayPageNum((prev) => prev + 1);
+    }
+  }
+  const goPrevDayPage = () => {
+    if (dayPageNum > 1) {
+      setDayPageNum((prev) => prev - 1);
+    }
+  }
+
+  const countDays = () => {
+
+    const startDate = planData.startDate.split('-');
+    const endDate = planData.endDate.split('-');
+
+    if (startDate[0] === endDate[0]
+      && startDate[1] === endDate[1]) {
+      planData.days = parseInt(endDate[2]) - parseInt(startDate[2]) + 1;
+    }
+    else if (startDate[0] === endDate[0]) {
+
+      const monthDay = 0;
+      switch (startDate[1]) {
+        case "01", "03", "05", "07", "08", "10", "12": monthDay = 31; break;
+        case "02", "04", "06", "09", "11": monthDay = 30; break;
+        default: console.log("error");
+      }
+
+      planData.days = (monthDay-startDate[2]) + endDate[2];
+    }
+    else {
+      
+    }
+  }
+
+  // useEffect(() => {
+  //   const list = planData.planTravels;
+
+  //   setDayPageContent(.filter(planTravel => planTravel.day === dayPageNum));
+  // },[dayPageNum])
+  // const planOfDayList = () => {
+  //   setDayPageContent(planData.planTravels.filter(planTravel => planTravel.day === dayPageNum));
+  // }
 
   const contents = [
     {
@@ -348,9 +415,9 @@ const BottomSheet = (props) => {
       content:
         <div>
           <WrapTop>
-            <img src={prevBtn} className='prev_button' />
-            <p className='day'>DAY 1</p>
-            <img src={nextBtn} className='next_button' />
+            <img src={prevBtn} className='prev_button' onClick={goPrevDayPage} />
+            <p className='day'>DAY {dayPageNum}</p>
+            <img src={nextBtn} className='next_button' onClick={goNextDayPage} />
           </WrapTop>
           <WrapTitle>
             <input type="text" name="title" placeholder='플랜 제목을 입력해주세요.' className="title-input" defaultValue={planData.title} />
@@ -365,28 +432,28 @@ const BottomSheet = (props) => {
               <WrapBtn>
                 {
                   isOpen ?
-                  <img 
-                  src={iconUnlock} 
-                  className='icon_unlock'
-                  onClick={setPlanNotOpen}
-                  /> :
-                  <img 
-                  src={iconLock} 
-                  className='icon_lock'
-                  onClick={setPlanOpen}
-                  />
+                    <img
+                      src={iconUnlock}
+                      className='icon_unlock'
+                      onClick={setPlanNotOpen}
+                    /> :
+                    <img
+                      src={iconLock}
+                      className='icon_lock'
+                      onClick={setPlanOpen}
+                    />
                 }
-                <div 
-                  className='save-btn' 
+                <div
+                  className='save-btn'
                   onClick={savePlanData}
                 >저장</div>
               </WrapBtn>
             </WrapLine>
 
-            {cards.map(card => (
+            {dayPageContent && dayPageContent.map(card => (
               <PlanCard card={card} onRemove={onRemove} />
             ))}
-            <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>
+            {dayPageContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
           </PlanDiv>
         </div>
     },
@@ -395,7 +462,7 @@ const BottomSheet = (props) => {
         <div>
           <WrapTop>
             <img src={prevBtn} className='prev_button' />
-            <p className='day'>DAY 1</p>
+            <p className='day'>DAY {dayPageNum}</p>
             <img src={nextBtn} className='next_button' />
           </WrapTop>
           <WrapTitle>

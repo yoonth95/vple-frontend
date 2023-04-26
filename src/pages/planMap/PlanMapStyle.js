@@ -107,7 +107,35 @@ export const WrapMoreButton = styled.div`
   }
 `;
 
+export const MapModal = styled.div`
+display: flex;
+align-items: center;
 
+width: 110px;
+height: 30px;
+background-color: white;
+border-radius: 10px;
+
+padding: 10px 10px;
+box-shadow: 0px 0px 3px #C5C5C5;
+
+text-align: center;
+
+
+.map-modal-detail {
+  width: 50%;
+  border-right: solid 1px black;
+  white-space: normal;
+
+  padding-top: 4px;
+  padding-right: 3px;
+}
+
+.map-modal-add {
+  width: 50%;
+
+}
+`;
 
 
 

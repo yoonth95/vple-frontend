@@ -9,21 +9,13 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
-export default function RestaurantCardButton({ id, title, image,  }) {
+export default function RestaurantCardButton({ id, title, image, onClick }) {
 
-    const navigate = useNavigate();
-    const move = () => {
-        navigate('/restaurant/detail', {
-            state: {
-                id: id,
-            }
-        });
-        window.scrollTo(0,0)
-    }
+    const click = onClick;
 
     return (
         <CardButtonStyle>
-            <div onClick={move}>
+            <div onClick={click}>
                 <StyledImgDiv>
                     <img className="img" src={image}/>
                 </StyledImgDiv>
