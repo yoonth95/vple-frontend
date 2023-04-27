@@ -29,7 +29,7 @@ export default function SavedPlanCard({ card, onClick, showModal }) {
                 </div>
 
                 <div className='wrap-time-line'>
-                    <p className='day'>2023.01.17</p>
+                    <p className='day'>{card.startDate}~{card.endDate}</p>
                 </div>
             </div>
             

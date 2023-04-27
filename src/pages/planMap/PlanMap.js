@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { getMapItems, planIdState } from '../../recoil/state';
+import { getMapItems, planDayState, planIdState } from '../../recoil/state';
 import Header from '../../components/header/Header';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
 import {
@@ -61,34 +61,38 @@ const PlanMap = () => {
         }
     }
 
-    const [planId, setPlanId] = useRecoilState(planIdState);
+    const planId = useRecoilState(planIdState);
+    const planDay = useRecoilState(planDayState);
     const addPlace = (place) => {
-        console.log(planId);
-        // axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${place.id}`,{
-        //     headers: {
-        //         Authorization: token
-        //     }
-        // })
-        // .then(response => {
-        //     console.log(response);
-        // });
-        // axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel`,
-        //     {
-        //         "name": place.name,
-        //         "planId": planId,
-        //         "longitude": ,
-        //         "latitude": ,
-        //         "day": ,
-        //         "startTime": ,
-        //     },
-        //     {
-        //         headers: {
-        //             Authorization: token
-        //         }
-        //     })
-        //     .then(response => {
 
-        //     });
+        console.log({
+            "name": place.name,
+            "planId": planId[0].toString(),
+            "address": "",
+            "longitude": place.longitude,
+            "latitude": place.latitude,
+            "day": planDay[0].toString(),
+            "startTime": "",
+        })
+
+        axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel`,
+            {
+                "name": place.name,
+                "planId": planId[0].toString(),
+                "address": "",
+                "longitude": place.longitude,
+                "latitude": place.latitude,
+                "day": planDay[0].toString(),
+                "startTime": "",
+            },
+            {
+                headers: {
+                    Authorization: token
+                }
+            })
+            .then(response => {
+                console.log(response.data);
+            });
     }
 
     useEffect(() => {

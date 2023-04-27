@@ -35,7 +35,7 @@ import SavedPlanCard from '../../components/savedPlanCard/SavedPlanCard';
 
 import styled, { keyframes } from "styled-components";
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { planIdState, } from '../../recoil/state';
+import { planDayState, planIdState, } from '../../recoil/state';
 
 
 const BottomSheet = (props) => {
@@ -146,6 +146,7 @@ const BottomSheet = (props) => {
         },
       })
       .then(res => {
+        // console.log(res.data);
         setPlanId(res.data.split(' ')[0]);
         changeContent(2);
 
@@ -163,8 +164,10 @@ const BottomSheet = (props) => {
   useEffect(() => {
 
     console.log("myInfo", myInfo);
-    console.log("planId", planId);
+    console.log("planId", planId[0]);
     console.log("planData", planData);
+
+    console.log("planDay", planDayNum);
 
   }, [planId])
   //----------------------------------------------------------------
@@ -211,6 +214,15 @@ const BottomSheet = (props) => {
   }
 
   const getPlanData = (card) => {
+
+
+
+
+
+
+
+
+    console.log("card", card);
 
     const plan = myInfo.myPlans.find((plan) => plan.id === card.id)
 
@@ -325,6 +337,7 @@ const BottomSheet = (props) => {
 
   const [dayPageNum, setDayPageNum] = useState(1);
   const [dayPageContent, setDayPageContent] = useState([]);
+  const [planDayNum, setPlanDayNum] = useRecoilState(planDayState);
   const goNextDayPage = () => {
     if (dayPageNum < planData.days) {
       setDayPageNum((prev) => prev + 1);
@@ -335,6 +348,10 @@ const BottomSheet = (props) => {
       setDayPageNum((prev) => prev - 1);
     }
   }
+  useEffect(()=> {
+    setPlanDayNum(dayPageNum);
+  }, [dayPageNum]);
+
 
   const countDays = () => {
 

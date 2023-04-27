@@ -30,7 +30,7 @@ const BottomNav = () => {
                         </Link>
                     </div>
                     <div>
-                        <Link to="/funding" className="nav-item" onClick={()=> setActive(3)}>
+                        <Link to="/cart" className="nav-item" onClick={()=> setActive(3)}>
                             <img src={keepBtn} 
                             className={active == 3 ? "nav-button-active" : "nav-button"} />
                             <span>저장</span>

@@ -11,9 +11,9 @@ export const planIdState = atom({
     default: 0,
 });
 
-export const searchedWord = atom({
-    key: 'searchedWord',
-    default: '',
+export const planDayState = atom({
+    key: 'planDayState',
+    default: 1,
 })
 
 // export const planDaysState = atom({

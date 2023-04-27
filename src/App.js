@@ -22,6 +22,7 @@ import BottomNav from './components/bottomNav/BottomNav';
 
 import KakaoAuthHandle from './pages/login/KakaoAuthHandle';
 import BottomSheet from './components/bottomSheet/BottomSheet';
+import Cart from './pages/cart/Cart';
 
 function App() {
     return (
@@ -44,6 +45,7 @@ function App() {
                     <Route path='/restaurant/detail' element={<RestaurantDetail/>} />
                     <Route path='/myProfile' element={<MyProfile/>} />
                     <Route path='/myProfile/edit' element={<MyProfileEdit/> }/>
+                    <Route path='/cart' element={<Cart/>} />
                 </Routes>
                 <BottomNav/>
             </Router>
