@@ -76,7 +76,7 @@ const BottomSheet = (props) => {
     box-shadow: 0px 0px 5px #C5C5C5;
     border-radius: 15px 15px 0 0;
 
-    z-index: 5;
+    z-index: 3;
 
     position: fixed;
     bottom: 0;
