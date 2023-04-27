@@ -194,10 +194,15 @@ const BottomSheet = (props) => {
 
     setTitle();
 
+    console.log(
+      
+      {
+        "title": planData.title,
+        "isOpened": planData.opened,
+      }
+    )
     axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId}`, {
       "title": planData.title,
-      "startDate": planData.startDate,
-      "endDate": planData.endDate,
       "isOpened": planData.opened,
     },
       {
@@ -212,18 +217,10 @@ const BottomSheet = (props) => {
       })
   }
 
+
   const getPlanData = (card) => {
 
-
-
-
-
-
-
-
-    console.log("card", card);
-
-    const plan = myPlansInfo.find((plan) => plan.id === card.id)
+    const plan = myPlansInfo.find((plan) => plan.id === card.id);
 
     axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
       headers: {
@@ -236,9 +233,13 @@ const BottomSheet = (props) => {
         planData.likesCount = response.data.likesCount;
         planData.opened = response.data.opened;
         planData.planTravels = response.data.planTravels;
+
+        getPlanTravels();
       });
 
     changeContent(2);
+
+    
   }
 
   useEffect(() => {
@@ -336,6 +337,17 @@ const BottomSheet = (props) => {
 
 
 
+
+
+
+
+
+  
+  const getPlanTravels = () => {
+    console.log("planTravels", planData.planTravels.filter((travel) => travel.day === dayPageNum));
+    
+  }
+
   const [dayPageNum, setDayPageNum] = useState(1);
   const [dayPageContent, setDayPageContent] = useState([]);
   const [planDayNum, setPlanDayNum] = useRecoilState(planDayState);
@@ -343,14 +355,17 @@ const BottomSheet = (props) => {
     if (dayPageNum < planData.days) {
       setDayPageNum((prev) => prev + 1);
     }
+    getPlanTravels();
   }
   const goPrevDayPage = () => {
     if (dayPageNum > 1) {
       setDayPageNum((prev) => prev - 1);
     }
+    getPlanTravels();
   }
   useEffect(()=> {
     setPlanDayNum(dayPageNum);
+    
   }, [dayPageNum]);
 
 

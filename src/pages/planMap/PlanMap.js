@@ -65,16 +65,6 @@ const PlanMap = () => {
     const planId = useRecoilState(planIdState);
     const planDay = useRecoilState(planDayState);
     const addPlace = (place) => {
-
-        console.log({
-            "name": place.name,
-            "planId": planId[0].toString(),
-            "longitude": place.longitude,
-            "latitude": place.latitude,
-            "day": planDay[0].toString(),
-            "startTime": "",
-        })
-
         axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel`,
             {
                 "name": place.name,
