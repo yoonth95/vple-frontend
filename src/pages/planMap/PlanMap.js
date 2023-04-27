@@ -69,7 +69,6 @@ const PlanMap = () => {
         console.log({
             "name": place.name,
             "planId": planId[0].toString(),
-            "address": "",
             "longitude": place.longitude,
             "latitude": place.latitude,
             "day": planDay[0].toString(),
@@ -80,11 +79,10 @@ const PlanMap = () => {
             {
                 "name": place.name,
                 "planId": planId[0].toString(),
-                "address": "",
                 "longitude": place.longitude,
                 "latitude": place.latitude,
                 "day": planDay[0].toString(),
-                "startTime": "",
+                "startTime": "07:20:00 ",
             },
             {
                 headers: {

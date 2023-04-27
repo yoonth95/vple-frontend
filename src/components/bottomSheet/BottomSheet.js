@@ -111,23 +111,22 @@ const BottomSheet = (props) => {
     }
   `;
 
-  const [myInfo, setMyInfo] = useState([]);
-  useEffect(() => {
+  const [myPlansInfo, setMyPlansInfo] = useState([]);
+  useEffect(()=> {
 
     if (token !== "null") {
 
-      axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
-        headers: {
-          Authorization: token,
-        }
-      })
-        .then(response => {
-          setMyInfo(response.data);
-
-        });
+      axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan', {
+          headers: {
+            Authorization: token,
+          }
+        })
+          .then(response => {
+            // console.log("여기", response.data);
+            setMyPlansInfo(response.data);
+          });
     }
-
-  }, []);
+  }, [])
 
 
   const location = useLocation();
@@ -163,7 +162,7 @@ const BottomSheet = (props) => {
   //확인용------------------------------------------------------------
   useEffect(() => {
 
-    console.log("myInfo", myInfo);
+    console.log("myPlansInfo", myPlansInfo);
     console.log("planId", planId[0]);
     console.log("planData", planData);
 
@@ -224,7 +223,7 @@ const BottomSheet = (props) => {
 
     console.log("card", card);
 
-    const plan = myInfo.myPlans.find((plan) => plan.id === card.id)
+    const plan = myPlansInfo.find((plan) => plan.id === card.id)
 
     axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
       headers: {
@@ -262,17 +261,19 @@ const BottomSheet = (props) => {
 
   const [deleteTitle, setDeleteTitle] = useState("무제");
   const [deleteId, setDeleteId] = useState(-1);
-  const updateMyInfo = () => {
-    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+  const updateMyPlansInfo = () => {
+    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan', {
       headers: {
         Authorization: token
       }
     })
       .then(response => {
-        setMyInfo(response.data);
+        setMyPlansInfo(response.data);
       });
   }
   const deletePlanCard = () => {
+
+    console.log("deleteId", deleteId);
 
     const deleteUrl = `http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${deleteId}`;
 
@@ -283,8 +284,8 @@ const BottomSheet = (props) => {
         },
       })
       .then(res => {
-        console.log(res);
-        updateMyInfo();
+        console.log(res.data);
+        updateMyPlansInfo();
         hideModal();
 
       }).catch(err => {
@@ -408,7 +409,7 @@ const BottomSheet = (props) => {
           <span
             className='edit-plan-small'>수정할 플랜을 선택해주세요.</span>
           <WrapCard>
-            {myInfo.myPlans && myInfo.myPlans.slice(0).reverse().map(card => (
+            {myPlansInfo && myPlansInfo.slice(0).reverse().map(card => (
               <SavedPlanCard card={card} onClick={() => getPlanData(card)} showModal={() => showModal(card)} />
             ))}
           </WrapCard>
