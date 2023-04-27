@@ -23,6 +23,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
 import { keyframes } from 'styled-components';
+import RestaurantDetailCom from '../../components/restaurantDetailComponent/RestaurantDetailCom'
 
 
 // class ApiClient {
@@ -136,10 +137,20 @@ const PlanMap = () => {
         window.scrollTo(0, 0)
     }
 
+    const [isDetailView, setIsDetailView] = useState(false);
+    const [restaurantId, setRestaurantId] = useState(-1);
+    const showDetailView = (id) => {
+        setIsDetailView(true);
+        setRestaurantId(id);
+    }
+    const hideDetailView = () => {
+        setIsDetailView(false);
+    }
 
 
     return (
         <>
+            {isDetailView ? <RestaurantDetailCom id={restaurantId} hide={hideDetailView}/> : <></>}
             <TitleHeader title="플랜 세우기" />
             <ContainerMap className='map-container'>
 
@@ -199,7 +210,7 @@ const PlanMap = () => {
 
                                     <MapModal>
                                         <div className='map-modal-detail'
-                                            onClick={() => routerRestaurantDetail(place.id)}
+                                            onClick={() => showDetailView(place.id)}
                                         >자세히보기</div>
                                         <div className='map-modal-add' onClick={() => addPlace(place)}>추가</div>
                                     </MapModal>

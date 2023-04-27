@@ -16,11 +16,6 @@ export const planDayState = atom({
     default: 1,
 })
 
-// export const planDaysState = atom({
-//     key: 'planDaysState',
-//     default: 1,
-// });
-
 //추천식당
 export const getAllRecommandRestaurantUrl = selector({
     key: 'getAllRecommandRestaurantUrl',
@@ -38,6 +33,7 @@ export const viewAllRestaurantPageState = atom({
     key: 'viewAllRestaurantPage',
     default: 0
 })
+
 
 
 

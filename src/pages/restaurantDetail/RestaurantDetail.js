@@ -9,6 +9,8 @@ import Review from '../../components/review/Review';
 import ReviewBoard from '../../components/reviewBoard/ReviewBoard';
 
 import {
+    WrapView,
+
     ImageContainer,
     WrapInfo,
     TagContainer,
@@ -77,141 +79,144 @@ export default function RestaurantDetail() {
                 setMenu(response.data.menus);
 
                 console.log(response.data);
-                
+
             });
     }, []);
 
     return (
         <>
             <DetailHeader title="식당" />
+            <WrapView>
 
-            <ImageContainer>
-                <img className='guide-image' src={detailRestaurant.image}/>
-            </ImageContainer>
+                <ImageContainer>
+                    <img className='guide-image' src={detailRestaurant.image} />
+                </ImageContainer>
 
-            <WrapInfo>
-                <div className="titleWrap">{detailRestaurant.name}</div>
-                <ClipDiv
-                    onClick={() => setClip(!isClip)}>
-                    {isClip ? <ClipButtonG /> : <ClipButtonW />}
-                </ClipDiv>
-                <TagContainer>
-                    {
-                        detailRestaurant.veganTypes && detailRestaurant.veganTypes.map((type, index) => {
-                            return (
-                                <div className='tag'>{type}</div>
-                            )
-                        })
-                    }
-                </TagContainer>
-                <div className="writerWrap">{detailRestaurant.introduction}</div>
-                <div className="partition" />
+                <WrapInfo>
+                    <div className="titleWrap">{detailRestaurant.name}</div>
+                    <ClipDiv
+                        onClick={() => setClip(!isClip)}>
+                        {isClip ? <ClipButtonG /> : <ClipButtonW />}
+                    </ClipDiv>
+                    <TagContainer>
+                        {
+                            detailRestaurant.veganTypes && detailRestaurant.veganTypes.map((type, index) => {
+                                return (
+                                    <div className='tag'>{type}</div>
+                                )
+                            })
+                        }
+                    </TagContainer>
+                    <div className="writerWrap">{detailRestaurant.introduction}</div>
+                    <div className="partition" />
 
-                <WrapIconText>
-                    <img src={IconMapPointer} className="icon" />
-                    <div className="text">{detailRestaurant.address}</div>
-                </WrapIconText>
-                <WrapIconText>
-                    <img src={IconClock} className="icon" />
-                    <div className="text">영업시간</div>
-                    <WrapRunTime>
-                        <p className="day">{detailRestaurant.openTime}</p><p className="hour">10:00 - 20:00</p>
-                    </WrapRunTime>
-                    <WrapRunTime>
-                        <p className="day">일요일</p><p className="hour">휴무</p>
-                    </WrapRunTime>
-                </WrapIconText>
-            </WrapInfo>
+                    <WrapIconText>
+                        <img src={IconMapPointer} className="icon" />
+                        <div className="text">{detailRestaurant.address}</div>
+                    </WrapIconText>
+                    <WrapIconText>
+                        <img src={IconClock} className="icon" />
+                        <div className="text">영업시간</div>
+                        <WrapRunTime>
+                            <p className="day">{detailRestaurant.openTime}</p><p className="hour">10:00 - 20:00</p>
+                        </WrapRunTime>
+                        <WrapRunTime>
+                            <p className="day">일요일</p><p className="hour">휴무</p>
+                        </WrapRunTime>
+                    </WrapIconText>
+                </WrapInfo>
 
-            <WrapMenu>
-                <MenuTitle>
-                    <div className='titleDeco' />
-                    <h3 className='recommendTitle'>메뉴</h3>
-                    <img src={arrow} className='arrow-btn' />
-                </MenuTitle>
-                <WrapCards>
-                    {
-                        menu.map((value, index) => {
-                            return (
-                                <WrapCard>
-                                    <img className='img-photo' src={value.image} />
-                                    <div className='div-content'>
-                                        <span className='plan-title'>{value.name}</span>
-                                    </div>
-                                </WrapCard>
-                            )
-                        })
-                    }
-                </WrapCards>
-                <WrapButton>
-                    <img src={IconMore} className="iconMore" />더보기
-                </WrapButton>
-            </WrapMenu>
-
-            <ReviewContainer>
-                <div className='container'>
-                    <ReviewTitle>
+                <WrapMenu>
+                    <MenuTitle>
                         <div className='titleDeco' />
-                        <h3 className='recommendTitle'>후기</h3>
-                        <p className='number'>({detailRestaurant.rating})</p>
-                    </ReviewTitle>
-                    <div className='write-btn'>
-                        <WriteReviewBtn onClick={() => {
-                            setVisible(!visible);
-                        }}> {visible ? "취소하기" : "작성하기"}</WriteReviewBtn>
+                        <h3 className='recommendTitle'>메뉴</h3>
+                        <img src={arrow} className='arrow-btn' />
+                    </MenuTitle>
+                    <WrapCards>
+                        {
+                            menu.map((value, index) => {
+                                return (
+                                    <WrapCard>
+                                        <img className='img-photo' src={value.image} />
+                                        <div className='div-content'>
+                                            <span className='plan-title'>{value.name}</span>
+                                        </div>
+                                    </WrapCard>
+                                )
+                            })
+                        }
+                    </WrapCards>
+                    <WrapButton>
+                        <img src={IconMore} className="iconMore" />더보기
+                    </WrapButton>
+                </WrapMenu>
+
+                <ReviewContainer>
+                    <div className='container'>
+                        <ReviewTitle>
+                            <div className='titleDeco' />
+                            <h3 className='recommendTitle'>후기</h3>
+                            <p className='number'>({detailRestaurant.rating})</p>
+                        </ReviewTitle>
+                        <div className='write-btn'>
+                            <WriteReviewBtn onClick={() => {
+                                setVisible(!visible);
+                            }}> {visible ? "취소하기" : "작성하기"}</WriteReviewBtn>
+                        </div>
                     </div>
-                </div>
 
-                {visible && 
-                    <WrapWriting>
-                        <div className='review-content'>
-                            <div className='camera'>
-                                <img src={camera}/>
+                    {visible &&
+                        <WrapWriting>
+                            <div className='review-content'>
+                                <div className='camera'>
+                                    <img src={camera} />
+                                </div>
+                                <div className='wrap-text'>
+                                    <input className='title' placeholder='제목을 입력해 주세요'></input>
+                                    <textarea className='text' placeholder='내용을 입력해 주세요'></textarea>
+                                </div>
                             </div>
-                            <div className='wrap-text'>
-                                <input className='title' placeholder='제목을 입력해 주세요'></input>
-                                <textarea className='text' placeholder='내용을 입력해 주세요'></textarea>
+
+                            <div className='wrap-button'>
+                                <div className='review-button'>"음식이 맛있어요"</div>
+                                <div className='review-button'>"재료가 신선해요"</div>
+                                <div className='review-button'>"직원이 친절해요"</div>
                             </div>
-                        </div>
+                            <div className='submit'>등록하기</div>
 
-                        <div className='wrap-button'>
-                            <div className='review-button'>"음식이 맛있어요"</div>
-                            <div className='review-button'>"재료가 신선해요"</div>
-                            <div className='review-button'>"직원이 친절해요"</div>
-                        </div>
-                        <div className='submit'>등록하기</div>
-                        
-                    </WrapWriting>
-                }
+                        </WrapWriting>
+                    }
 
-                <WrapReviewBars>
-                    <ReviewBar>
-                        <PercentBar count={80}>
-                            <div className='review'> 😊 "음식이 맛있어요"</div>
-                        </PercentBar>
-                    </ReviewBar>
-                    <ReviewBar>
-                        <PercentBar count={60}>
-                            <div className='review'> 🌿 “재료가 신선해요”</div>
-                        </PercentBar>
-                    </ReviewBar>
-                    <ReviewBar>
-                        <PercentBar count={30}>
-                            <div className='review'> 💖 “친절해요”</div>
-                        </PercentBar>
-                    </ReviewBar>
+                    <WrapReviewBars>
+                        <ReviewBar>
+                            <PercentBar count={80}>
+                                <div className='review'> 😊 "음식이 맛있어요"</div>
+                            </PercentBar>
+                        </ReviewBar>
+                        <ReviewBar>
+                            <PercentBar count={60}>
+                                <div className='review'> 🌿 “재료가 신선해요”</div>
+                            </PercentBar>
+                        </ReviewBar>
+                        <ReviewBar>
+                            <PercentBar count={30}>
+                                <div className='review'> 💖 “친절해요”</div>
+                            </PercentBar>
+                        </ReviewBar>
 
-                </WrapReviewBars>
+                    </WrapReviewBars>
 
-                {reviews.map(review => (
-                    <Review />
-                ))}
+                    {reviews.map(review => (
+                        <Review />
+                    ))}
 
-                <UpButton onClick={scrollToUp}>
-                    <img src={IconUp} className='icon' /> 맨 위로
-                </UpButton>
+                    <UpButton onClick={scrollToUp}>
+                        <img src={IconUp} className='icon' /> 맨 위로
+                    </UpButton>
 
-            </ReviewContainer>
+                </ReviewContainer>
+            </WrapView>
+
         </>
     );
 }

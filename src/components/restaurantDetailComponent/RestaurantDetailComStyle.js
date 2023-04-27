@@ -2,10 +2,53 @@ import styled from "styled-components";
 import IconClipW from '../../asset/IconClipW.png';
 import IconClipG from '../../asset/IconClipG.png';
 
-
 export const WrapView = styled.div`
+    position: absolute;
+    z-index: 5;
+
     max-width: 100vw;
 `;
+
+
+export const HeaderContainer = styled.header`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 70px;
+  background-color: #ffffff;
+`;
+
+export const HeaderTitleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 5px;
+`;
+
+export const IconContainer = styled.div`
+  flex: 0;
+  width: 100%;
+  display: flex;
+  margin-left: 20px;
+  .back-arrow{
+    margin-top: 2px;
+    width: 9px;
+    height: 15px;
+  }
+`;
+
+export const TitleContainer = styled.div`
+  flex: 10;
+  text-align: center;
+  width: 100%;
+  padding-right: 22px;
+  
+  h3{
+    color: #758B6F;
+  }
+`;
+
 
 const ButtonStyle = styled.button`
     &:hover{
@@ -18,6 +61,9 @@ const ButtonStyle = styled.button`
 `;
 
 export const ImageContainer = styled.div`
+
+    height: 202px;
+
     .guide-image{
         width: 100%;
         height: 202px;
@@ -209,7 +255,7 @@ export const ReviewContainer = styled.div`
     padding: 25px 30px 10px 30px;
     background-color: #F8F8F8;
     text-align: center;
-    padding-bottom: 35%;
+    padding-bottom: 10%;
 
     .partition{
         width: 100%;
