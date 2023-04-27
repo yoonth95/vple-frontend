@@ -2,6 +2,7 @@ import DetailHeader from '../../components/titleHeader/TitleHeader'
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
 
 import {
+    WrapSearchContainer,
     SearchContainer,
     WrapSelection,
     CardContainer,
@@ -9,6 +10,9 @@ import {
 
 } from './ViewAllRestaurantStyle';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { getAllRecommandRestaurantUrl, viewAllRestaurantListState, viewAllRestaurantPageState } from '../../recoil/state';
+import { useNavigate } from 'react-router-dom';
 
 
 function ViewAllRestaurant() {
@@ -40,9 +44,11 @@ function ViewAllRestaurant() {
     let selectedCity = '전체';
     let selectedProvince = '전체';
 
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useRecoilState(viewAllRestaurantListState);
     const [target, setTarget] = useState(null);
-    let page = 0;
+    let [page, setPage] = useRecoilState(viewAllRestaurantPageState);
+    const [pageState, setPageState] = useRecoilState(viewAllRestaurantPageState);
+
 
     const changeCity = async () => {
 
@@ -72,20 +78,42 @@ function ViewAllRestaurant() {
     }
 
 
+    const [stickyToFixed, setStickyToFixed] = useState(false);
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [])
+    const handleScroll = () => {
+        if (window.scrollY >= 50) {
+            setStickyToFixed(true);
+        } else {
+            setStickyToFixed(false);
+        }
+    }
+
+
+    const [viewAllRestaurantList, setViewAllRestaurantList] = useRecoilState(viewAllRestaurantListState);
+    
     const fetchData = async () => {
 
-        var index = locationList.findIndex((prop) => {
-            if (prop.city == document.getElementById('selected_city').value) return true;
-        })
-        setProvinceList(locationList[index].province);
+        if(page < 160) {
+            var index = locationList.findIndex((prop) => {
+                if (prop.city == document.getElementById('selected_city').value) return true;
+            })
+            setProvinceList(locationList[index].province);
+    
+            const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
+    
+            const data = await response.json();
+            setItems((prev) => prev.concat(data.content));
 
-        const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
-
-        const data = await response.json();
-        setItems((prev) => prev.concat(data.content));
-        page++;
+            page++;
+            setPageState(page);
+        }
+        
     };
-
 
     useEffect(() => {
         let observer;
@@ -109,26 +137,38 @@ function ViewAllRestaurant() {
             behavior: 'smooth'
         })
     }
-
+    let navigate = useNavigate();
+    const routerRestaurantDetail = (id) => {
+        navigate('/restaurant/detail', {
+            state: {
+                id: id,
+            }
+        });
+        window.scrollTo(0,0)
+        setViewAllRestaurantList(items);
+    }
 
     return (
         <>
             <DetailHeader title="추천 식당 전체 보기" />
 
-            <SearchContainer>
-                <WrapSelection>
-                    <select className='select-box' id="selected_city" onChange={changeCity}>
-                        {locationList.map((region) => {
-                            return <option className='option'>{region.city}</option>
-                        })}
-                    </select>
-                    <select className='select-box' id="selected_province" onChange={changeProvince}>
-                        {provinceList.map((location) => {
-                            return <option className='option'>{location}</option>
-                        })}
-                    </select>
-                </WrapSelection>
-            </SearchContainer>
+            <WrapSearchContainer>
+                <SearchContainer className={stickyToFixed ? 'fixed' : 'sticky'}>
+                    <WrapSelection>
+                        <select className='select-box' id="selected_city" onChange={changeCity}>
+                            {locationList.map((region) => {
+                                return <option className='option'>{region.city}</option>
+                            })}
+                        </select>
+                        <select className='select-box' id="selected_province" onChange={changeProvince}>
+                            {provinceList.map((location) => {
+                                return <option className='option'>{location}</option>
+                            })}
+                        </select>
+                    </WrapSelection>
+                </SearchContainer>
+
+            </WrapSearchContainer>
 
             <CardContainer className="card-container">
                 {items.map(restaurant => (
@@ -137,6 +177,7 @@ function ViewAllRestaurant() {
                             id={restaurant.id}
                             title={restaurant.name}
                             image={restaurant.image}
+                            onClick={()=>routerRestaurantDetail(restaurant.id)}
                         />
                     </div>
                 ))}
@@ -144,6 +185,8 @@ function ViewAllRestaurant() {
             </CardContainer>
 
             <UpButton onClick={scrollToUp} />
+
+
         </>
     );
 }

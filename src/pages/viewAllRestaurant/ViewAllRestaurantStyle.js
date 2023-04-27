@@ -1,15 +1,28 @@
 import styled from "styled-components";
 import IconUp from '../../asset/restaurant/IconUp.png';
 
+export const WrapSearchContainer = styled.div`
+
+  .sticky {
+    position: sticky;
+    top: 0px;
+  }
+  .fixed {
+    position: fixed;
+    top: 0px;
+  }
+
+`;
+
 export const SearchContainer = styled.section`
   display: flex;
   margin-bottom: 15px;
   width: 100%;
   height: 75px;
   background-color: #F8F8F8;
-  position: sticky;
-  top: 0px;
   z-index: 3;
+
+  
 `;
 
 export const WrapSelection = styled.div`
