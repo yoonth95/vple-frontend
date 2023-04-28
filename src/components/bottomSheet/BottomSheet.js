@@ -35,7 +35,7 @@ import SavedPlanCard from '../../components/savedPlanCard/SavedPlanCard';
 
 import styled, { keyframes } from "styled-components";
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { planDayState, planIdState, } from '../../recoil/state';
+import { dayPageContentState, planDayState, planIdState, } from '../../recoil/state';
 
 
 const BottomSheet = (props) => {
@@ -234,15 +234,18 @@ const BottomSheet = (props) => {
         planData.opened = response.data.opened;
         planData.planTravels = response.data.planTravels;
 
-        getPlanTravels();
+        setDayPageContent(planData.planTravels);
       });
 
     changeContent(2);
   }
-
-  const getPlanTravels = () => {
-    setDayPageContent(planData.planTravels.filter((travel) => travel.day === dayPageNum));
+  const updatePlanData = () => {
+    
   }
+
+  // const getPlanTravels = () => {
+  //   setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
+  // }
 
   useEffect(() => {
     countDays();
@@ -348,7 +351,8 @@ const BottomSheet = (props) => {
 
 
   const [dayPageNum, setDayPageNum] = useState(1);
-  const [dayPageContent, setDayPageContent] = useState([]);
+  const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
+  const [specificDayContent, setSpecificDayContent] = useState([]);
   const [planDayNum, setPlanDayNum] = useRecoilState(planDayState);
   const goNextDayPage = () => {
     if (dayPageNum < planData.days) {
@@ -362,8 +366,11 @@ const BottomSheet = (props) => {
   }
   useEffect(() => {
     setPlanDayNum(dayPageNum);
-    getPlanTravels();
   }, [dayPageNum]);
+  useEffect(() => {
+    console.log("현재 모든 컨텐츠", dayPageContent);
+    setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
+  }, [dayPageNum, dayPageContent])
 
 
   const countDays = () => {
@@ -471,10 +478,10 @@ const BottomSheet = (props) => {
               </WrapBtn>
             </WrapLine>
 
-            {dayPageContent && dayPageContent.map(card => (
+            {specificDayContent && specificDayContent.map(card => (
               <PlanCard card={card} onRemove={onRemove} />
             ))}
-            {dayPageContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
+            {specificDayContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
           </PlanDiv>
         </div>
     },

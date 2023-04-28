@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { getMapItems, planDayState, planIdState } from '../../recoil/state';
+import { dayPageContentState, getMapItems, planDayState, planIdState } from '../../recoil/state';
 import Header from '../../components/header/Header';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
 import {
@@ -64,6 +64,7 @@ const PlanMap = () => {
 
     const planId = useRecoilState(planIdState);
     const planDay = useRecoilState(planDayState);
+    const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
     const addPlace = (place) => {
 
         axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel`,
@@ -82,6 +83,19 @@ const PlanMap = () => {
             })
             .then(response => {
                 console.log(response.data);
+                place.day = planDay[0];
+                place.startTime = "07:20:00";
+                setDayPageContent(oldArray => [...oldArray, place])
+
+                // axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
+                // headers: {
+                //     Authorization: token,
+                // }
+                // })
+                // .then(response => {
+                //     console.log("post 이후 다시 get", response.data);
+                //     dayPageContent.push(place);
+                // });
             });
     }
 
@@ -112,18 +126,6 @@ const PlanMap = () => {
 
     const onChangeSearch = (e) => {
         setSearchWord(e.target.value);
-    }
-
-    let navigate = useNavigate();
-    const routerRestaurantDetail = (id) => {
-
-        navigate('/restaurant/detail', {
-            state: {
-                id: id,
-
-            }
-        });
-        window.scrollTo(0, 0)
     }
 
     const [isDetailView, setIsDetailView] = useState(false);
