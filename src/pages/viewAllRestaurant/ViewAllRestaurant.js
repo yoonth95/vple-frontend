@@ -48,7 +48,7 @@ function ViewAllRestaurant() {
     const [target, setTarget] = useState(null);
     let [page, setPage] = useRecoilState(viewAllRestaurantPageState);
     const [pageState, setPageState] = useRecoilState(viewAllRestaurantPageState);
-
+    const [totalPages, setTotalPages] = useState(160);
 
     const changeCity = async () => {
 
@@ -56,19 +56,16 @@ function ViewAllRestaurant() {
         document.getElementById('selected_province').value = "전체";
         selectedProvince = document.getElementById('selected_province').value;
 
-        setItems([]);
-        setViewAllRestaurantList([]);
         setPage(0);
-        setPageState(0);
-        console.log(items);
-        console.log(viewAllRestaurantList);
-        console.log(page);
-        console.log(pageState);
+        setItems([]);
 
         const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
 
         const data = await response.json();
-        setItems((prev) => prev.concat(data.content));
+        setTotalPages(data.totalPages);
+        setItems((data.content));
+
+        console.log(page);
 
     }
     const changeProvince = async () => {
@@ -76,19 +73,14 @@ function ViewAllRestaurant() {
         selectedCity = document.getElementById('selected_city').value;
         selectedProvince = document.getElementById('selected_province').value;
 
-        setItems([]);
-        setViewAllRestaurantList([]);
         setPage(0);
-        setPageState(0);        
-        console.log(items);
-        console.log(viewAllRestaurantList);
-        console.log(page);
-        console.log(pageState);
+        setItems([]);
 
         const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
 
         const data = await response.json();
-        setItems((prev) => prev.concat(data.content));
+        setTotalPages(data.totalPages);
+        setItems((data.content));
     }
 
 
@@ -112,19 +104,23 @@ function ViewAllRestaurant() {
     
     const fetchData = async () => {
 
-        if(page < 160) {
-            var index = locationList.findIndex((prop) => {
-                if (prop.city == document.getElementById('selected_city').value) return true;
-            })
-            setProvinceList(locationList[index].province);
-    
+        var index = locationList.findIndex((prop) => {
+            if (prop.city == document.getElementById('selected_city').value) return true;
+        })
+        setProvinceList(locationList[index].province);
+
+        if(page < totalPages) {
+            
             const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
     
             const data = await response.json();
             setItems((prev) => prev.concat(data.content));
 
+            console.log("page", page);
+            
             page++;
             setPageState(page);
+            
         }
         
     };

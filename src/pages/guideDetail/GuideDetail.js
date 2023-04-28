@@ -17,14 +17,6 @@ import {
 
 } from '../../pages/guideDetail/GuideDetailStyle';
 
-//플랜 카드
-const cards = [
-    { title: "장", time: "1시간 0분" },
-    { title: "장소", time: "2시간 0분" },
-    { title: "장소이름", time: "3시간 0분" },
-    { title: "장소이름", time: "4시간 0분" },
-    { title: "장소이름", time: "5시간 0분" },
-]
 
 export default function GuideDetail() {
 
@@ -36,7 +28,6 @@ export default function GuideDetail() {
     const [guideData, setGuideData] = useState([]);
 
     useEffect(() => {
-        console.log(location.state.title);
 
         axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
             headers: {
@@ -45,7 +36,7 @@ export default function GuideDetail() {
         })
             .then(response => {
                 setGuideData(response.data);
-                // console.log(guideData);
+                console.log(guideData);
             });
     }, [id])
 
@@ -70,7 +61,7 @@ export default function GuideDetail() {
 
                 <WrapTime>
                     <p className='start_time'>일정 시작 |
-                        <span className='time-btn'>오전 10:00</span></p>
+                        <span className='time-btn'>{guideData.planTravels[0].startTime}</span></p>
                 </WrapTime>
 
                 <CardSection>
@@ -79,7 +70,7 @@ export default function GuideDetail() {
                             <img className='plan-img'/>
                             <div>
                                 <p className='spot-name'>{card.name}</p>
-                                <p className='time'>소요 시간 | <span className='time-btn'>{card.time}</span></p>
+                                <p className='time'>소요 시간 | <span className='time-btn'>{card.startTime}</span></p>
                             </div>
                             <img src={Delete}className='delete-btn' />
                         </WrapCard>

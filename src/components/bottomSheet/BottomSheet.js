@@ -203,7 +203,7 @@ const BottomSheet = (props) => {
         "isOpened": planData.opened,
       }
     )
-    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId}`, {
+    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
       "title": planData.title,
       "isOpened": planData.opened,
     },
