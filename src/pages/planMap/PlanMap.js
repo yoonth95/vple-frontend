@@ -26,16 +26,6 @@ import { keyframes } from 'styled-components';
 import RestaurantDetailCom from '../../components/restaurantDetailComponent/RestaurantDetailCom'
 
 
-// class ApiClient {
-
-//     async searchApi(keyword) {
-//         return await Axios.get(`https://vple-backend.all.gagark.shop/api/map/search?keyword=${keyword}`)
-//     }
-// }
-
-// const client = new ApiClient()
-
-
 const PlanMap = () => {
 
     const token = localStorage.getItem('token');

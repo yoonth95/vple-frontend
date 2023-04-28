@@ -166,6 +166,11 @@ const BottomSheet = (props) => {
     console.log("planDay", planDayNum);
 
   }, [planId])
+
+
+  const removeAll = () => {
+
+  }
   //----------------------------------------------------------------
 
 
@@ -239,13 +244,6 @@ const BottomSheet = (props) => {
 
     changeContent(2);
   }
-  const updatePlanData = () => {
-    
-  }
-
-  // const getPlanTravels = () => {
-  //   setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
-  // }
 
   useEffect(() => {
     countDays();
@@ -311,43 +309,6 @@ const BottomSheet = (props) => {
     planData.opened = false;
   }
 
-
-
-
-
-
-
-
-
-
-  const [cards, setCards] = useState([
-    { id: 1, title: "장", time: "1시간 0분" },
-    { id: 2, title: "장소", time: "2시간 0분" },
-    { id: 3, title: "장소이름", time: "3시간 0분" },
-    { id: 4, title: "장소이름", time: "4시간 0분" },
-    { id: 5, title: "장소이름", time: "5시간 0분" },
-  ]);
-  //deleteButton
-
-  const removeAll = () => {
-    const empty = [];
-    setCards(empty);
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const [dayPageNum, setDayPageNum] = useState(1);
   const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
   const [specificDayContent, setSpecificDayContent] = useState([]);
@@ -369,17 +330,6 @@ const BottomSheet = (props) => {
     console.log("현재 모든 컨텐츠", dayPageContent);
     setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
   }, [dayPageNum, dayPageContent])
-
-
-
-
-
-
-
-
-
-
-
 
   const onRemove = (id) => {
     
