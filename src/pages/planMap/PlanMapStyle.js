@@ -111,8 +111,8 @@ export const MapModal = styled.div`
 display: flex;
 align-items: center;
 
-width: 110px;
-height: 30px;
+width: 115px;
+height: 35px;
 background-color: white;
 border-radius: 10px;
 
@@ -124,7 +124,6 @@ text-align: center;
 
 .map-modal-detail {
   width: 50%;
-  border-right: solid 1px black;
   white-space: normal;
 
   padding-top: 4px;
@@ -132,7 +131,11 @@ text-align: center;
 }
 
 .map-modal-add {
+
+  border-left: solid 1px black;
+  height: 100%;
   width: 50%;
+  line-height: 35px;
 
 }
 `;

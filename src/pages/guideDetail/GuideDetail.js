@@ -61,7 +61,8 @@ export default function GuideDetail() {
 
                 <WrapTime>
                     <p className='start_time'>일정 시작 |
-                        <span className='time-btn'>{guideData.planTravels[0].startTime}</span></p>
+                        {/* <span className='time-btn'>{guideData.planTravels.length === 0 ? null : guideData.planTravels[0].start}</span> */}
+                        </p>
                 </WrapTime>
 
                 <CardSection>

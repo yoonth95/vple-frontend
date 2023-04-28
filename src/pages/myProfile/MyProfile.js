@@ -92,9 +92,9 @@ export default function MyProfile() {
                         </WrapProfilePhoto>
                         <div>
                             <h4 className='user-name'>{myInfo.nickname}</h4>
-                            <div className="tag-div">페스코</div>
+                            {/* <div className="tag-div">페스코</div> */}
                         </div>
-                        <img className='setting-btn' src={settingButton} />
+                        {/* <img className='setting-btn' src={settingButton} /> */}
                     </ProfileContainer>
 
                     <MyPlanContainer>
@@ -171,10 +171,11 @@ export default function MyProfile() {
                 : logInOut[1].content}
 
             <WrapMenuContainer>
-                <div className='menu'>최근 본 가이드<img src={arrow} className='arrow-btn' /></div>
+                {/* <div className='menu'>최근 본 가이드<img src={arrow} className='arrow-btn' /></div>
                 <div className='menu'>최근 본 식당<img src={arrow} className='arrow-btn' /></div>
-                <div className='menu'>작성한 후기<img src={arrow} className='arrow-btn' /></div>
+                <div className='menu'>작성한 후기<img src={arrow} className='arrow-btn' /></div> */}
                 <div className='menu' onClick={logout}>로그아웃<img src={arrow} className='arrow-btn' /></div>
+                <div className='menu'>탈퇴하기<img src={arrow} className='arrow-btn' /></div>
                 <div className='menu'>버전<span>1.0.0</span></div>
             </WrapMenuContainer>
 

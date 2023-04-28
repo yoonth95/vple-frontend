@@ -429,7 +429,7 @@ const BottomSheet = (props) => {
           <PlanDiv className="plan-div">
             <WrapLine>
               <WrapTime>
-                <p className='start_time'>일정 시작 |
+                <p className='start_time'>일정 시작 | 
                   <TimeButton onClick={() => changeContent(3)}>오전 10:00</TimeButton></p>
               </WrapTime>
               <WrapBtn>

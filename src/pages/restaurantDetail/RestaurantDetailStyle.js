@@ -126,9 +126,10 @@ export const WrapRunTime = styled.div`
 `;
 
 export const WrapMenu = styled.div`
-    padding: 25px 30px 10px 30px;
+    padding: 25px 30px 40% 30px;
     background-color: #F8F8F8;
     text-align: center;
+
 `;
 export const MenuTitle = styled.div`
     display: flex;

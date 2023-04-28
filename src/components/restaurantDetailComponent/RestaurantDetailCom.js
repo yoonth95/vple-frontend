@@ -155,11 +155,11 @@ export default function RestaurantDetailCom(props) {
                         })
                     }
                 </WrapCards>
-                <WrapButton>
+                {/* <WrapButton>
                     <img src={IconMore} className="iconMore" />더보기
-                </WrapButton>
+                </WrapButton> */}
             </WrapMenu>
-
+{/* 
             <ReviewContainer>
                 <div className='container'>
                     <ReviewTitle>
@@ -223,7 +223,7 @@ export default function RestaurantDetailCom(props) {
                     <img src={IconUp} className='icon' /> 맨 위로
                 </UpButton>
 
-            </ReviewContainer>
+            </ReviewContainer> */}
         </WrapView>
     );
 }
