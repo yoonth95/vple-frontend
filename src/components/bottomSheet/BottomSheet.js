@@ -112,21 +112,18 @@ const BottomSheet = (props) => {
   `;
 
   const [myPlansInfo, setMyPlansInfo] = useState([]);
-  useEffect(()=> {
+  const getMyPlansInfo = () => {
 
-    if (token !== "null") {
-
-      axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan', {
-          headers: {
-            Authorization: token,
-          }
-        })
-          .then(response => {
-            // console.log("여기", response.data);
-            setMyPlansInfo(response.data);
-          });
-    }
-  }, [])
+    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan', {
+      headers: {
+        Authorization: token,
+      }
+    })
+      .then(response => {
+        setMyPlansInfo(response.data);
+        changeContent(1);
+      });
+  }
 
 
   const location = useLocation();
@@ -195,7 +192,7 @@ const BottomSheet = (props) => {
     setTitle();
 
     console.log(
-      
+
       {
         "title": planData.title,
         "isOpened": planData.opened,
@@ -216,8 +213,11 @@ const BottomSheet = (props) => {
         console.log(err);
       })
   }
-
-
+  useEffect(() => {
+    planData.planTravels = [];
+    console.log("propsCard", props.card);
+  }, [])
+  
   const getPlanData = (card) => {
 
     const plan = myPlansInfo.find((plan) => plan.id === card.id);
@@ -238,8 +238,10 @@ const BottomSheet = (props) => {
       });
 
     changeContent(2);
+  }
 
-    
+  const getPlanTravels = () => {
+    setDayPageContent(planData.planTravels.filter((travel) => travel.day === dayPageNum));
   }
 
   useEffect(() => {
@@ -342,11 +344,8 @@ const BottomSheet = (props) => {
 
 
 
-  
-  const getPlanTravels = () => {
-    console.log("planTravels", planData.planTravels.filter((travel) => travel.day === dayPageNum));
-    
-  }
+
+
 
   const [dayPageNum, setDayPageNum] = useState(1);
   const [dayPageContent, setDayPageContent] = useState([]);
@@ -355,17 +354,15 @@ const BottomSheet = (props) => {
     if (dayPageNum < planData.days) {
       setDayPageNum((prev) => prev + 1);
     }
-    getPlanTravels();
   }
   const goPrevDayPage = () => {
     if (dayPageNum > 1) {
       setDayPageNum((prev) => prev - 1);
     }
-    getPlanTravels();
   }
-  useEffect(()=> {
+  useEffect(() => {
     setPlanDayNum(dayPageNum);
-    
+    getPlanTravels();
   }, [dayPageNum]);
 
 
@@ -387,21 +384,12 @@ const BottomSheet = (props) => {
         default: console.log("error");
       }
 
-      planData.days = (monthDay-startDate[2]) + endDate[2];
+      planData.days = (monthDay - startDate[2]) + endDate[2];
     }
     else {
-      
+
     }
   }
-
-  // useEffect(() => {
-  //   const list = planData.planTravels;
-
-  //   setDayPageContent(.filter(planTravel => planTravel.day === dayPageNum));
-  // },[dayPageNum])
-  // const planOfDayList = () => {
-  //   setDayPageContent(planData.planTravels.filter(planTravel => planTravel.day === dayPageNum));
-  // }
 
   const contents = [
     {
@@ -409,7 +397,7 @@ const BottomSheet = (props) => {
         <div>
           <span
             className='edit-plan'> ✔️ 저장한 플랜이 있어요!</span>
-          <EditBtn onClick={() => changeContent(1)}>기존 플랜 수정하기</EditBtn>
+          <EditBtn onClick={getMyPlansInfo}>기존 플랜 수정하기</EditBtn>
           <span
             className='make-plan'> ✨ 플랜을 만들래요!</span>
           <NewBtn onClick={() => postPlanData()}>새롭게 플랜 세우기</NewBtn>

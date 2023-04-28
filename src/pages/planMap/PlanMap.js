@@ -65,6 +65,7 @@ const PlanMap = () => {
     const planId = useRecoilState(planIdState);
     const planDay = useRecoilState(planDayState);
     const addPlace = (place) => {
+
         axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel`,
             {
                 "name": place.name,
@@ -200,7 +201,8 @@ const PlanMap = () => {
                                         <div className='map-modal-detail'
                                             onClick={() => showDetailView(place.id)}
                                         >자세히보기</div>
-                                        <div className='map-modal-add' onClick={() => addPlace(place)}>추가</div>
+                                        <div 
+                                        className='map-modal-add' onClick={() => addPlace(place)}>추가</div>
                                     </MapModal>
 
                                 </CustomOverlayMap>

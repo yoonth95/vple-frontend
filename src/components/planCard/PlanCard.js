@@ -15,17 +15,17 @@ export default function PlanCard({ card, onRemove }) {
 
     return (
         <CardDiv>
-            <img src={tempImg} className='plan_img' />
+            <img src={card.image} className='plan_img' />
 
             <div className='container'>
                 <div className='wrap-title-line'>
-                    <p className='spot_name'>{card.title}</p>
+                    <p className='spot_name'>{card.name}</p>
                     <img src={iconRedDelete} className='delete_button' onClick={onDelete} />
                 </div>
 
                 <div className='wrap-time-line'>
                     <p className='time'>예상 시간 |
-                    <TimeButton>{card.time}</TimeButton></p>
+                    <TimeButton>{card.startTime}</TimeButton></p>
                 </div>
             </div>
             

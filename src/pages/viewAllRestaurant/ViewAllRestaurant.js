@@ -57,6 +57,13 @@ function ViewAllRestaurant() {
         selectedProvince = document.getElementById('selected_province').value;
 
         setItems([]);
+        setViewAllRestaurantList([]);
+        setPage(0);
+        setPageState(0);
+        console.log(items);
+        console.log(viewAllRestaurantList);
+        console.log(page);
+        console.log(pageState);
 
         const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
 
@@ -70,6 +77,13 @@ function ViewAllRestaurant() {
         selectedProvince = document.getElementById('selected_province').value;
 
         setItems([]);
+        setViewAllRestaurantList([]);
+        setPage(0);
+        setPageState(0);        
+        console.log(items);
+        console.log(viewAllRestaurantList);
+        console.log(page);
+        console.log(pageState);
 
         const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
 
