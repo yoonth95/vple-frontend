@@ -279,7 +279,7 @@ const BottomSheet = (props) => {
   }
   const deletePlanCard = () => {
 
-    console.log("deleteId", deleteId);
+    // console.log("deleteId", deleteId);
 
     const deleteUrl = `http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${deleteId}`;
 
@@ -328,9 +328,7 @@ const BottomSheet = (props) => {
     { id: 5, title: "장소이름", time: "5시간 0분" },
   ]);
   //deleteButton
-  const onRemove = id => {
-    setCards(cards.filter(card => card.id !== id));
-  }
+
   const removeAll = () => {
     const empty = [];
     setCards(empty);
@@ -371,6 +369,33 @@ const BottomSheet = (props) => {
     console.log("현재 모든 컨텐츠", dayPageContent);
     setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
   }, [dayPageNum, dayPageContent])
+
+
+
+
+
+
+
+
+
+
+
+
+  const onRemove = (id) => {
+    
+    axios.delete(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${id}`,
+      {
+        headers: {
+          Authorization: token
+        },
+      })
+      .then(res => {
+        console.log(res.data);
+        setDayPageContent(dayPageContent.filter((card)=> card.id !== id));
+      }).catch(err => {
+        console.log(err);
+      });
+  }
 
 
   const countDays = () => {
@@ -479,7 +504,7 @@ const BottomSheet = (props) => {
             </WrapLine>
 
             {specificDayContent && specificDayContent.map(card => (
-              <PlanCard card={card} onRemove={onRemove} />
+              <PlanCard card={card} onRemove={()=>onRemove(card.id)} />
             ))}
             {specificDayContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
           </PlanDiv>

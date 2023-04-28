@@ -86,16 +86,6 @@ const PlanMap = () => {
                 place.day = planDay[0];
                 place.startTime = "07:20:00";
                 setDayPageContent(oldArray => [...oldArray, place])
-
-                // axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
-                // headers: {
-                //     Authorization: token,
-                // }
-                // })
-                // .then(response => {
-                //     console.log("post 이후 다시 get", response.data);
-                //     dayPageContent.push(place);
-                // });
             });
     }
 

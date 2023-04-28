@@ -35,7 +35,6 @@ export const WrapSelection = styled.div`
 `;
 
 export const CardContainer = styled.section`
-    display: flex;
     width: 100%;
     background-color: white;
     padding-bottom: 20%;
