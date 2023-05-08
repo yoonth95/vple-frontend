@@ -445,19 +445,18 @@ const BottomSheet = (props) => {
       && startDate[1] === endDate[1]) {
       planData.days = parseInt(endDate[2]) - parseInt(startDate[2]) + 1;
     }
-    else if (startDate[0] === endDate[0]) {
+    else {
 
-      const monthDay = 0;
+      let monthDay = 0;
+      
       switch (startDate[1]) {
-        case "01", "03", "05", "07", "08", "10", "12": monthDay = 31; break;
-        case "02", "04", "06", "09", "11": monthDay = 30; break;
+        case "01": case "03": case "05": case "07": case "08": case "10": case "12": monthDay = 31; break;
+        case "04": case "06": case "09": case "11": monthDay = 30; break;
+        case "02": monthDay = 28; break;
         default: console.log("error");
       }
 
-      planData.days = (monthDay - startDate[2]) + endDate[2];
-    }
-    else {
-
+      planData.days = (monthDay - parseInt(startDate[2])) + parseInt(endDate[2]) + 1;
     }
   }
 

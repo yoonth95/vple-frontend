@@ -3,12 +3,13 @@ import Calendar from 'react-calendar';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
 
 import {
+    LoginWindow,
     CalendarWrap,
     CountContainer,
     CountWrap,
     PlanContainer,
     SelectLocationOption,
-    SetLocationWrap, 
+    SetLocationWrap,
     SubmitButtonActive,
     SubmitButton,
 } from "./PlanStyle";
@@ -16,7 +17,11 @@ import 'react-calendar/dist/Calendar.css';
 import './CalendarCustom.css';
 import { useNavigate } from 'react-router-dom';
 
+import lock from '../../asset/lock.png';
+
 const Plan = () => {
+
+    const token = localStorage.getItem('token');
 
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [date, setDate] = useState(new Date, new Date);
@@ -127,13 +132,18 @@ const Plan = () => {
     const onClickRouteMap = () => {
 
         navigate('/plan/map', {
-            state : {
+            state: {
                 planSetting: planSetting,
             }
         });
 
     }
-  
+    const routerLogin = () => {
+        navigate('/login')
+        window.scrollTo(0, 0)
+    }
+
+
     // const postSetting = () => {
     //     setSelectedCity(document.getElementById('selected_city').value);
     //     setSelectedProvince(document.getElementById('selected_province').value);
@@ -151,6 +161,18 @@ const Plan = () => {
 
     return (
         <>
+            {token==="null" && <LoginWindow>
+                <div className='modal-background'>
+                    <img src={lock}/>
+                    <div className='text-bold'>로그인이 필요합니다.</div>
+                    <div className="text">해당 기능 사용을 위해 <br/> 계정을 로그인 해주세요.</div>
+                    <div className='line' />
+                    <div className='button'>
+                        <span onClick={routerLogin}>확인</span>
+                    </div>
+                </div>
+            </LoginWindow> }
+
             <TitleHeader title="플랜 기본 설정" />
             <PlanContainer>
                 <SetLocationWrap>
@@ -171,19 +193,6 @@ const Plan = () => {
                 <CalendarWrap>
                     <Calendar onChange={setDate} value={date} defaultValue={date} selectRange={true} />
                 </CalendarWrap>
-                {/*{date.length > 0 ? (*/}
-                {/*    <p className='text-center'>*/}
-                {/*        <span className='bold'>Start:</span>{' '}*/}
-                {/*        {date[0].toDateString()}*/}
-                {/*        &nbsp;|&nbsp;*/}
-                {/*        <span className='bold'>End:</span> {date[1].toDateString()}*/}
-                {/*    </p>*/}
-                {/*) : (*/}
-                {/*    <p className='text-center'>*/}
-                {/*        <span className='bold'>Default selected date:</span>{' '}*/}
-                {/*        {date.toDateString()}*/}
-                {/*    </p>*/}
-                {/*)}*/}
                 <CountWrap>
                     <span className='people'>인원</span>
                     <CountContainer>
@@ -194,7 +203,7 @@ const Plan = () => {
                 </CountWrap>
 
                 {isAllChecked ?
-                    <SubmitButtonActive 
+                    <SubmitButtonActive
                         onClick={onClickRouteMap}>
                         <span>확인</span>
                     </SubmitButtonActive>
