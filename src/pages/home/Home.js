@@ -42,22 +42,20 @@ const Home = () => {
                     setMyInfo(response.data);
                     //console.log(myInfo);
                 });
+
+            axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/like', {
+                headers: {
+                    Authorization: token
+                }
+            })
+                .then(response => {
+                    setRecommendGuide(response.data);
+                    // console.log(recommendGuideList);
+                });
+
         }
 
     }, []);
-
-    useEffect(() => {
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/like', {
-            headers: {
-                Authorization: token
-            }
-        })
-            .then(response => {
-                setRecommendGuide(response.data);
-                // console.log(recommendGuideList);
-            });
-
-    }, [recommendGuideList]);
 
 
     let navigate = useNavigate();
@@ -94,7 +92,7 @@ const Home = () => {
                 id: id,
             }
         });
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
     }
 
     // const move = () => {
@@ -127,14 +125,14 @@ const Home = () => {
                 </TitleWrap>
 
                 <CardContainer className="card-container">
-                    {recommendGuideList.content&&recommendGuideList.content.map(card => (
+                    {recommendGuideList.content && recommendGuideList.content.map(card => (
                         <CardWrap>
-                            <GuideCardButton 
-                                title={card.title} 
-                                onClick={()=>routerGuideDetail(card.id)}
+                            <GuideCardButton
+                                title={card.title}
+                                onClick={() => routerGuideDetail(card.id)}
                             />
                         </CardWrap>
-                        
+
                     ))}
                 </CardContainer>
 
@@ -156,7 +154,7 @@ const Home = () => {
                                 id={card.id}
                                 title={card.name}
                                 image={card.image}
-                                onClick={()=>routerRestaurantDetail(card.id)}
+                                onClick={() => routerRestaurantDetail(card.id)}
                             />
                         </CardWrap>
 

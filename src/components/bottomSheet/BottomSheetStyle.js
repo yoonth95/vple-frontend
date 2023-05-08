@@ -116,9 +116,10 @@ export const WrapTitle = styled.div`
     font-size: 14px;
 
     .title-input {
-      width: 50%;
+      width: 100%;
       padding: 7px 7px 7px 2px;
       border: none;
+      font-size: 15px;
     }
 
     .title-p {
@@ -148,13 +149,11 @@ export const WrapLine = styled.div`
     justify-content: space-between;
     align-items: center;
 `;
-export const WrapTime = styled.div`
-  .start_time{
-    color: #848484;
-    font-size: 14px;
+export const WrapDate = styled.div`
+  color: #848484;
+  font-size: 15px;
 
-    display: inline-block;
-  }
+  display: inline-block;
 `;
 
 export const WrapSelect = styled.div`
@@ -174,7 +173,13 @@ export const WrapSelect = styled.div`
     font-size: 13px;
   }
   .long-box {
-    width: 30%;
+    width: 31%;
+  }
+  .long-box input[type="radio"]{
+    display: none;
+  }
+  .long-box input[type="radio"]+div{
+    width: 100%;
     height: 30px;
     border: solid 1px #B5B5B5;
     border-radius: 5px;
@@ -182,10 +187,20 @@ export const WrapSelect = styled.div`
     text-align: center;
     line-height: 30px;
     font-size: 13px;
+  }
+  .long-box input[type="radio"]:checked+div {
+    border: solid 1px #E9E9E9;
+    background-color: #E9E9E9;
   }
   
   .short-box {
-    width: 7%;
+    width: 8%;
+  }
+  .short-box input[type="radio"] {
+    display: none;
+  }
+  .short-box input[type="radio"]+div {
+    width: 100%;
     height: 30px;
     border: solid 1px #B5B5B5;
     border-radius: 5px;
@@ -194,6 +209,14 @@ export const WrapSelect = styled.div`
     line-height: 30px;
     font-size: 13px;
   }
+  .short-box input[type="radio"]:checked+div {
+    border: solid 1px #E9E9E9;
+    background-color: #E9E9E9;
+  }
+
+
+
+
 `;
 export const WrapTimeButton = styled.div`
   margin-top: 30px;

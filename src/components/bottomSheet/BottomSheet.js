@@ -20,7 +20,7 @@ import {
   WrapTitle,
   PlanDiv,
   WrapLine,
-  WrapTime,
+  WrapDate,
   WrapSelect,
   WrapTimeButton,
   WrapBtn,
@@ -220,7 +220,7 @@ const BottomSheet = (props) => {
   }
   useEffect(() => {
     planData.planTravels = [];
-    console.log("propsCard", props.card);
+    // console.log("propsCard", props.card);
   }, [])
   
   const getPlanData = (card) => {
@@ -347,6 +347,71 @@ const BottomSheet = (props) => {
       });
   }
 
+  const [planTravelId, setPlanTravelId] = useState(-1);
+  const [checkedTime, setCheckedTime] = useState("00:00:00");
+  const onClickTime = (card) => {
+    setPlanTravelId(card.id);
+    setCheckedTime(card.startTime);
+    changeContent(3);
+  }
+  useEffect(()=> {
+    const prevTimeString = checkedTime.split(":");
+    if(prevTimeString[0] < 12) {
+      document.getElementsByName('ampm').forEach((node)=> {
+        if(node.value === '오전') node.checked=true;
+      })
+    } else {
+      document.getElementsByName('ampm').forEach((node)=> {
+        if(node.value === '오후') node.checked=true;
+      })
+    }
+    document.getElementsByName('hour').forEach((node)=> {
+      if(node.value === prevTimeString[0]) node.checked=true;
+    })
+    document.getElementsByName('minute').forEach((node)=> {
+      if(node.value === prevTimeString[1]) node.checked=true;
+    })
+
+  },[checkedTime, height])
+
+  const [planTravelTime, setPlanTravelTime] = useState({
+    "ampm": '오전',
+    "hour": '7',
+    "minute": '20',
+  })
+  const findCheckedValue = () => {
+    document.getElementsByName('ampm').forEach((node) => {
+      if(node.checked) {
+        setPlanTravelTime({
+          ...planTravelTime,
+          ampm: node.value
+        })
+      }
+    })
+    console.log(planTravelTime);
+  }
+  const saveTime = () => {
+
+    findCheckedValue();
+    changeContent(2);
+    
+
+    // axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${id}`,
+    //   {
+    //     "startTime" : "",
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: token
+    //     },
+    //   })
+    //   .then(res=> {
+
+    //   }).catch(err => {
+    //     console.log(err);
+    //   })
+  }
+
 
   const countDays = () => {
 
@@ -424,14 +489,12 @@ const BottomSheet = (props) => {
           </WrapTop>
           <WrapTitle>
             <input type="text" name="title" placeholder='플랜 제목을 입력해주세요.' className="title-input" defaultValue={planData.title} />
-            <p>{planData.startDate} ~ {planData.endDate}</p>
           </WrapTitle>
           <PlanDiv className="plan-div">
             <WrapLine>
-              <WrapTime>
-                <p className='start_time'>일정 시작 | 
-                  <TimeButton onClick={() => changeContent(3)}>오전 10:00</TimeButton></p>
-              </WrapTime>
+              <WrapDate>
+                <p>{planData.startDate} ~ {planData.endDate}</p>
+              </WrapDate>
               <WrapBtn>
                 {
                   isOpen ?
@@ -454,7 +517,11 @@ const BottomSheet = (props) => {
             </WrapLine>
 
             {specificDayContent && specificDayContent.map(card => (
-              <PlanCard card={card} onRemove={()=>onRemove(card.id)} />
+              <PlanCard 
+                card={card}
+                onRemove={()=>onRemove(card.id)} 
+                onClickTime={()=>onClickTime(card)}
+                />
             ))}
             {specificDayContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
           </PlanDiv>
@@ -470,50 +537,128 @@ const BottomSheet = (props) => {
           </WrapTop>
           <WrapTitle>
             <p className='title-p'>일정 시작</p>
-            <div className='save-btn' onClick={() => changeContent(2)}>저장</div>
+            <div className='save-btn' onClick={saveTime}>저장</div>
           </WrapTitle>
 
           <WrapTimeButton>
             <WrapSelect>
               <p className="time-head">오전 / 오후</p>
-              <div className="long-box">오전</div>
-              <div className="long-box">오후</div>
+              <label className="long-box">
+                <input type="radio" name="ampm" value="오전"/>
+                <div>오전</div>
+              </label>
+              <label className="long-box">
+                <input type="radio" name="ampm" value="오후"/>
+                <div>오후</div>
+              </label>
             </WrapSelect>
             <WrapSelect>
               <p className="time-head">시</p>
-              <div className="short-box">1</div>
-              <div className="short-box">2</div>
-              <div className="short-box">3</div>
-              <div className="short-box">4</div>
-              <div className="short-box">5</div>
-              <div className="short-box">6</div>
+              <label className="short-box">
+                <input type="radio" name="hour" value="01"/>
+                <div>1</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="02"/>
+                <div>2</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="03"/>
+                <div>3</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="04"/>
+                <div>4</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="05"/>
+                <div>5</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="06"/>
+                <div>6</div>
+              </label>
             </WrapSelect>
             <WrapSelect>
               <p className="time-head"></p>
-              <div className="short-box">7</div>
-              <div className="short-box">8</div>
-              <div className="short-box">9</div>
-              <div className="short-box">10</div>
-              <div className="short-box">11</div>
-              <div className="short-box">12</div>
+              <label className="short-box">
+                <input type="radio" name="hour" value="07"/>
+                <div>7</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="08"/>
+                <div>8</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="09"/>
+                <div>9</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="10"/>
+                <div>10</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="11"/>
+                <div>11</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="hour" value="12"/>
+                <div>12</div>
+              </label>
             </WrapSelect>
             <WrapSelect>
               <p className="time-head">분</p>
-              <div className="short-box">00</div>
-              <div className="short-box">05</div>
-              <div className="short-box">10</div>
-              <div className="short-box">15</div>
-              <div className="short-box">20</div>
-              <div className="short-box">25</div>
+              <label className="short-box">
+                <input type="radio" name="minute" value="00"/>
+                <div>00</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="05"/>
+                <div>05</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="10"/>
+                <div>10</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="15"/>
+                <div>15</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="20"/>
+                <div>20</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="25"/>
+                <div>25</div>
+              </label>
             </WrapSelect>
             <WrapSelect>
               <p className="time-head"></p>
-              <div className="short-box">30</div>
-              <div className="short-box">35</div>
-              <div className="short-box">40</div>
-              <div className="short-box">45</div>
-              <div className="short-box">50</div>
-              <div className="short-box">55</div>
+              <label className="short-box">
+                <input type="radio" name="minute" value="30"/>
+                <div>30</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="35"/>
+                <div>35</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="40"/>
+                <div>40</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="45"/>
+                <div>45</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="50"/>
+                <div>50</div>
+              </label>
+              <label className="short-box">
+                <input type="radio" name="minute" value="55"/>
+                <div>55</div>
+              </label>
             </WrapSelect>
           </WrapTimeButton>
 
