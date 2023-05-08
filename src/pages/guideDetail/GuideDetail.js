@@ -40,11 +40,10 @@ export default function GuideDetail() {
         })
             .then(response => {
                 setGuideData(response.data);
-                response.data.planTravels.map(e => 
-                    {
-                        console.log(e.day);
-                        if(e.day > maxPage) setMaxPage(e.day)
-                    });
+                response.data.planTravels.map(e => {
+                    console.log(e.day);
+                    if (e.day > maxPage) setMaxPage(e.day)
+                });
                 console.log(guideData);
             });
     }, [id])
@@ -64,12 +63,12 @@ export default function GuideDetail() {
         }
     }
     useEffect(() => {
-        if(guideData.planTravels) {
+        if (guideData.planTravels) {
             console.log("현재 모든 컨텐츠", dayPageContent);
             setDayPageContent(guideData.planTravels.filter((travel) => travel.day === dayPageNum));
         }
-        
-      }, [guideData, dayPageNum])
+
+    }, [guideData, dayPageNum])
 
     return (
         <>
@@ -99,7 +98,12 @@ export default function GuideDetail() {
                             <img src={card.image} className='plan-img' />
                             <div>
                                 <p className='spot-name'>{card.name}</p>
-                                <p className='time'>소요 시간 | <span className='time-btn'>{card.startTime}</span></p>
+                                <p className='time'>소요 시간 |
+                                    <span className='time-btn'>
+                                        {card.startTime.split(":")[0] < 12 ?
+                                            `오전 ${card.startTime.split(":")[0]}:${card.startTime.split(":")[1]}`
+                                            : `오후 ${card.startTime.split(":")[0]}:${card.startTime.split(":")[1]}`
+                                        }</span></p>
                             </div>
                             <img src={Delete} className='delete-btn' />
                         </WrapCard>
