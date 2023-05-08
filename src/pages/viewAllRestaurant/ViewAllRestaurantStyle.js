@@ -80,8 +80,8 @@ export const UpButton = styled.div`
 
   box-shadow: 0px 0px 5px #C5C5C5;
 
-  position: sticky;
-  bottom: 110px;
+  position: fixed;
+  bottom: 14%;
   left: 85%;
 
 `;

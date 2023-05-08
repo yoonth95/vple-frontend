@@ -41,56 +41,46 @@ function ViewAllRestaurant() {
         { city: '충북', province: ['전체', '단양군', '영동군', '음성군', '제천시', '청주시', '충주시',] },
     ]
     const [provinceList, setProvinceList] = useState(['전체']);
-    let selectedCity = '전체';
-    let selectedProvince = '전체';
+    const [selectedCity, setSelectedCity] = useState('전체');
+    const [selectedProvince, setSelectedProvince] = useState('전체');
+    // let selectedCity = '전체';
+    // let selectedProvince = '전체';
 
     const [items, setItems] = useRecoilState(viewAllRestaurantListState);
     const [target, setTarget] = useState(null);
     let [page, setPage] = useRecoilState(viewAllRestaurantPageState);
     const [pageState, setPageState] = useRecoilState(viewAllRestaurantPageState);
-    const [totalPages, setTotalPages] = useState(160);
+    let [totalPages, setTotalPages] = useState(160);
 
     const changeCity = async () => {
+        var index = locationList.findIndex((prop) => {
+            if (prop.city == document.getElementById('selected_city').value) return true;
+        })
+        setProvinceList(locationList[index].province);
 
-        selectedCity = document.getElementById('selected_city').value;
+        setSelectedCity(document.getElementById('selected_city').value);
         document.getElementById('selected_province').value = "전체";
-        selectedProvince = document.getElementById('selected_province').value;
+        setSelectedProvince(document.getElementById('selected_province').value);
 
-        setPage(0);
+        page = 0;
         setItems([]);
-
-        const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
-
-        const data = await response.json();
-        setTotalPages(data.totalPages);
-        setItems((data.content));
-
-        console.log(page);
-
     }
     const changeProvince = async () => {
+        var index = locationList.findIndex((prop) => {
+            if (prop.city == document.getElementById('selected_city').value) return true;
+        })
+        setProvinceList(locationList[index].province);
 
-        selectedCity = document.getElementById('selected_city').value;
-        selectedProvince = document.getElementById('selected_province').value;
 
-        setPage(0);
+        setSelectedCity(document.getElementById('selected_city').value);
+        setSelectedProvince(document.getElementById('selected_province').value);
+
+        page = 0;
         setItems([]);
-
-        const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
-
-        const data = await response.json();
-        setTotalPages(data.totalPages);
-        setItems((data.content));
     }
 
 
     const [stickyToFixed, setStickyToFixed] = useState(false);
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [])
     const handleScroll = () => {
         if (window.scrollY >= 50) {
             setStickyToFixed(true);
@@ -98,38 +88,39 @@ function ViewAllRestaurant() {
             setStickyToFixed(false);
         }
     }
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [])
+
 
 
     const [viewAllRestaurantList, setViewAllRestaurantList] = useRecoilState(viewAllRestaurantListState);
     
     const fetchData = async () => {
+        console.log("prev-page", page);
+        
+        const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
 
-        var index = locationList.findIndex((prop) => {
-            if (prop.city == document.getElementById('selected_city').value) return true;
-        })
-        setProvinceList(locationList[index].province);
-
-        if(page < totalPages) {
-            
-            const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
-    
-            const data = await response.json();
-            setItems((prev) => prev.concat(data.content));
-
-            console.log("page", page);
-            
-            page++;
-            setPageState(page);
-            
-        }
+        const data = await response.json();        
+        totalPages = data.totalPages;
+        setItems((prev) => prev.concat(data.content));
+        
+        page++;
+        
+        console.log("page", page);
+        console.log("totalPages", totalPages);
         
     };
 
     useEffect(() => {
         let observer;
+
         if (target) {
             const onIntersect = async ([entry], observer) => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting  && (page < totalPages)) {
                     observer.unobserve(entry.target);
                     await fetchData();
                     observer.observe(entry.target);
@@ -139,7 +130,7 @@ function ViewAllRestaurant() {
             observer.observe(target);
         }
         return () => observer && observer.disconnect();
-    }, [target]);
+    }, [target, selectedCity, selectedProvince]);
 
     const scrollToUp = () => {
         window.scroll({
@@ -191,7 +182,7 @@ function ViewAllRestaurant() {
                         />
                     </div>
                 ))}
-                <div ref={setTarget} />
+                <div id="target" ref={setTarget} />
             </CardContainer>
 
             <UpButton onClick={scrollToUp} />
