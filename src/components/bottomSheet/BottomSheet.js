@@ -364,6 +364,13 @@ const BottomSheet = (props) => {
     setPlanTravelId(card.id);
     setCheckedTime(card.startTime);
     changeContent(3);
+
+    // const amPmElement = document.getElementsByName('ampm');
+
+    // amPmElement.addEventListener('change', )
+  }
+  const checkedAllTime = () => {
+
   }
   useEffect(()=> {
     const prevTimeString = checkedTime.split(":");
@@ -382,15 +389,10 @@ const BottomSheet = (props) => {
     document.getElementsByName('minute').forEach((node)=> {
       if(node.value === prevTimeString[1]) node.checked=true;
     })
+  },[onClickTime, checkedTime, height])
 
-  },[checkedTime, height])
+  const saveTime = () => {
 
-  const [planTravelTime, setPlanTravelTime] = useState({
-    "ampm": '오전',
-    "hour": '07',
-    "minute": '20',
-  })
-  const findCheckedValue = () => {
     let tempPlanTravelTime = {};
     document.getElementsByName('ampm').forEach((node) => {
       if(node.checked) {
@@ -408,18 +410,9 @@ const BottomSheet = (props) => {
       }
     })
 
-    setPlanTravelTime(tempPlanTravelTime);
-  }
-  const patchPlanTravel = () =>{
-
-  }
-  const saveTime = () => {
-
-    findCheckedValue();
-
     axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${planTravelId}`,
     {
-      "startTime" : `${planTravelTime.hour.toString()}:${planTravelTime.minute.toString()}:00`,
+      "startTime" : `${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`,
     },
     {
       headers: {
@@ -427,16 +420,21 @@ const BottomSheet = (props) => {
       },
     })
     .then(res=> {
+      
+      axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
+        headers: {
+          Authorization: token
+        }
+      })
+        .then(response => {
+          setDayPageContent(response.data.planTravels);
+        });
       changeContent(2);
     }).catch(err => {
       console.log(err);
     })
 
-    console.log(planTravelTime);
-
-    
   }
-
 
   const countDays = () => {
 
@@ -544,7 +542,6 @@ const BottomSheet = (props) => {
             {specificDayContent && specificDayContent.map(card => (
               <PlanCard 
                 card={card}
-                // time={planTravelTime}
                 onRemove={()=>onRemove(card.id)}
                 onClickTime={()=>onClickTime(card)}
                 />
