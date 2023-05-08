@@ -94,6 +94,41 @@ export const WrapTime = styled.div`
     }
 `;
 
+export const WrapTop = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+
+    .prev_button{
+      width: 25px;
+      height: 25px;
+
+      display: inline-block;
+    }
+    .day{
+      color: #758B6F;
+      font-weight: 700;
+
+      display: inline-block;
+      margin: 0px 18px;
+    }
+    .next_button{
+      width: 25px;
+      height: 25px;
+
+      display: inline-block;
+    }
+    .saved-plan {
+      color: #758B6F;
+      font-weight: 700;
+
+      display: inline-block;
+      margin: 0px 18px;
+      margin-bottom: 15px;
+    }
+`;
+
 export const CardSection = styled.div`
     display: flex;
     flex-direction: column;

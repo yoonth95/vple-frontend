@@ -244,6 +244,17 @@ const BottomSheet = (props) => {
 
     changeContent(2);
   }
+  // useEffect(() => {
+  //   axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
+  //     headers: {
+  //       Authorization: token,
+  //     }
+  //   })
+  //     .then(response => {
+  //       planData.planTravels = response.data.planTravels;
+  //       setDayPageContent(planData.planTravels);
+  //     });
+  // },[checkedTime])
 
   useEffect(() => {
     countDays();
@@ -376,40 +387,54 @@ const BottomSheet = (props) => {
 
   const [planTravelTime, setPlanTravelTime] = useState({
     "ampm": '오전',
-    "hour": '7',
+    "hour": '07',
     "minute": '20',
   })
   const findCheckedValue = () => {
+    let tempPlanTravelTime = {};
     document.getElementsByName('ampm').forEach((node) => {
       if(node.checked) {
-        setPlanTravelTime({
-          ...planTravelTime,
-          ampm: node.value
-        })
+        tempPlanTravelTime.ampm= node.value;
       }
     })
-    console.log(planTravelTime);
+    document.getElementsByName('hour').forEach((node) => {
+      if(node.checked) {
+        tempPlanTravelTime.hour= node.value;
+      }
+    })
+    document.getElementsByName('minute').forEach((node) => {
+      if(node.checked) {
+        tempPlanTravelTime.minute= node.value;
+      }
+    })
+
+    setPlanTravelTime(tempPlanTravelTime);
+  }
+  const patchPlanTravel = () =>{
+
   }
   const saveTime = () => {
 
     findCheckedValue();
-    changeContent(2);
+
+    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${planTravelId}`,
+    {
+      "startTime" : `${planTravelTime.hour.toString()}:${planTravelTime.minute.toString()}:00`,
+    },
+    {
+      headers: {
+        Authorization: token
+      },
+    })
+    .then(res=> {
+      changeContent(2);
+    }).catch(err => {
+      console.log(err);
+    })
+
+    console.log(planTravelTime);
+
     
-
-    // axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${id}`,
-    //   {
-    //     "startTime" : "",
-    //   },
-    //   {
-    //     headers: {
-    //       Authorization: token
-    //     },
-    //   })
-    //   .then(res=> {
-
-    //   }).catch(err => {
-    //     console.log(err);
-    //   })
   }
 
 
@@ -519,7 +544,8 @@ const BottomSheet = (props) => {
             {specificDayContent && specificDayContent.map(card => (
               <PlanCard 
                 card={card}
-                onRemove={()=>onRemove(card.id)} 
+                // time={planTravelTime}
+                onRemove={()=>onRemove(card.id)}
                 onClickTime={()=>onClickTime(card)}
                 />
             ))}

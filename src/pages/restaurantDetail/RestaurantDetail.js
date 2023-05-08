@@ -62,11 +62,12 @@ export default function RestaurantDetail() {
         })
     }
 
-    const [visible, setVisible] = useState(false);
+    // const [visible, setVisible] = useState(false);
 
     //식당 상세 정보 url 받아오기
     const location = useLocation();
     const id = location.state.id;
+    const token = localStorage.getItem('token');
 
     const [detailRestaurant, setDetailRestaurant] = useState([]);
     const [menu, setMenu] = useState([]);
@@ -81,7 +82,44 @@ export default function RestaurantDetail() {
                 console.log(response.data);
 
             });
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart',
+        {
+            headers: {
+                Authorization: token
+            }
+        })
+        .then(response => {
+            response.data.map(e => 
+                {
+                    console.log("e", id);
+                    if(e.id === id) setClip(true)
+                });
+        });
     }, []);
+
+    const putInCart = () => {
+        axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart`,
+            {
+                "name": detailRestaurant.name,
+                "address": detailRestaurant.address,
+                "longitude": detailRestaurant.longitude,
+                "latitude": detailRestaurant.latitude,
+                "image": detailRestaurant.image,
+            },
+            {
+                headers: {
+                    Authorization: token
+                }
+            })
+            .then(res => {
+
+                setClip(true);
+                console.log(res);
+            });
+    }
+    const deleteInCart = () => {
+        
+    }
 
     return (
         <>
@@ -94,9 +132,9 @@ export default function RestaurantDetail() {
 
                 <WrapInfo>
                     <div className="titleWrap">{detailRestaurant.name}</div>
-                    <ClipDiv
-                        onClick={() => setClip(!isClip)}>
-                        {isClip ? <ClipButtonG /> : <ClipButtonW />}
+                    <ClipDiv>
+                        {isClip ? <ClipButtonG /> 
+                        : <ClipButtonW onClick={putInCart} />}
                     </ClipDiv>
                     <TagContainer>
                         {

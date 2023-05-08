@@ -9,13 +9,12 @@ import tempImg from '../../asset/profile/tempProfile.jpeg';
 import more from '../../asset/more.png';
 import iconRedDelete from '../../asset/IconRedDelete.png';
 
-export default function PlanCard({ card, onRemove, onClickTime }) {
+export default function PlanCard({ card, time, onRemove, onClickTime }) {
 
     const onDelete = () => onRemove(card.id);
     const onClickTimeBtn = () => onClickTime(card.id);
-
-    const prevTimeString = card.startTime.split(":");
     
+    const prevTimeString = card.startTime.split(":");
 
     return (
         <CardDiv>
@@ -34,6 +33,9 @@ export default function PlanCard({ card, onRemove, onClickTime }) {
                         prevTimeString[0] < 12 ? 
                         `오전 ${prevTimeString[0]}:${prevTimeString[1]}`
                         : `오후 : ${prevTimeString[0]}:${prevTimeString[1]}`}
+                        {/* {
+                            `${time.ampm} ${time.hour}:${time.minute}`
+                        } */}
                     </TimeButton>
                     </p>
                 </div>
