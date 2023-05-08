@@ -69,7 +69,7 @@ export default function GuideDetail() {
             setDayPageContent(guideData.planTravels.filter((travel) => travel.day === dayPageNum));
         }
         
-      }, [dayPageNum])
+      }, [guideData, dayPageNum])
 
     return (
         <>
@@ -96,7 +96,7 @@ export default function GuideDetail() {
                 <CardSection>
                     {dayPageContent && dayPageContent.map(card => (
                         <WrapCard>
-                            <img className='plan-img' />
+                            <img src={card.image} className='plan-img' />
                             <div>
                                 <p className='spot-name'>{card.name}</p>
                                 <p className='time'>소요 시간 | <span className='time-btn'>{card.startTime}</span></p>
