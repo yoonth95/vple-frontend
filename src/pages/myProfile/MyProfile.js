@@ -45,7 +45,7 @@ export default function MyProfile() {
     useEffect (() => {
 
 
-        // console.log(myInfo);
+        console.log(myInfo);
 
         if(myInfo.length !== 0) {
 

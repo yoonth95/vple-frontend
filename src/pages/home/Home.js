@@ -50,12 +50,16 @@ const Home = () => {
             })
                 .then(response => {
                     setRecommendGuide(response.data);
-                    // console.log(recommendGuideList);
                 });
 
         }
 
     }, []);
+
+    //확인용===================================
+    // useEffect(()=> {
+    //     console.log(recommendGuideList);
+    // },[recommendGuideList])
 
 
     let navigate = useNavigate();

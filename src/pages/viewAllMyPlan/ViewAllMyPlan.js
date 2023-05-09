@@ -95,6 +95,7 @@ function ViewAllMyPlan() {
                 changeMode(1);
 
             }).catch(err => {
+                console.log(deleteId);
                 console.log(err);
             });
         }

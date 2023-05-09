@@ -33,6 +33,8 @@ export default function GuideDetail() {
 
     useEffect(() => {
 
+        console.log("guideData", guideData);
+
         axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
             headers: {
                 Authorization: token
@@ -64,7 +66,7 @@ export default function GuideDetail() {
     }
     useEffect(() => {
         if (guideData.planTravels) {
-            console.log("현재 모든 컨텐츠", dayPageContent);
+            console.log("현재 모든 컨텐츠", guideData);
             setDayPageContent(guideData.planTravels.filter((travel) => travel.day === dayPageNum));
         }
 
@@ -75,7 +77,9 @@ export default function GuideDetail() {
             <DetailHeader title={title} />
 
             <ImageContainer>
-                <img className='guide-image' />
+                {guideData.planTravels 
+                    && <img className='guide-image' src={guideData.planTravels[0].image }
+                 />}
             </ImageContainer>
 
             <ContentContainer>

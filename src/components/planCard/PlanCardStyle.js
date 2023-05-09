@@ -22,6 +22,7 @@ display: flex;
 align-items: center;
 
 .plan_img{
+    min-width: 62.82px;
     width: 62.82px;
     height: 62.82px;
     border-radius: 8px;

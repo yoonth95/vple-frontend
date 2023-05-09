@@ -47,6 +47,7 @@ export const CardContainer = styled.section`
 `;
 export const WrapCards = styled.div`
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   gap: 5%;
   margin: 20px 20px;

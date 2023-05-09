@@ -153,6 +153,7 @@ export const WrapCard = styled.div`
     display: inline-flex;
     flex-direction: column;
     flex: 1;
+    max-width: 33%;
 
     box-shadow: 0px 0px 3px #C5C5C5;
     border-radius: 10px;

@@ -67,6 +67,7 @@ const PlanMap = () => {
                 "latitude": place.latitude,
                 "day": planDay[0].toString(),
                 "startTime": "07:20:00 ",
+                "image": place.image,
             },
             {
                 headers: {
