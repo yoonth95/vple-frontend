@@ -19,6 +19,7 @@ import {
 import Delete from '../../asset/IconRedDelete.png';
 import prevBtn from '../../asset/prevBtn.png';
 import nextBtn from '../../asset/nextBtn.png';
+import planDefaultImg from '../../asset/planDefault.png';
 
 
 export default function GuideDetail() {
@@ -30,10 +31,9 @@ export default function GuideDetail() {
 
     const [guideData, setGuideData] = useState([]);
     const [maxPage, setMaxPage] = useState(0);
+    let [representPic, setRepresentPic] = useState(planDefaultImg);
 
     useEffect(() => {
-
-        console.log("guideData", guideData);
 
         axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
             headers: {
@@ -43,10 +43,12 @@ export default function GuideDetail() {
             .then(response => {
                 setGuideData(response.data);
                 response.data.planTravels.map(e => {
-                    console.log(e.day);
+                    // console.log(e.day);
                     if (e.day > maxPage) setMaxPage(e.day)
                 });
-                console.log(guideData);
+                if(response.data.planTravels !== []) {
+                    setRepresentPic(response.data.planTravels[0].image);
+                }
             });
     }, [id])
 
@@ -65,8 +67,11 @@ export default function GuideDetail() {
         }
     }
     useEffect(() => {
+        // console.log("guideData", guideData);
+
         if (guideData.planTravels) {
-            console.log("현재 모든 컨텐츠", guideData);
+            
+            // console.log("현재 모든 컨텐츠", guideData);
             setDayPageContent(guideData.planTravels.filter((travel) => travel.day === dayPageNum));
         }
 
@@ -77,9 +82,10 @@ export default function GuideDetail() {
             <DetailHeader title={title} />
 
             <ImageContainer>
-                {guideData.planTravels 
-                    && <img className='guide-image' src={guideData.planTravels[0].image }
-                 />}
+                {representPic
+                    && <img className='guide-image' src={representPic}
+                    />
+                }
             </ImageContainer>
 
             <ContentContainer>

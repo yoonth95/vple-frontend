@@ -244,17 +244,7 @@ const BottomSheet = (props) => {
 
     changeContent(2);
   }
-  // useEffect(() => {
-  //   axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
-  //     headers: {
-  //       Authorization: token,
-  //     }
-  //   })
-  //     .then(response => {
-  //       planData.planTravels = response.data.planTravels;
-  //       setDayPageContent(planData.planTravels);
-  //     });
-  // },[checkedTime])
+
 
   useEffect(() => {
     countDays();
