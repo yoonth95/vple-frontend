@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { dayPageContentState, getMapItems, planDayState, planIdState } from '../../recoil/state';
 import Header from '../../components/header/Header';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
@@ -54,7 +54,7 @@ const PlanMap = () => {
 
     const planId = useRecoilState(planIdState);
     const planDay = useRecoilState(planDayState);
-    const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
+    const setDayPageContent = useSetRecoilState(dayPageContentState);
     const addPlace = (place) => {
 
         console.log(place);

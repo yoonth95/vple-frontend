@@ -12,6 +12,7 @@ import iconLock from '../../asset/IconLock.png';
 import iconUnlock from '../../asset/IconUnlock.png';
 
 import {
+  SheetHeader,
   WrapContent,
   EditBtn,
   NewBtn,
@@ -24,38 +25,36 @@ import {
   WrapSelect,
   WrapTimeButton,
   WrapBtn,
-  TimeButton,
   DeleteAllButton,
   WrapModal,
-
 
 } from './BottomSheetStyle';
 import PlanCard from '../../components/planCard/PlanCard';
 import SavedPlanCard from '../../components/savedPlanCard/SavedPlanCard';
 
 import styled, { keyframes } from "styled-components";
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { dayPageContentState, planDayState, planIdState, } from '../../recoil/state';
 
 
 const BottomSheet = (props) => {
 
-  const slideDown = keyframes`
-    from {
-      transform: translateY(80vh);
-    }
-    to {
-      transform: translateY(40vh);
-    }
-  `;
-  const slideUp = keyframes`
-    from {
-      transform: translateY(40vh);
-    }
-    to {
-      transform: translateY(0);
-    }
-  `;
+  // const slideDown = keyframes`
+  //   from {
+  //     transform: translateY(80vh);
+  //   }
+  //   to {
+  //     transform: translateY(40vh);
+  //   }
+  // `;
+  // const slideUp = keyframes`
+  //   from {
+  //     transform: translateY(40vh);
+  //   }
+  //   to {
+  //     transform: translateY(0);
+  //   }
+  // `;
 
   const [height, setHeight] = useState(40);
   const [isHigh, setIsHigh] = useState(false);
@@ -81,35 +80,20 @@ const BottomSheet = (props) => {
     position: fixed;
     bottom: 0;
 
-    transition: all 0.2s;
-
-    // animation-name: ${slideUp};
-    // animation-duration: 0.2s;
+    transition: all 1s;
   `;
 
-  const SheetHeader = styled.div`
-    height: 40px;
-    border-bottom: 0.5px solid #C5C5C5;
-  
-    display: flex;
-    justify-content: space-between;
-    margin: 0 20px;
-  
-    text-align: center;
-    line-height: 45px;
-    font-size: 13px;
+  const closeSheet = () => {
+    setHeight(0);
+    props.closeSheet();
+  }
 
-    .spread-btn {
-      width: 25px;
-      height: 18px;
-      margin: auto 0;
-    }
-    .close-btn {
-      width: 18px;
-      height: 18px;
-      margin: auto 0;
-    }
-  `;
+
+  const [step, setStep] = useState(0);
+  const changeContent = (index) => {
+    setStep(index);
+  }
+
 
   const [myPlansInfo, setMyPlansInfo] = useState([]);
   const getMyPlansInfo = () => {
@@ -124,7 +108,6 @@ const BottomSheet = (props) => {
         changeContent(1);
       });
   }
-
 
   const location = useLocation();
   const planSetting = location.state.planSetting;
@@ -177,10 +160,77 @@ const BottomSheet = (props) => {
 
 
 
-  const [step, setStep] = useState(0);
-  const changeContent = (index) => {
-    setStep(index);
+  const getPlanData = (card) => {
+
+    const plan = myPlansInfo.find((plan) => plan.id === card.id);
+
+    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
+      headers: {
+        Authorization: token,
+      }
+    })
+      .then(response => {
+        setPlanId(plan.id);
+        setPlanData(response.data);
+        planData.likesCount = response.data.likesCount;
+        planData.opened = response.data.opened;
+        planData.planTravels = response.data.planTravels;
+
+        setDayPageContent(planData.planTravels);
+      });
+
+    changeContent(2);
   }
+
+  const [isShowModal, setIsShowModal] = useState(false);
+  const showModal = (card) => {
+
+    setIsShowModal(true);
+
+    setDeleteTitle(card.title);
+    setDeleteId(card.id);
+  }
+  const hideModal = () => {
+    setIsShowModal(false);
+  }
+
+  const [deleteTitle, setDeleteTitle] = useState("무제");
+  const [deleteId, setDeleteId] = useState(-1);
+  const updateMyPlansInfo = () => {
+    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan', {
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(response => {
+        setMyPlansInfo(response.data);
+      });
+  }
+  const deletePlanCard = () => {
+
+    const deleteUrl = `http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${deleteId}`;
+
+    axios.delete(deleteUrl,
+      {
+        headers: {
+          Authorization: token
+        },
+      })
+      .then(res => {
+        console.log(res.data);
+        updateMyPlansInfo();
+        hideModal();
+
+      }).catch(err => {
+        console.log(err);
+      });
+
+    setIsShowModal(false);
+  }
+
+
+
+
 
   const setTitle = () => {
     let newTitle = document.querySelector('.title-input').value;
@@ -223,82 +273,17 @@ const BottomSheet = (props) => {
     // console.log("propsCard", props.card);
   }, [])
   
-  const getPlanData = (card) => {
 
-    const plan = myPlansInfo.find((plan) => plan.id === card.id);
 
-    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
-      headers: {
-        Authorization: token,
-      }
-    })
-      .then(response => {
-        setPlanId(plan.id);
-        setPlanData(response.data);
-        planData.likesCount = response.data.likesCount;
-        planData.opened = response.data.opened;
-        planData.planTravels = response.data.planTravels;
 
-        setDayPageContent(planData.planTravels);
-      });
-
-    changeContent(2);
-  }
 
 
   useEffect(() => {
     countDays();
     setIsOpen(planData.opened);
+
+    console.log("planData변경됨", planData);
   }, [planData])
-
-
-  const [isShowModal, setIsShowModal] = useState(false);
-  const showModal = (card) => {
-
-    setIsShowModal(true);
-
-    setDeleteTitle(card.title);
-    setDeleteId(card.id);
-  }
-  const hideModal = () => {
-    setIsShowModal(false);
-  }
-
-  const [deleteTitle, setDeleteTitle] = useState("무제");
-  const [deleteId, setDeleteId] = useState(-1);
-  const updateMyPlansInfo = () => {
-    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan', {
-      headers: {
-        Authorization: token
-      }
-    })
-      .then(response => {
-        setMyPlansInfo(response.data);
-      });
-  }
-  const deletePlanCard = () => {
-
-    // console.log("deleteId", deleteId);
-
-    const deleteUrl = `http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${deleteId}`;
-
-    axios.delete(deleteUrl,
-      {
-        headers: {
-          Authorization: token
-        },
-      })
-      .then(res => {
-        console.log(res.data);
-        updateMyPlansInfo();
-        hideModal();
-
-      }).catch(err => {
-        console.log(err);
-      });
-
-    setIsShowModal(false);
-  }
 
   const [isOpen, setIsOpen] = useState(planData.opened);
   const setPlanOpen = () => {
@@ -310,10 +295,7 @@ const BottomSheet = (props) => {
     planData.opened = false;
   }
 
-  const [dayPageNum, setDayPageNum] = useState(1);
-  const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
-  const [specificDayContent, setSpecificDayContent] = useState([]);
-  const [planDayNum, setPlanDayNum] = useRecoilState(planDayState);
+  const [dayPageNum, setDayPageNum] = useState(1);  const [planDayNum, setPlanDayNum] = useRecoilState(planDayState);
   const goNextDayPage = () => {
     if (dayPageNum < planData.days) {
       setDayPageNum((prev) => prev + 1);
@@ -327,12 +309,17 @@ const BottomSheet = (props) => {
   useEffect(() => {
     setPlanDayNum(dayPageNum);
   }, [dayPageNum]);
+
+  
+  const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
+  const [specificDayContent, setSpecificDayContent] = useState([]);
+
   useEffect(() => {
     console.log("현재 모든 컨텐츠", dayPageContent);
     setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
   }, [dayPageNum, dayPageContent])
 
-  const onRemove = (id) => {
+  const onTravelRemove = (id) => {
     
     axios.delete(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${id}`,
       {
@@ -359,9 +346,7 @@ const BottomSheet = (props) => {
 
     // amPmElement.addEventListener('change', )
   }
-  const checkedAllTime = () => {
 
-  }
   useEffect(()=> {
     const prevTimeString = checkedTime.split(":");
     if(prevTimeString[0] < 12) {
@@ -390,8 +375,13 @@ const BottomSheet = (props) => {
       }
     })
     document.getElementsByName('hour').forEach((node) => {
-      if(node.checked) {
+      // if(node.checked) {
+      //   tempPlanTravelTime.hour= node.value;
+      // }
+      if(node.checked && tempPlanTravelTime.ampm==='오전') {
         tempPlanTravelTime.hour= node.value;
+      } else {
+        tempPlanTravelTime.hour= (node.value);
       }
     })
     document.getElementsByName('minute').forEach((node) => {
@@ -418,13 +408,30 @@ const BottomSheet = (props) => {
       })
         .then(response => {
           setDayPageContent(response.data.planTravels);
+          console.log(tempPlanTravelTime);
         });
       changeContent(2);
     }).catch(err => {
+      console.log(`${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`);
       console.log(err);
     })
 
   }
+
+  useEffect(()=> {
+
+    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
+      headers: {
+        Authorization: token,
+      }
+    })
+      .then(response => {
+        planData.planTravels = response.data.planTravels;
+
+        setDayPageContent(planData.planTravels);
+      });
+    
+  }, [planTravelId])
 
   const countDays = () => {
 
@@ -531,7 +538,7 @@ const BottomSheet = (props) => {
             {specificDayContent && specificDayContent.map(card => (
               <PlanCard 
                 card={card}
-                onRemove={()=>onRemove(card.id)}
+                onRemove={()=>onTravelRemove(card.id)}
                 onClickTime={()=>onClickTime(card)}
                 />
             ))}
@@ -689,7 +696,7 @@ const BottomSheet = (props) => {
           {/* <span className="title">{props.title}</span> */}
           <img
             className='close-btn'
-            onClick={props.closeSheet}
+            onClick={closeSheet}
             src={IconClose} />
         </SheetHeader>
 

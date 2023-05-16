@@ -111,7 +111,7 @@ export default function MyProfile() {
                                 planList.map((plan) => {
                                     return (
                                         <WrapCard>
-                                            <img className='img-photo' />
+                                            <img className='img-photo' src={plan.image}/>
                                             <div className='div-content'>
                                                 <span className='plan-title'>{plan.title}</span>
                                             </div>

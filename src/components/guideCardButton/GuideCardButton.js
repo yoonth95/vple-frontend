@@ -7,7 +7,7 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
-export default function GuideCardButton({ title, onClick}) {
+export default function GuideCardButton({ title, image, onClick}) {
 
     const click = onClick;
 
@@ -15,7 +15,7 @@ export default function GuideCardButton({ title, onClick}) {
         <CardButtonStyle>
             <div onClick={click}>
 
-                <StyledImgDiv />
+                <img className='image' src={image}></img>
                 <StyledContentDiv>
                     <StyledTitleFont>{title}</StyledTitleFont>
                 </StyledContentDiv>

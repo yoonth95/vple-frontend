@@ -15,8 +15,12 @@ export const CardButtonStyle = styled(ButtonStyle)`
     border-radius: 10px;
     margin: 5px;
 
-    .link{
-        text-decoration-line: none;
+    .image {
+        width : 150px;
+        height: 130px;
+        background-color: #F8F8F8;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
     }
 
 `;
@@ -38,6 +42,9 @@ export const StyledContentDiv = styled.div`
     background-color: #FFFFFF;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+
+    margin-top: -5px;
+    padding-bottom: 10px;
 `;
 
 export const StyledTitleFont = styled.div`

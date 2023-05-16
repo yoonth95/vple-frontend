@@ -57,9 +57,9 @@ const Home = () => {
     }, []);
 
     //확인용===================================
-    // useEffect(()=> {
-    //     console.log(recommendGuideList);
-    // },[recommendGuideList])
+    useEffect(()=> {
+        console.log(recommendGuideList);
+    },[recommendGuideList])
 
 
     let navigate = useNavigate();
@@ -133,6 +133,7 @@ const Home = () => {
                         <CardWrap>
                             <GuideCardButton
                                 title={card.title}
+                                image={card.image}
                                 onClick={() => routerGuideDetail(card.id)}
                             />
                         </CardWrap>

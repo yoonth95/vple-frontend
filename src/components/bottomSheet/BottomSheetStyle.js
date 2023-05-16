@@ -1,5 +1,28 @@
 import styled from "styled-components";
 
+export const SheetHeader = styled.div`
+    height: 40px;
+    border-bottom: 0.5px solid #C5C5C5;
+  
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+  
+    text-align: center;
+    line-height: 45px;
+    font-size: 13px;
+
+    .spread-btn {
+      width: 25px;
+      height: 18px;
+      margin: auto 0;
+    }
+    .close-btn {
+      width: 18px;
+      height: 18px;
+      margin: auto 0;
+    }
+  `;
 
 export const WrapContent = styled.div`
   margin-top: 30px;

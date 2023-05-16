@@ -99,7 +99,7 @@ function ViewAllGuide() {
                         recommandGuideList.content.map((card) => {
                             return (
                                 <WrapCard onClick={()=>routerGuideDetail(card.id)}>
-                                    <img className='img-photo' />
+                                    <img className='img-photo' src={card.image}/>
                                     <div className='div-content'>
                                         <span className='plan-title'>{card.title}</span>
                                     </div>
