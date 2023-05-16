@@ -94,6 +94,7 @@ const BottomSheet = (props) => {
   }
   const goBack = () => {
     setStep(prev=> {
+      if(prev === 3) return 0;
       if(prev>0) return prev-1;
       else return prev;
     });
@@ -132,7 +133,7 @@ const BottomSheet = (props) => {
       .then(res => {
         // console.log(res.data);
         setPlanId(res.data.split(' ')[0]);
-        changeContent(2);
+        changeContent(3);
 
       }).catch(err => {
         console.log(err);
@@ -501,6 +502,54 @@ const BottomSheet = (props) => {
           }
 
 
+        </div>
+    },
+    {
+      content:
+        <div>
+          <WrapTop>
+            <img src={prevBtn} className='prev_button' onClick={goPrevDayPage} />
+            <p className='day'>DAY {dayPageNum}</p>
+            <img src={nextBtn} className='next_button' onClick={goNextDayPage} />
+          </WrapTop>
+          <WrapTitle>
+            <input type="text" name="title" placeholder='플랜 제목을 입력해주세요.' className="title-input" defaultValue={planData.title} />
+          </WrapTitle>
+          <PlanDiv className="plan-div">
+            <WrapLine>
+              <WrapDate>
+                <p>{planData.startDate} ~ {planData.endDate}</p>
+              </WrapDate>
+              <WrapBtn>
+                {
+                  isOpen ?
+                    <img
+                      src={iconUnlock}
+                      className='icon_unlock'
+                      onClick={setPlanNotOpen}
+                    /> :
+                    <img
+                      src={iconLock}
+                      className='icon_lock'
+                      onClick={setPlanOpen}
+                    />
+                }
+                <div
+                  className='save-btn'
+                  onClick={savePlanData}
+                >저장</div>
+              </WrapBtn>
+            </WrapLine>
+
+            {specificDayContent && specificDayContent.map(card => (
+              <PlanCard 
+                card={card}
+                onRemove={()=>onTravelRemove(card.id)}
+                onClickTime={()=>onClickTime(card)}
+                />
+            ))}
+            {specificDayContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
+          </PlanDiv>
         </div>
     },
     {

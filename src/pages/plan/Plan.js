@@ -109,7 +109,7 @@ const Plan = () => {
 
     }
     const planSetting = {
-        "title": "(제목없음)",
+        "title": `${selectedCity} ${selectedProvince} 여행`,
         "startDate": postDate(date[0]),
         "endDate": postDate(date[1]),
         "district": selectedCity,
