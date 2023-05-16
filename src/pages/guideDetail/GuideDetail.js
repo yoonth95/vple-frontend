@@ -115,7 +115,7 @@ export default function GuideDetail() {
                                             : `오후 ${card.startTime.split(":")[0]}:${card.startTime.split(":")[1]}`
                                         }</span></p>
                             </div>
-                            <img src={Delete} className='delete-btn' />
+                            
                         </WrapCard>
                     ))}
                 </CardSection>

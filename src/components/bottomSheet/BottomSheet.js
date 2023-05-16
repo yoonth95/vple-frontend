@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
-import IconBreif from '../../asset/IconBreif.png';
+import IconBack from '../../asset/IconBack.png';
 import IconClose from '../../asset/IconClose.png';
-import IconSpread from '../../asset/IconSpread.png';
 import prevBtn from '../../asset/prevBtn.png';
 import nextBtn from '../../asset/nextBtn.png';
 import iconLock from '../../asset/IconLock.png';
@@ -56,14 +55,14 @@ const BottomSheet = (props) => {
   //   }
   // `;
 
-  const [height, setHeight] = useState(40);
+  const [height, setHeight] = useState(43);
   const [isHigh, setIsHigh] = useState(false);
   const setHeightHigher = () => {
     setHeight(80);
     setIsHigh(true);
   }
   const setHeightLower = () => {
-    setHeight(40);
+    setHeight(43);
     setIsHigh(false);
   }
 
@@ -92,6 +91,12 @@ const BottomSheet = (props) => {
   const [step, setStep] = useState(0);
   const changeContent = (index) => {
     setStep(index);
+  }
+  const goBack = () => {
+    setStep(prev=> {
+      if(prev>0) return prev-1;
+      else return prev;
+    });
   }
 
 
@@ -549,11 +554,6 @@ const BottomSheet = (props) => {
     {
       content:
         <div>
-          <WrapTop>
-            <img src={prevBtn} className='prev_button' />
-            <p className='day'>DAY {dayPageNum}</p>
-            <img src={nextBtn} className='next_button' />
-          </WrapTop>
           <WrapTitle>
             <p className='title-p'>일정 시작</p>
             <div className='save-btn' onClick={saveTime}>저장</div>
@@ -690,9 +690,15 @@ const BottomSheet = (props) => {
       <ContainerSheet id="sheet">
         <SheetHeader>
           <img
+            className='back-btn'
+            onClick={goBack}
+            src={IconBack} />
+          <span
             className='spread-btn'
             onClick={isHigh ? setHeightLower : setHeightHigher}
-            src={isHigh ? IconBreif : IconSpread} />
+            >
+              {isHigh ? "내리기" : "펼치기"}
+            </span>
           {/* <span className="title">{props.title}</span> */}
           <img
             className='close-btn'

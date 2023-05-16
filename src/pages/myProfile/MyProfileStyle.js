@@ -172,10 +172,10 @@ export const WrapCard = styled.div`
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
-    .div-content span {
+    .div-content .plan-title {
         font-size: 13px;
         color: #414141;
-        padding: 13px 0px 0px 7px;
+        padding: 9px 0px 5px 7px;
         text-align: left;
         text-decoration: none;
     }

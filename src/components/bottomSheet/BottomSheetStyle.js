@@ -12,10 +12,18 @@ export const SheetHeader = styled.div`
     line-height: 45px;
     font-size: 13px;
 
-    .spread-btn {
-      width: 25px;
+    .back-btn {
+      width: 23px;
       height: 18px;
       margin: auto 0;
+      transform: rotate( 90deg );
+    }
+    .spread-btn {
+      height: 18px;
+      margin: auto 0;
+      line-height: 20px;
+      color: #848484;
+      border-bottom: solid 1px #848484;
     }
     .close-btn {
       width: 18px;
@@ -133,16 +141,14 @@ export const WrapTitle = styled.div`
 
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
 
     color: #6C6C6C;
-    font-size: 14px;
 
     .title-input {
       width: 100%;
-      padding: 7px 7px 7px 2px;
+      padding: 30px 7px 5px 2px;
       border: none;
-      font-size: 15px;
+      font-size: 16px;
     }
 
     .title-p {
@@ -212,8 +218,11 @@ export const WrapSelect = styled.div`
     font-size: 13px;
   }
   .long-box input[type="radio"]:checked+div {
-    border: solid 1px #E9E9E9;
-    background-color: #E9E9E9;
+    border: solid 1px #A2BD9A;
+    background-color: #A2BD9A;
+
+    color: white;
+    font-weight: bold;
   }
   
   .short-box {
@@ -233,17 +242,16 @@ export const WrapSelect = styled.div`
     font-size: 13px;
   }
   .short-box input[type="radio"]:checked+div {
-    border: solid 1px #E9E9E9;
-    background-color: #E9E9E9;
+    border: solid 1px #A2BD9A;
+    background-color: #A2BD9A;
+
+    color: white;
+    font-weight: bold;
   }
-
-
-
 
 `;
 export const WrapTimeButton = styled.div`
   margin-top: 30px;
-  margin-bottom: 25%;
 `;
 
 export const WrapBtn = styled.div`
