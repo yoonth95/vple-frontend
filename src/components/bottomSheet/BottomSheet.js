@@ -182,7 +182,7 @@ const BottomSheet = (props) => {
         planData.opened = response.data.opened;
         planData.planTravels = response.data.planTravels;
 
-        setDayPageContent(planData.planTravels);
+        // setDayPageContent(planData.planTravels);
       });
 
     changeContent(2);
@@ -301,7 +301,8 @@ const BottomSheet = (props) => {
     planData.opened = false;
   }
 
-  const [dayPageNum, setDayPageNum] = useState(1);  const [planDayNum, setPlanDayNum] = useRecoilState(planDayState);
+  const [dayPageNum, setDayPageNum] = useState(1);  
+  const [planDayNum, setPlanDayNum] = useRecoilState(planDayState);
   const goNextDayPage = () => {
     if (dayPageNum < planData.days) {
       setDayPageNum((prev) => prev + 1);
@@ -317,15 +318,18 @@ const BottomSheet = (props) => {
   }, [dayPageNum]);
 
   
-  const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
+  // const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
   const [specificDayContent, setSpecificDayContent] = useState([]);
 
-  useEffect(() => {
-    console.log("현재 모든 컨텐츠", dayPageContent);
-    setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
-  }, [dayPageNum, dayPageContent])
+  // useEffect(() => {
+  //   console.log("현재 모든 컨텐츠", dayPageContent);
+  //   setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
+  // }, [dayPageNum, dayPageContent])
 
   const onTravelRemove = (id) => {
+
+    // console.log("삭제 전 플래너 정보", planData.planTravels);
+    // console.log("삭제 전 day 정보", dayPageContent);
     
     axios.delete(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${id}`,
       {
@@ -335,7 +339,7 @@ const BottomSheet = (props) => {
       })
       .then(res => {
         console.log(res.data);
-        setDayPageContent(dayPageContent.filter((card)=> card.id !== id));
+        // setDayPageContent(dayPageContent.filter((card)=> card.id !== id));
       }).catch(err => {
         console.log(err);
       });
@@ -413,7 +417,7 @@ const BottomSheet = (props) => {
         }
       })
         .then(response => {
-          setDayPageContent(response.data.planTravels);
+          // setDayPageContent(response.data.planTravels);
           console.log(tempPlanTravelTime);
         });
       changeContent(2);
@@ -434,7 +438,7 @@ const BottomSheet = (props) => {
       .then(response => {
         planData.planTravels = response.data.planTravels;
 
-        setDayPageContent(planData.planTravels);
+        // setDayPageContent(planData.planTravels);
       });
     
   }, [planTravelId])

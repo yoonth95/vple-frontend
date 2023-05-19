@@ -27,7 +27,7 @@ import RestaurantDetailCom from '../../components/restaurantDetailComponent/Rest
 
 
 const PlanMap = () => {
-
+    
     const token = localStorage.getItem('token');
     const [searchWord, setSearchWord] = useState('');
     const [searchedRestaurantList, setSearchedRestaurantList] = useState([]);
@@ -54,10 +54,10 @@ const PlanMap = () => {
 
     const planId = useRecoilState(planIdState);
     const planDay = useRecoilState(planDayState);
-    const setDayPageContent = useSetRecoilState(dayPageContentState);
+    // const setDayPageContent = useSetRecoilState(dayPageContentState);
     const addPlace = (place) => {
 
-        console.log(place);
+        // console.log(place);
 
         axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel`,
             {
@@ -75,10 +75,10 @@ const PlanMap = () => {
                 }
             })
             .then(response => {
-                console.log(response.data);
-                place.day = planDay[0];
-                place.startTime = "07:20:00";
-                setDayPageContent(oldArray => [...oldArray, place])
+                console.log(place);
+                // place.day = planDay[0];
+                // place.startTime = "07:20:00";
+                // setDayPageContent(oldArray => [...oldArray, place]);
             });
     }
 

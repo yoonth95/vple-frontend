@@ -135,7 +135,7 @@ export const CountContainer = styled.div`
     border-radius: 50px;
     border: solid 0.5px black;
   };
-  .count{
+  .count-people{
     padding: 0 10px;
   }
 `;

@@ -31,6 +31,7 @@ const Home = () => {
     const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
 
     useEffect(() => {
+        console.log("토큰", token);
 
         if (token != "null") {
             axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
