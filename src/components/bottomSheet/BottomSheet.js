@@ -33,7 +33,7 @@ import SavedPlanCard from '../../components/savedPlanCard/SavedPlanCard';
 
 import styled, { keyframes } from "styled-components";
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
-import { dayPageContentState, planDayState, planIdState, } from '../../recoil/state';
+import { dayPageContentState, planDataState, planDayState, planIdState, } from '../../recoil/state';
 
 
 const BottomSheet = (props) => {
@@ -116,15 +116,27 @@ const BottomSheet = (props) => {
   }
 
   const location = useLocation();
-  const planSetting = location.state.planSetting;
-  const [planData, setPlanData] = useState(planSetting);
+  const newPlanData = location.state;
+  const [planData, setPlanData] = useState({});
 
-  const planId = useRecoilState(planIdState);
-  const setPlanId = useSetRecoilState(planIdState);
+  const [planId, setPlanId] = useRecoilState(planIdState);
 
   const token = localStorage.getItem('token');
-  const postPlanData = () => {
-    axios.post("http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan", planSetting,
+
+  const makeNewPlan = () => {
+
+    let copyNewPlanData = {...newPlanData};
+    setPlanData(copyNewPlanData);
+
+    axios.post("http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan", 
+    {
+      "title": newPlanData.title,
+      "startDate": newPlanData.startDate,
+      "endDate": newPlanData.endDate,
+      "district": newPlanData.district,
+      "city": newPlanData.city,
+      "peopleNum": newPlanData.peopleNum,
+    },
       {
         headers: {
           Authorization: token
@@ -132,6 +144,7 @@ const BottomSheet = (props) => {
       })
       .then(res => {
         // console.log(res.data);
+        // countDays();
         setPlanId(res.data.split(' ')[0]);
         changeContent(3);
 
@@ -148,6 +161,7 @@ const BottomSheet = (props) => {
   //확인용------------------------------------------------------------
   useEffect(() => {
 
+    // console.log("location" ,newPlanData);
     console.log("myPlansInfo", myPlansInfo);
     console.log("planId", planId[0]);
     console.log("planData", planData);
@@ -164,26 +178,57 @@ const BottomSheet = (props) => {
 
 
 
+  // const countDays = () => {
 
+  //   const startDate = planData.startDate.split('-');
+  //   const endDate = planData.endDate.split('-');
 
+  //   let days = 1;
+
+  //   if (startDate[0] === endDate[0]
+  //     && startDate[1] === endDate[1]) {
+  //       days = parseInt(endDate[2]) - parseInt(startDate[2]) + 1;
+  //   }
+  //   else {
+
+  //     let monthDay = 0;
+      
+  //     switch (startDate[1]) {
+  //       case "01": case "03": case "05": case "07": case "08": case "10": case "12": monthDay = 31; break;
+  //       case "04": case "06": case "09": case "11": monthDay = 30; break;
+  //       case "02": monthDay = 28; break;
+  //       default: console.log("error");
+  //     }
+
+  //     days = (monthDay - parseInt(startDate[2])) + parseInt(endDate[2]) + 1;
+  //   }
+
+  //   setPlanData(plan => ({
+  //       ...plan,
+  //       days,
+  //   }))
+  // }
+  useEffect (() => {
+    // countDays();
+  }, [planId])
   const getPlanData = (card) => {
 
-    const plan = myPlansInfo.find((plan) => plan.id === card.id);
+    // const plan = myPlansInfo.find((plan) => plan.id === card.id);
 
-    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
-      headers: {
-        Authorization: token,
-      }
-    })
-      .then(response => {
-        setPlanId(plan.id);
-        setPlanData(response.data);
-        planData.likesCount = response.data.likesCount;
-        planData.opened = response.data.opened;
-        planData.planTravels = response.data.planTravels;
+    // axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
+    //   headers: {
+    //     Authorization: token,
+    //   }
+    // })
+    //   .then(response => {
+    //     setPlanId(plan.id);
+    //     setPlanData(response.data);
+    //     planData.likesCount = response.data.likesCount;
+    //     planData.opened = response.data.opened;
+    //     planData.planTravels = response.data.planTravels;
 
-        // setDayPageContent(planData.planTravels);
-      });
+    //     // setDayPageContent(planData.planTravels);
+    //   });
 
     changeContent(2);
   }
@@ -245,23 +290,14 @@ const BottomSheet = (props) => {
       newTitle = "(제목없음)";
     }
 
-    planData.title = newTitle;
+    return newTitle;
   }
 
   const savePlanData = () => {
-
-    setTitle();
-
-    console.log(
-
-      {
-        "title": planData.title,
-        "isOpened": planData.opened,
-      }
-    )
+    
     axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
-      "title": planData.title,
-      "isOpened": planData.opened,
+      "title": setTitle(),
+      "isOpened": isOpen,
     },
       {
         headers: {
@@ -270,35 +306,22 @@ const BottomSheet = (props) => {
       })
       .then(response => {
         console.log(response.data);
+        setPlanData(plan => ({
+          ...plan,
+          title: document.querySelector('.title-input').value,
+          opened: isOpen,
+        }))
       }).catch(err => {
         console.log(err);
       })
   }
-  useEffect(() => {
-    planData.planTravels = [];
-    // console.log("propsCard", props.card);
-  }, [])
-  
-
-
-
-
-
-  useEffect(() => {
-    countDays();
-    setIsOpen(planData.opened);
-
-    console.log("planData변경됨", planData);
-  }, [planData])
 
   const [isOpen, setIsOpen] = useState(planData.opened);
   const setPlanOpen = () => {
     setIsOpen(true);
-    planData.opened = true;
   }
-  const setPlanNotOpen = () => {
+  const setPlanClose = () => {
     setIsOpen(false);
-    planData.opened = false;
   }
 
   const [dayPageNum, setDayPageNum] = useState(1);  
@@ -436,36 +459,13 @@ const BottomSheet = (props) => {
       }
     })
       .then(response => {
-        planData.planTravels = response.data.planTravels;
+        // planData.planTravels = response.data.planTravels;
 
         // setDayPageContent(planData.planTravels);
       });
     
   }, [planTravelId])
 
-  const countDays = () => {
-
-    const startDate = planData.startDate.split('-');
-    const endDate = planData.endDate.split('-');
-
-    if (startDate[0] === endDate[0]
-      && startDate[1] === endDate[1]) {
-      planData.days = parseInt(endDate[2]) - parseInt(startDate[2]) + 1;
-    }
-    else {
-
-      let monthDay = 0;
-      
-      switch (startDate[1]) {
-        case "01": case "03": case "05": case "07": case "08": case "10": case "12": monthDay = 31; break;
-        case "04": case "06": case "09": case "11": monthDay = 30; break;
-        case "02": monthDay = 28; break;
-        default: console.log("error");
-      }
-
-      planData.days = (monthDay - parseInt(startDate[2])) + parseInt(endDate[2]) + 1;
-    }
-  }
 
   const contents = [
     {
@@ -476,7 +476,7 @@ const BottomSheet = (props) => {
           <EditBtn onClick={getMyPlansInfo}>기존 플랜 수정하기</EditBtn>
           <span
             className='make-plan'> ✨ 플랜을 만들래요!</span>
-          <NewBtn onClick={() => postPlanData()}>새롭게 플랜 세우기</NewBtn>
+          <NewBtn onClick={() => makeNewPlan()}>새롭게 플랜 세우기</NewBtn>
         </div>
     },
     {
@@ -530,7 +530,7 @@ const BottomSheet = (props) => {
                     <img
                       src={iconUnlock}
                       className='icon_unlock'
-                      onClick={setPlanNotOpen}
+                      onClick={setPlanClose}
                     /> :
                     <img
                       src={iconLock}
@@ -578,7 +578,7 @@ const BottomSheet = (props) => {
                     <img
                       src={iconUnlock}
                       className='icon_unlock'
-                      onClick={setPlanNotOpen}
+                      onClick={setPlanClose}
                     /> :
                     <img
                       src={iconLock}

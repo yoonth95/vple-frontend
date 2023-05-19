@@ -42,7 +42,9 @@ const Home = () => {
                 .then(response => {
                     setMyInfo(response.data);
                     //console.log(myInfo);
-                });
+                }).catch(err => {
+                    console.log(err);
+                  });
 
             axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/like', {
                 headers: {
@@ -51,7 +53,9 @@ const Home = () => {
             })
                 .then(response => {
                     setRecommendGuide(response.data);
-                });
+                }).catch(err => {
+                    console.log(err);
+                  });
 
         }
 

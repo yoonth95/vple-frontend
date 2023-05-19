@@ -16,21 +16,22 @@ export const planDayState = atom({
     default: 1,
 })
 
-export const planDataState = atom({
-    key: 'planDataState',
-    default: {
-        "title": "",
-        "startDate": "",
-        "endDate": "",
-        "district": "",
-        "city": "",
-        "peopleNum": 1,
-        "days": "",
-        "likesCount": 0,
-        "opened": false,
-        "planTravels": [],
-    },
-})
+// export const planDataState = atom({
+//     key: 'planDataState',
+//     default: {
+//         "title": "",
+//         "startDate": "",
+//         "endDate": "",
+//         "district": "",
+//         "city": "",
+//         "peopleNum": 1,
+//         "likesCount": 0,
+//         "opened": false,
+//         "planTravels": [],
+
+//         "days": 1,
+//     },
+// })
 
 export const locationListState = atom({
     key: "locationListState",

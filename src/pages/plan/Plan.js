@@ -17,7 +17,7 @@ import 'react-calendar/dist/Calendar.css';
 import './CalendarCustom.css';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { planDataState, locationListState } from '../../recoil/state';
+import { locationListState } from '../../recoil/state';
 
 import lock from '../../asset/lock.png';
 
@@ -38,8 +38,20 @@ const Plan = () => {
         }
     }
 
-    const [planData, setPlanData] = useRecoilState(planDataState);
-    
+    const [newPlanData, setNewPlanData] = useState({
+        "title": "",
+        "startDate": "",
+        "endDate": "",
+        "district": "",
+        "city": "",
+        "peopleNum": 1,
+        "likesCount": 0,
+        "opened": false,
+        "planTravels": [],
+
+        "days": 1,
+    });
+
     const locationList = useRecoilValue(locationListState);
     const [cityList, setCityList] = useState(['전체']);
 
@@ -49,10 +61,11 @@ const Plan = () => {
         })
         setCityList(locationList[index].city);
 
-        setPlanData(plan => ({
+        setNewPlanData(plan => ({
             ...plan,
+            title: `${document.getElementById('selected_district').value} ${document.getElementById('selected_city').value} 여행`,
             district: document.getElementById('selected_district').value,
-            city: document.getElementById('selected_city').value, 
+            city: document.getElementById('selected_city').value,
         }))
     }
 
@@ -86,11 +99,43 @@ const Plan = () => {
             return (year + "-" + month + "-" + day);
         }
     }
+    const countDays = () => {
+
+        if(newPlanData.startDate !== "" && newPlanData.endDate !== "") {
+            const startDate = newPlanData.startDate.split('-');
+            const endDate = newPlanData.endDate.split('-');
+    
+            let days = 1;
+    
+            if (startDate[0] === endDate[0]
+                && startDate[1] === endDate[1]) {
+                days = parseInt(endDate[2]) - parseInt(startDate[2]) + 1;
+            }
+            else {
+    
+                let monthDay = 0;
+    
+                switch (startDate[1]) {
+                    case "01": case "03": case "05": case "07": case "08": case "10": case "12": monthDay = 31; break;
+                    case "04": case "06": case "09": case "11": monthDay = 30; break;
+                    case "02": monthDay = 28; break;
+                    default: console.log("error");
+                }
+    
+                days = (monthDay - parseInt(startDate[2])) + parseInt(endDate[2]) + 1;
+            }
+    
+            setNewPlanData(plan => ({
+                ...plan,
+                days,
+            }))
+        }
+        
+    }
 
     useEffect(() => {
         if (date.length > 1) {
-
-            setPlanData(plan => ({
+            setNewPlanData(plan => ({
                 ...plan,
                 startDate: formatDate(date[0]),
                 endDate: formatDate(date[1]),
@@ -100,15 +145,21 @@ const Plan = () => {
     }, [date])
 
     useEffect(() => {
-        setPlanData(plan => ({
+        setNewPlanData(plan => ({
             ...plan,
             peopleNum: countPeople,
         }))
     }, [countPeople])
+    
+    useEffect(() => {
+        countDays();
+    }, [newPlanData.startDate])
 
     const navigate = useNavigate();
     const onClickRouteMap = () => {
-        navigate('/plan/map');
+        navigate('/plan/map', {
+            state: newPlanData,
+        });
     }
     const routerLogin = () => {
         navigate('/login')
@@ -118,17 +169,17 @@ const Plan = () => {
 
     return (
         <>
-            {token==="null" && <LoginWindow>
+            {token === "null" && <LoginWindow>
                 <div className='modal-background'>
-                    <img src={lock}/>
+                    <img src={lock} />
                     <div className='text-bold'>로그인이 필요합니다.</div>
-                    <div className="text">해당 기능 사용을 위해 <br/> 계정을 로그인 해주세요.</div>
+                    <div className="text">해당 기능 사용을 위해 <br /> 계정을 로그인 해주세요.</div>
                     <div className='line' />
                     <div className='button'>
                         <span onClick={routerLogin}>확인</span>
                     </div>
                 </div>
-            </LoginWindow> }
+            </LoginWindow>}
 
             <TitleHeader title="플랜 기본 설정" />
             <PlanContainer>
