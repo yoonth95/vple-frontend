@@ -24,6 +24,7 @@ export const planDataState = atom({
         "endDate": "",
         "district": "",
         "city": "",
+        "peopleNum": 1,
         "days": "",
         "likesCount": 0,
         "opened": false,

@@ -85,24 +85,9 @@ const Plan = () => {
 
             return (year + "-" + month + "-" + day);
         }
-
-    }
-    const planSetting = {
-        // "title": `${selectedCity} ${selectedProvince} 여행`,
-        // "startDate": formatDate(date[0]),
-        // "endDate": formatDate(date[1]),
-        // "district": selectedCity,
-        // "city": selectedProvince,
-        // "peopleNum": countPeople,
     }
 
     useEffect(() => {
-        console.log("planData", planData);
-    }, [planData])
-
-
-    useEffect(() => {
-
         if (date.length > 1) {
 
             setPlanData(plan => ({
@@ -112,8 +97,14 @@ const Plan = () => {
             }))
             setIsAllChecked(true);
         }
-
     }, [date])
+
+    useEffect(() => {
+        setPlanData(plan => ({
+            ...plan,
+            peopleNum: countPeople,
+        }))
+    }, [countPeople])
 
     const navigate = useNavigate();
     const onClickRouteMap = () => {
