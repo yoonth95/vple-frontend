@@ -6,7 +6,7 @@ export const WrapView = styled.div`
     position: absolute;
     z-index: 5;
 
-    max-width: 100vw;
+    min-width: 100vw;
 `;
 
 

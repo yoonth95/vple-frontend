@@ -49,7 +49,7 @@ const Plan = () => {
         "opened": false,
         "planTravels": [],
 
-        "days": 1,
+        "totalDays": 1,
     });
 
     const locationList = useRecoilValue(locationListState);
@@ -99,7 +99,7 @@ const Plan = () => {
             return (year + "-" + month + "-" + day);
         }
     }
-    const countDays = () => {
+    const countTotalDays = () => {
 
         if(newPlanData.startDate !== "" && newPlanData.endDate !== "") {
             const startDate = newPlanData.startDate.split('-');
@@ -127,7 +127,7 @@ const Plan = () => {
     
             setNewPlanData(plan => ({
                 ...plan,
-                days,
+                totalDays: days,
             }))
         }
         
@@ -152,7 +152,7 @@ const Plan = () => {
     }, [countPeople])
     
     useEffect(() => {
-        countDays();
+        countTotalDays();
     }, [newPlanData.startDate])
 
     const navigate = useNavigate();

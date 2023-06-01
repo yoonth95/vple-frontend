@@ -177,40 +177,6 @@ const BottomSheet = (props) => {
   //----------------------------------------------------------------
 
 
-
-  // const countDays = () => {
-
-  //   const startDate = planData.startDate.split('-');
-  //   const endDate = planData.endDate.split('-');
-
-  //   let days = 1;
-
-  //   if (startDate[0] === endDate[0]
-  //     && startDate[1] === endDate[1]) {
-  //       days = parseInt(endDate[2]) - parseInt(startDate[2]) + 1;
-  //   }
-  //   else {
-
-  //     let monthDay = 0;
-      
-  //     switch (startDate[1]) {
-  //       case "01": case "03": case "05": case "07": case "08": case "10": case "12": monthDay = 31; break;
-  //       case "04": case "06": case "09": case "11": monthDay = 30; break;
-  //       case "02": monthDay = 28; break;
-  //       default: console.log("error");
-  //     }
-
-  //     days = (monthDay - parseInt(startDate[2])) + parseInt(endDate[2]) + 1;
-  //   }
-
-  //   setPlanData(plan => ({
-  //       ...plan,
-  //       days,
-  //   }))
-  // }
-  useEffect (() => {
-    // countDays();
-  }, [planId])
   const getPlanData = (card) => {
 
     // const plan = myPlansInfo.find((plan) => plan.id === card.id);
@@ -221,6 +187,8 @@ const BottomSheet = (props) => {
     //   }
     // })
     //   .then(response => {
+    //     console.log(response.data);
+
     //     setPlanId(plan.id);
     //     setPlanData(response.data);
     //     planData.likesCount = response.data.likesCount;
@@ -327,7 +295,7 @@ const BottomSheet = (props) => {
   const [dayPageNum, setDayPageNum] = useState(1);  
   const [planDayNum, setPlanDayNum] = useRecoilState(planDayState);
   const goNextDayPage = () => {
-    if (dayPageNum < planData.days) {
+    if (dayPageNum < planData.totalDays) {
       setDayPageNum((prev) => prev + 1);
     }
   }
