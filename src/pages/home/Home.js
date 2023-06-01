@@ -26,12 +26,14 @@ const Home = () => {
 
     const [myInfo, setMyInfo] = useState([]);
     const token = localStorage.getItem('token');
+    const tokenInfo = localStorage.getItem('token_info');
 
     const [recommendGuideList, setRecommendGuide] = useState([]);
     const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
 
     useEffect(() => {
         console.log("토큰", token);
+        console.log("토큰정보", tokenInfo);
 
         if (token != "null") {
             axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {

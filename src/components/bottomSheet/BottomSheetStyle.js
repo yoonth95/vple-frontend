@@ -146,7 +146,8 @@ export const WrapTitle = styled.div`
 
     .title-input {
       width: 100%;
-      padding: 30px 7px 5px 2px;
+      margin-top: 20px;
+      padding: 5px 7px 5px 2px;
       border: none;
       font-size: 16px;
     }
@@ -180,7 +181,7 @@ export const WrapLine = styled.div`
 `;
 export const WrapDate = styled.div`
   color: #848484;
-  font-size: 15px;
+  font-size: 14px;
 
   display: inline-block;
 `;
@@ -288,7 +289,7 @@ export const PlanDiv = styled.div`
     width: 90%;
     max-width: 500px;
     background-color: white;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 30%;
 
     display: flex;

@@ -12,6 +12,7 @@ const KakaoAuthHandle = (props) => {
           .get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/oauth/token?code=${code}`)
           .then((res) => {
             localStorage.setItem('token', res.headers.get("Authorization"));
+            localStorage.setItem('token_info', res.headers);
 
             window.location.href = "/";
           })
