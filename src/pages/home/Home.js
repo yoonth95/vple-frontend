@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header";
 import {
+    LoginBtn,
     ResponsiveDiv,
     SearchContainer,
     ButtonWrap,
@@ -26,7 +27,6 @@ const Home = () => {
 
     const [myInfo, setMyInfo] = useState([]);
     const token = localStorage.getItem('token');
-    const [isLogin, setIsLogin] = useState(true);
 
     const [recommendGuideList, setRecommendGuide] = useState([]);
     const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
@@ -46,7 +46,8 @@ const Home = () => {
                 console.log(err);
 
                 if(err.response.data === "Authorization : 토큰이 만료되었습니다.\n") {
-                    setIsLogin(false);
+                    // setIsLogin(false);
+                    localStorage.setItem('token', null);
                 }
             });
 
@@ -112,6 +113,10 @@ const Home = () => {
         });
         window.scrollTo(0, 0)
     }
+    const routerLogin = () => {
+        navigate('/login')
+        window.scrollTo(0, 0)
+    }
 
     // const move = () => {
     //     navigate('/guide/detail');
@@ -121,10 +126,11 @@ const Home = () => {
     return (
         <>
             <Header />
+            {token==="null" && <LoginBtn><div onClick={routerLogin}>로그인</div></LoginBtn>}
 
             <SearchContainer>
                 <p className='userWrap'>
-                    <span>{isLogin ? myInfo.nickname+"님," : "환영합니다 🌱"}</span>
+                    <span>{token!=="null" ? myInfo.nickname+"님," : "환영합니다 🌱"}</span>
                 </p>
                 <p className='textWrap'>비플 함께 친환경 여행을 떠나보세요!</p>
             </SearchContainer>

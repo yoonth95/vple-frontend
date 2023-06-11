@@ -1,5 +1,6 @@
-import { useState, } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import DetailHeader from '../../components/titleHeader/TitleHeader';
 
 import {
@@ -11,13 +12,33 @@ import lock from '../../asset/lock.png';
 function Cart(props) {
 
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(response => {
+        // setMyInfo(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+
+        if (err.response.data === "Authorization : 토큰이 만료되었습니다.\n") {
+          // setIsLogin(false);
+          localStorage.setItem('token', null);
+        }
+      });
+  }, []);
+
   const [planActive, setPlanActive] = useState(true);
 
   const navigate = useNavigate();
   const routerLogin = () => {
     navigate('/login')
     window.scrollTo(0, 0)
-}
+  }
 
   return (
     <>

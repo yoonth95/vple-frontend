@@ -22,8 +22,6 @@ import planDefaultImg from '../../asset/planDefault.png';
 
 export default function MyProfile() {
 
-    const [isLogin, setIsLogin] = useState(true);
-
     const [myInfo, setMyInfo] = useState([]);
     let [planList, setPlanList] = useState([]);
     const token = localStorage.getItem('token');
@@ -42,7 +40,9 @@ export default function MyProfile() {
                 console.log(err);
 
                 if(err.response.data === "Authorization : 토큰이 만료되었습니다.\n") {
-                    setIsLogin(false);
+                    // setIsLogin(false);
+
+                    localStorage.setItem('token', null);
                 }
             });
 
@@ -172,7 +172,7 @@ export default function MyProfile() {
         <>
             <TitleHeader title="마이페이지" />
 
-            {isLogin === true ?
+            {token !== "null" ?
                 logInOut[0].content
                 : logInOut[1].content}
 

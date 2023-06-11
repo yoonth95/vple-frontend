@@ -25,7 +25,6 @@ import lock from '../../asset/lock.png';
 const Plan = () => {
 
     const token = localStorage.getItem('token');
-    const [isLogin, setIsLogin] = useState(true);
 
     useEffect(() => {
 
@@ -41,7 +40,8 @@ const Plan = () => {
                 console.log(err);
 
                 if(err.response.data === "Authorization : 토큰이 만료되었습니다.\n") {
-                    setIsLogin(false);
+                    // setIsLogin(false);
+                    localStorage.setItem('token', null);
                 }
             });
 
@@ -192,7 +192,7 @@ const Plan = () => {
 
     return (
         <>
-            {!isLogin && <LoginWindow>
+            {token==="null" && <LoginWindow>
                 <div className='modal-background'>
                     <img src={lock} />
                     <div className='text-bold'>로그인이 필요합니다.</div>

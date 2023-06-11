@@ -1,5 +1,18 @@
 import styled from "styled-components";
 
+export const LoginBtn = styled.div`
+
+  position: absolute;
+  top: 19.25px;
+  right: 5%;
+  
+  div {
+    border: 1px solid #758B6F;
+    color: #758B6F;
+    padding: 5px 13px;
+    border-radius: 20px;
+  }
+`;
 export const ResponsiveDiv = styled.footer`
 
   width: 100%;
