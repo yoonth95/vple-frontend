@@ -18,8 +18,11 @@ import tempProfile from '../../asset/profile/tempProfile.jpeg';
 import settingButton from '../../asset/profile/setting.png';
 import arrow from '../../asset/arrow.png';
 import longArrow from '../../asset/profile/longArrow.png';
+import planDefaultImg from '../../asset/planDefault.png';
 
 export default function MyProfile() {
+
+    const [isLogin, setIsLogin] = useState(true);
 
     const [myInfo, setMyInfo] = useState([]);
     let [planList, setPlanList] = useState([]);
@@ -27,32 +30,35 @@ export default function MyProfile() {
 
     useEffect(() => {
 
-        if (token !== "null") {
-            
-            axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
-                headers: {
-                    Authorization: token
-                }
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+            headers: {
+                Authorization: token
+            }
+        })
+            .then(response => {
+                setMyInfo(response.data);
             })
-                .then(response => {
-                    setMyInfo(response.data);
+            .catch(err => {
+                console.log(err);
 
-                });
-        }
+                if(err.response.data === "Authorization : 토큰이 만료되었습니다.\n") {
+                    setIsLogin(false);
+                }
+            });
+
 
     }, []);
 
-    useEffect (() => {
-
+    useEffect(() => {
 
         console.log(myInfo);
 
-        if(myInfo.length !== 0) {
+        if (myInfo.length !== 0) {
 
             let list = [];
             let index = myInfo.myPlans.length - 1;
-        
-            while(myInfo.myPlans[index] && list.length <3) {
+
+            while (myInfo.myPlans[index] && list.length < 3) {
                 list.push(myInfo.myPlans[index]);
                 index--;
             }
@@ -60,7 +66,7 @@ export default function MyProfile() {
         }
 
     }, [myInfo])
-    
+
 
     const navigate = useNavigate();
     const routerMyPlan = () => {
@@ -111,7 +117,7 @@ export default function MyProfile() {
                                 planList.map((plan) => {
                                     return (
                                         <WrapCard>
-                                            <img className='img-photo' src={plan.image}/>
+                                            <img className='img-photo' src={plan.image === null ? planDefaultImg : plan.image} />
                                             <div className='div-content'>
                                                 <span className='plan-title'>{plan.title}</span>
                                             </div>
@@ -135,7 +141,7 @@ export default function MyProfile() {
                             <h4 className='user-name-logout'>로그인이 필요합니다.</h4>
                             <div className="tag-div-logout" onClick={routerLogin}>로그인하기</div>
                         </div>
-                        
+
                     </ProfileContainer>
 
                     <MyPlanContainer>
@@ -150,11 +156,11 @@ export default function MyProfile() {
                         <WrapCards>
                             <div className="my-plan-logout">
                                 <div className="arrow-btn">
-                                    <img src={longArrow} className='arrow-img'/>
+                                    <img src={longArrow} className='arrow-img' />
                                 </div>
                                 <div className="text">플랜 만들기</div>
                             </div>
-                            
+
                         </WrapCards>
                     </MyPlanContainer>
                 </div>
@@ -166,7 +172,7 @@ export default function MyProfile() {
         <>
             <TitleHeader title="마이페이지" />
 
-            {token !== "null" ?
+            {isLogin === true ?
                 logInOut[0].content
                 : logInOut[1].content}
 

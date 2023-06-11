@@ -25,7 +25,7 @@ export const CardButtonStyle = styled(ButtonStyle)`
 export const StyledImgDiv = styled.div`
     .img{
         width: 28vw;
-        max-width: 150px;
+        max-width: 140px;
         height: 80px;
         background-color: #F8F8F8;
         border-top-left-radius: 10px;
@@ -37,7 +37,7 @@ export const StyledImgDiv = styled.div`
 
 export const StyledContentDiv = styled.div`
     width: 28vw;
-    max-width: 150px;
+    max-width: 140px;
     height: 50px;
     background-color: #FFFFFF;
     border-bottom-left-radius: 10px;

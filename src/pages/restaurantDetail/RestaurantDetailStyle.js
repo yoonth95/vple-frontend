@@ -168,6 +168,21 @@ export const WrapCard = styled.div`
     box-shadow: 0px 0px 3px #C5C5C5;
     border-radius: 10px;
 
+    .wrap-img-default {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 80px;
+        background-color: #F8F8F8;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .img-default {
+        display: inline-flex;
+        width: 30px;
+        height: 30px;
+        margin: auto 0;
+    }
     .img-photo {
         display: inline-flex;
         height: 80px;

@@ -98,21 +98,21 @@ function ViewAllRestaurant() {
 
 
     const [viewAllRestaurantList, setViewAllRestaurantList] = useRecoilState(viewAllRestaurantListState);
-    
+
     const fetchData = async () => {
         console.log("prev-page", page);
-        
+
         const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
 
-        const data = await response.json();        
+        const data = await response.json();
         totalPages = data.totalPages;
         setItems((prev) => prev.concat(data.content));
-        
+
         page++;
-        
+
         console.log("page", page);
         console.log("totalPages", totalPages);
-        
+
     };
 
     useEffect(() => {
@@ -120,7 +120,7 @@ function ViewAllRestaurant() {
 
         if (target) {
             const onIntersect = async ([entry], observer) => {
-                if (entry.isIntersecting  && (page < totalPages)) {
+                if (entry.isIntersecting && (page < totalPages)) {
                     observer.unobserve(entry.target);
                     await fetchData();
                     observer.observe(entry.target);
@@ -145,7 +145,7 @@ function ViewAllRestaurant() {
                 id: id,
             }
         });
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
         setViewAllRestaurantList(items);
     }
 
@@ -178,12 +178,13 @@ function ViewAllRestaurant() {
                             id={restaurant.id}
                             title={restaurant.name}
                             image={restaurant.image}
-                            onClick={()=>routerRestaurantDetail(restaurant.id)}
+                            onClick={() => routerRestaurantDetail(restaurant.id)}
                         />
                     </div>
                 ))}
                 <div id="target" ref={setTarget} />
             </CardContainer>
+
 
             <UpButton onClick={scrollToUp} />
 

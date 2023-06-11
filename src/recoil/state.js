@@ -61,10 +61,10 @@ export const locationListState = atom({
 })
 // const [provinceList, setProvinceList] = useState(['전체']);
 
-// export const dayPageContentState = atom({
-//     key: 'dayPageContent',
-//     default: [],
-// })
+export const dayPageContentState = atom({
+    key: 'dayPageContent',
+    default: [],
+})
 
 //추천식당
 export const getAllRecommandRestaurantUrl = selector({

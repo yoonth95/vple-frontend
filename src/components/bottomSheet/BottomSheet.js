@@ -143,7 +143,7 @@ const BottomSheet = (props) => {
         },
       })
       .then(res => {
-        // console.log(res.data);
+        console.log(res.data.split(' ')[0]);
         // countDays();
         setPlanId(res.data.split(' ')[0]);
         changeContent(3);
@@ -162,11 +162,11 @@ const BottomSheet = (props) => {
   useEffect(() => {
 
     // console.log("location" ,newPlanData);
-    console.log("myPlansInfo", myPlansInfo);
-    console.log("planId", planId[0]);
-    console.log("planData", planData);
+    // console.log("myPlansInfo", myPlansInfo);
+    console.log("확인용planId", planId);
+    // console.log("planData", planData);
 
-    console.log("planDay", planDayNum);
+    // console.log("planDay", planDayNum);
 
   }, [planId])
 
@@ -179,27 +179,28 @@ const BottomSheet = (props) => {
 
   const getPlanData = (card) => {
 
-    // const plan = myPlansInfo.find((plan) => plan.id === card.id);
+    const plan = myPlansInfo.find((plan) => plan.id === card.id);
 
-    // axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
-    //   headers: {
-    //     Authorization: token,
-    //   }
-    // })
-    //   .then(response => {
-    //     console.log(response.data);
+    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
+      headers: {
+        Authorization: token,
+      }
+    })
+      .then(response => {
+        console.log(response.data);
 
-    //     setPlanId(plan.id);
-    //     setPlanData(response.data);
-    //     planData.likesCount = response.data.likesCount;
-    //     planData.opened = response.data.opened;
-    //     planData.planTravels = response.data.planTravels;
-
-    //     // setDayPageContent(planData.planTravels);
-    //   });
-
+        setPlanData(response.data);
+        console.log("여기여기여기여깅기ㅕ", plan.id);
+        setPlanId(plan.id);
+      });
     changeContent(2);
   }
+
+  useEffect(() => {
+    setDayPageContent(planData.planTravels);
+    setIsOpen(planData.opened);
+  }, [planData]);
+
 
   const [isShowModal, setIsShowModal] = useState(false);
   const showModal = (card) => {
@@ -263,7 +264,12 @@ const BottomSheet = (props) => {
 
   const savePlanData = () => {
     
-    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
+    //확인용--------------------
+    console.log(planId);
+    console.log(isOpen);
+    //-------------------------
+
+    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId}`, {
       "title": setTitle(),
       "isOpened": isOpen,
     },
@@ -285,6 +291,7 @@ const BottomSheet = (props) => {
   }
 
   const [isOpen, setIsOpen] = useState(planData.opened);
+
   const setPlanOpen = () => {
     setIsOpen(true);
   }
@@ -309,13 +316,15 @@ const BottomSheet = (props) => {
   }, [dayPageNum]);
 
   
-  // const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
+  const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
   const [specificDayContent, setSpecificDayContent] = useState([]);
 
-  // useEffect(() => {
-  //   console.log("현재 모든 컨텐츠", dayPageContent);
-  //   setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
-  // }, [dayPageNum, dayPageContent])
+  useEffect(() => {
+    console.log("현재 모든 컨텐츠", dayPageContent);
+    if(dayPageContent !== undefined) {
+      setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
+    }
+  }, [dayPageNum, dayPageContent])
 
   const onTravelRemove = (id) => {
 
@@ -402,7 +411,7 @@ const BottomSheet = (props) => {
     })
     .then(res=> {
       
-      axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
+      axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId}`, {
         headers: {
           Authorization: token
         }
@@ -421,17 +430,18 @@ const BottomSheet = (props) => {
 
   useEffect(()=> {
 
-    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
-      headers: {
-        Authorization: token,
-      }
-    })
-      .then(response => {
-        // planData.planTravels = response.data.planTravels;
-
-        // setDayPageContent(planData.planTravels);
-      });
-    
+    if(planTravelId !== -1) {
+      axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId[0]}`, {
+        headers: {
+          Authorization: token,
+        }
+      })
+        .then(response => {
+          // planData.planTravels = response.data.planTravels;
+  
+          // setDayPageContent(planData.planTravels);
+        });
+    }
   }, [planTravelId])
 
 

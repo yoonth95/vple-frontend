@@ -42,8 +42,8 @@ import IconClock from '../../asset/IconClock.png';
 import IconMore from '../../asset/restaurant/IconMore.png';
 import IconUp from '../../asset/restaurant/IconUp.png';
 import arrow from '../../asset/arrow.png';
-
 import camera from '../../asset/camera.png';
+import menuDefaultImg from '../../asset/menuDefault.png';
 
 export default function RestaurantDetail() {
 
@@ -175,7 +175,8 @@ export default function RestaurantDetail() {
                             menu.map((value, index) => {
                                 return (
                                     <WrapCard>
-                                        <img className='img-photo' src={value.image} />
+                                        {value.image ===null ? <div className='wrap-img-default'><img className='img-default' src= {menuDefaultImg}/></div> : <img className='img-photo' src={value.image} />}
+                                        
                                         <div className='div-content'>
                                             <span className='plan-title'>{value.name}</span>
                                         </div>

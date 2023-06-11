@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import planDefaultImg from '../../asset/planDefault.png';
 import DeleteModeBtn from '../../asset/moreGreen.png';
 import DeleteBtn from '../../asset/IconRedDelete.png';
 
@@ -132,7 +133,7 @@ function ViewAllMyPlan() {
                                     myPlans&&myPlans.slice(0).reverse().map((value, index) => {
                                         return (
                                             <WrapCard onClick={()=>routerGuideDetail(value.id)}>
-                                                <img className='img-photo' src={value.image} />
+                                                <img className='img-photo' src= {value.image === null ?planDefaultImg : value.image } />
                                                 <div className='div-content'>
                                                     <span className='plan-title'>{value.title}</span>
                                                 </div>

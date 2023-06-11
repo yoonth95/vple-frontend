@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Calendar from 'react-calendar';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
 
@@ -24,6 +25,28 @@ import lock from '../../asset/lock.png';
 const Plan = () => {
 
     const token = localStorage.getItem('token');
+    const [isLogin, setIsLogin] = useState(true);
+
+    useEffect(() => {
+
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+            headers: {
+                Authorization: token
+            }
+        })
+            .then(response => {
+                // setMyInfo(response.data);
+            })
+            .catch(err => {
+                console.log(err);
+
+                if(err.response.data === "Authorization : 토큰이 만료되었습니다.\n") {
+                    setIsLogin(false);
+                }
+            });
+
+
+    }, []);
 
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [date, setDate] = useState(new Date, new Date);
@@ -169,7 +192,7 @@ const Plan = () => {
 
     return (
         <>
-            {token === "null" && <LoginWindow>
+            {!isLogin && <LoginWindow>
                 <div className='modal-background'>
                     <img src={lock} />
                     <div className='text-bold'>로그인이 필요합니다.</div>
@@ -187,13 +210,13 @@ const Plan = () => {
                     <p className='trip-location'>여행지</p>
                     <SelectLocationOption>
                         <select className='select-box' id="selected_district" onChange={getList}>
-                            {locationList.map((region) => {
-                                return <option className='option'>{region.district}</option>
+                            {locationList.map((region, index) => {
+                                return <option className='option' key={index}>{region.district}</option>
                             })}
                         </select>
                         <select className='select-box' id="selected_city" onChange={getList}>
-                            {cityList.map((location) => {
-                                return <option className='option'>{location}</option>
+                            {cityList.map((location, index) => {
+                                return <option className='option'  key={index}>{location}</option>
                             })}
                         </select>
                     </SelectLocationOption>

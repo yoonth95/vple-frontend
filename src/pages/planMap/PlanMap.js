@@ -54,20 +54,20 @@ const PlanMap = () => {
 
     const planId = useRecoilState(planIdState);
     const planDay = useRecoilState(planDayState);
-    // const setDayPageContent = useSetRecoilState(dayPageContentState);
+    const setDayPageContent = useSetRecoilState(dayPageContentState);
     const addPlace = (place) => {
 
-        // console.log(place);
-
+        console.log(place);
         axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel`,
             {
                 "name": place.name,
                 "planId": planId[0].toString(),
+                "address": "필요 여부 확인 후 컬럼 삭제",
+                "image": place.image,
                 "longitude": place.longitude,
                 "latitude": place.latitude,
                 "day": planDay[0].toString(),
-                "startTime": "07:20:00 ",
-                "image": place.image,
+                "startTime": "오전 07:20",
             },
             {
                 headers: {
@@ -76,9 +76,8 @@ const PlanMap = () => {
             })
             .then(response => {
                 console.log(place);
-                // place.day = planDay[0];
-                // place.startTime = "07:20:00";
-                // setDayPageContent(oldArray => [...oldArray, place]);
+                
+                setDayPageContent(oldArray => [...oldArray, place]);
             });
     }
 

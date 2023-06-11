@@ -5,8 +5,10 @@ import IconClipG from '../../asset/IconClipG.png';
 export const WrapView = styled.div`
     position: absolute;
     z-index: 5;
+    background-color: white;
 
     min-width: 100vw;
+    min-height: 100vh;
 `;
 
 

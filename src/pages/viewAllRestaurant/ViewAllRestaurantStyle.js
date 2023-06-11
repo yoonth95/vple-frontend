@@ -53,14 +53,12 @@ export const WrapSelection = styled.div`
     }
 `;
 
-export const CardContainer = styled.section`
+export const CardContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 1%;
-    width: 100%;
-    padding-bottom: 20%;
-    justify-content: center;
-
+    padding-bottom: 30%;
+    margin-left: 3.5%;
     background-color: white;
 
   ::-webkit-scrollbar {

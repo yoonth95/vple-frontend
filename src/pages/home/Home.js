@@ -19,54 +19,61 @@ import GuideCardButton from '../../components/guideCardButton/GuideCardButton';
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
 import axios from 'axios'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { getAllRecommandRestaurantUrl } from '../../recoil/state';
+import { loginCodeState, getAllRecommandRestaurantUrl } from '../../recoil/state';
 import { useState, useEffect } from 'react';
 
 const Home = () => {
 
     const [myInfo, setMyInfo] = useState([]);
     const token = localStorage.getItem('token');
-    const tokenInfo = localStorage.getItem('token_info');
+    const [isLogin, setIsLogin] = useState(true);
 
     const [recommendGuideList, setRecommendGuide] = useState([]);
     const restaurantInfo = useRecoilValue(getAllRecommandRestaurantUrl);
 
     useEffect(() => {
         console.log("토큰", token);
-        console.log("토큰정보", tokenInfo);
 
-        if (token != "null") {
-            axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
-                headers: {
-                    Authorization: token
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+            headers: {
+                Authorization: token
+            }
+        })
+            .then(response => {
+                setMyInfo(response.data);
+                //console.log(myInfo);
+            }).catch(err => {
+                console.log(err);
+
+                if(err.response.data === "Authorization : 토큰이 만료되었습니다.\n") {
+                    setIsLogin(false);
                 }
-            })
-                .then(response => {
-                    setMyInfo(response.data);
-                    //console.log(myInfo);
-                }).catch(err => {
-                    console.log(err);
-                  });
+            });
 
-            axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/like', {
-                headers: {
-                    Authorization: token
-                }
-            })
-                .then(response => {
-                    setRecommendGuide(response.data);
-                }).catch(err => {
-                    console.log(err);
-                  });
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/like', {
+            headers: {
+                Authorization: token
+            }
+        })
+            .then(response => {
+                setRecommendGuide(response.data);
+            }).catch(err => {
+                console.log("guide");
+                console.log(err);
+            });
 
-        }
+
 
     }, []);
 
+
     //확인용===================================
-    useEffect(()=> {
+    useEffect(() => {
         console.log(recommendGuideList);
-    },[recommendGuideList])
+    }, [recommendGuideList])
+    //=======================================
+
+
 
 
     let navigate = useNavigate();
@@ -117,7 +124,7 @@ const Home = () => {
 
             <SearchContainer>
                 <p className='userWrap'>
-                    <span>{myInfo.nickname}</span> 님,
+                    <span>{isLogin ? myInfo.nickname+"님," : "환영합니다 🌱"}</span>
                 </p>
                 <p className='textWrap'>비플 함께 친환경 여행을 떠나보세요!</p>
             </SearchContainer>
