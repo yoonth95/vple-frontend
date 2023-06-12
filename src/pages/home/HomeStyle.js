@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const LoginBtn = styled.div`
+  position: relative;
 
-  position: absolute;
-  top: 19.25px;
-  right: 5%;
-  
   div {
+    position: absolute;
+    // top: 19.25px;
+    top: -50px;
+    right: 5%;
+
     border: 1px solid #758B6F;
     color: #758B6F;
     padding: 5px 13px;
