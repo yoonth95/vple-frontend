@@ -20,6 +20,7 @@ function Cart(props) {
   const token = localStorage.getItem("token");
 
   const [restaurantList, setRestaurantList] = useState([]);
+  const [planList, setPlanList] = useState([]);
 
   useEffect(() => {
     axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
@@ -49,14 +50,15 @@ function Cart(props) {
         setRestaurantList(response.data);
       })
 
-    // axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/liked/plan', {
-    //   headers: {
-    //     Authorization: token
-    //   }
-    // })
-    //   .then(response => {
-    //     console.log("플랜목록", response);
-    //   })
+    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/liked/plan', {
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(response => {
+        console.log("플랜목록", response);
+        setPlanList(response.data);
+      })
 
   }, []);
 
@@ -67,14 +69,24 @@ function Cart(props) {
     navigate('/login')
     window.scrollTo(0, 0)
   }
+  const routerGuideDetail = (id) => {
+    navigate('/guide/detail', {
+      state: {
+        id: id,
+        token: token,
+        title: '추천 가이드',
+      }
+    })
+    window.scrollTo(0, 0)
+  }
   const routerRestaurantDetail = (id) => {
     navigate('/restaurant/detail', {
-        state: {
-            id: id,
-        }
+      state: {
+        id: id,
+      }
     });
     window.scrollTo(0, 0)
-}
+  }
 
   return (
     <>
@@ -104,20 +116,32 @@ function Cart(props) {
 
       </WrapButton>
       {planActive ?
-        <></>
-        : <CardContainer className="card-container">
-        {restaurantList&&restaurantList.map(card => (
+        <CardContainer className="card-container">
+          {planList && planList.map(card => (
             <CardWrap>
-                <RestaurantCardButton
-                    id={card.restaurantId}
-                    title={card.name}
-                    image={card.image}
-                    onClick={() => routerRestaurantDetail(card.restaurantId)}
-                />
+              <RestaurantCardButton
+                id={card.id}
+                title={card.title}
+                image={card.image1}
+                onClick={() => routerGuideDetail(card.id)}
+              />
             </CardWrap>
 
-        ))}
-    </CardContainer>}
+          ))}
+        </CardContainer>
+        : <CardContainer className="card-container">
+          {restaurantList && restaurantList.map(card => (
+            <CardWrap>
+              <RestaurantCardButton
+                id={card.restaurantId}
+                title={card.name}
+                image={card.image}
+                onClick={() => routerRestaurantDetail(card.restaurantId)}
+              />
+            </CardWrap>
+
+          ))}
+        </CardContainer>}
 
     </>
   );

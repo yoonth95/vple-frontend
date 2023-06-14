@@ -36,11 +36,11 @@ export default function GuideDetail() {
     useEffect(() => {
 
         axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/${id}`
-        // , {
-        //     headers: {
-        //         Authorization: token
-        //     }
-        // }
+            // , {
+            //     headers: {
+            //         Authorization: token
+            //     }
+            // }
         )
             .then(response => {
                 setGuideData(response.data);
@@ -48,9 +48,26 @@ export default function GuideDetail() {
                     // console.log(e.day);
                     if (e.day > maxPage) setMaxPage(e.day)
                 });
-                if(response.data.planTravels !== []) {
+                if (response.data.planTravels !== []) {
                     setRepresentPic(response.data.planTravels[0].image);
                 }
+            });
+
+        axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/liked/plan`
+            , {
+                headers: {
+                    Authorization: token
+                }
+            }
+        )
+            .then(response => {
+                response.data.map(e => 
+                    {
+                        console.log("e", id);
+                        if(e.id === id) {
+                            setClip(true);
+                        }
+                    });
             });
     }, [id])
 
@@ -72,16 +89,16 @@ export default function GuideDetail() {
         console.log("guideData", guideData);
 
         if (guideData.planTravels) {
-            
+
             // console.log("현재 모든 컨텐츠", guideData);
             setDayPageContent(guideData.planTravels.filter((travel) => travel.day === dayPageNum));
         }
 
     }, [guideData, dayPageNum])
 
-    const addToCart = () => {
+    const addOrRemoveToCart = () => {
         axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/like/${id}`
-        , {
+            , {}, {
             headers: {
                 Authorization: token
             }
@@ -106,7 +123,7 @@ export default function GuideDetail() {
                 <div className="titleWrap">{guideData.title}</div>
                 <WrapClip
                     onClick={() => setClip(!isClip)}>
-                    {isClip ? <ClipButtonG /> : <ClipButtonW onClick={addToCart}/>}
+                    {isClip ? <ClipButtonG onClick={addOrRemoveToCart}/> : <ClipButtonW onClick={addOrRemoveToCart} />}
                 </WrapClip>
                 <div className="writerWrap">{guideData.district}  {guideData.city}</div>
                 <EditButton>플랜 수정</EditButton>
@@ -129,7 +146,7 @@ export default function GuideDetail() {
                                             : `오후 ${card.startTime.split(":")[0]}:${card.startTime.split(":")[1]}`
                                         }</span></p>
                             </div>
-                            
+
                         </WrapCard>
                     ))}
                 </CardSection>

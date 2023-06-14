@@ -84,9 +84,12 @@ const PlanMap = () => {
 
         if (searchedRestaurantList.length !== 0) {
             setCenterCoordinate({
-                lat: searchedRestaurantList[3].longitude,
-                lng: searchedRestaurantList[3].latitude
+                lat: searchedRestaurantList[3].latitude,
+                lng: searchedRestaurantList[3].longitude
             });
+
+            console.log(searchedRestaurantList[3]);
+            console.log(searchedRestaurantList[3].latitude, searchedRestaurantList[3].longitude);
             setLevel(7);
         }
 
@@ -160,8 +163,8 @@ const PlanMap = () => {
                             <>
                                 <MapMarker
                                     position={{
-                                        lat: place.longitude,
-                                        lng: place.latitude,
+                                        lat: place.latitude,
+                                        lng: place.longitude,
                                     }}
                                 // image={{
                                 //     src: {IconMark},
@@ -174,8 +177,8 @@ const PlanMap = () => {
 
                                 <CustomOverlayMap
                                     position={{
-                                        lat: place.longitude,
-                                        lng: place.latitude,
+                                        lat: place.latitude,
+                                        lng: place.longitude,
                                     }}
                                     yAnchor={1.9}
                                 >
