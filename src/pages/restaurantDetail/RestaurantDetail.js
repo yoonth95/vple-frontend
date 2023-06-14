@@ -93,11 +93,11 @@ export default function RestaurantDetail() {
             }
         })
         .then(response => {
-            // console.log("장바구니 목록", response);
+            console.log("장바구니 목록", response);
             response.data.map(e => 
                 {
                     console.log("e", id);
-                    if(e.id === id) setClip(true)
+                    if(e.restaurantId === id) setClip(true)
                 });
         });
     }, []);
