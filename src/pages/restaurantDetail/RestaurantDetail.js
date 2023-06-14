@@ -71,6 +71,7 @@ export default function RestaurantDetail() {
 
     const [detailRestaurant, setDetailRestaurant] = useState([]);
     const [menu, setMenu] = useState([]);
+    const [cartId, setCartId] = useState(-1);
 
     useEffect(() => {
 
@@ -78,7 +79,6 @@ export default function RestaurantDetail() {
             .then(response => {
                 setDetailRestaurant(response.data);
                 setMenu(response.data.menus);
-
                 console.log(response.data);
 
             });
@@ -97,7 +97,10 @@ export default function RestaurantDetail() {
             response.data.map(e => 
                 {
                     console.log("e", id);
-                    if(e.restaurantId === id) setClip(true)
+                    if(e.restaurantId === id) {
+                        setClip(true);
+                        setCartId(e.id);
+                    }
                 });
         });
     }, []);
@@ -125,7 +128,16 @@ export default function RestaurantDetail() {
             });
     }
     const removeInCart = () => {
-        setClip(false);
+        axios.delete(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart/${cartId}`,
+            {
+                headers: {
+                    Authorization: token
+                }
+            })
+            .then(res => {
+                setClip(false);
+                console.log(res);
+            });
     }
 
     return (
