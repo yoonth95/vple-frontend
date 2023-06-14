@@ -57,7 +57,6 @@ const PlanMap = () => {
     const setDayPageContent = useSetRecoilState(dayPageContentState);
     const addPlace = (place) => {
 
-        console.log(place);
         axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel`,
             {
                 "name": place.name,
@@ -66,17 +65,24 @@ const PlanMap = () => {
                 "longitude": place.longitude,
                 "latitude": place.latitude,
                 "day": planDay[0].toString(),
-                "startTime": "오전 07:20",
+                "startTime": "07:30:00",
             },
-            {
-                headers: {
-                    Authorization: token
-                }
-            })
-            .then(response => {
+            // {
+            //     headers: {
+            //         Authorization: token
+            //     }
+            // }
+            ).then(response => {
                 console.log(place);
-                
-                setDayPageContent(oldArray => [...oldArray, place]);
+                console.log(response);
+
+                axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/${planId[0]}`
+                ).then(res => {
+                    console.log("새로 get한 데이터", res);
+                    setDayPageContent(res.data.planTravels);
+                })
+
+
             });
     }
 

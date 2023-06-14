@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DetailHeader from '../../components/titleHeader/TitleHeader';
-
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
 
 import {
@@ -14,6 +13,8 @@ import {
 import lock from '../../asset/lock.png';
 import { useRecoilState } from 'recoil';
 import { cartPlanBtnState } from '../../recoil/state';
+
+import planDefaultImg from '../../asset/planDefault.png';
 
 function Cart(props) {
 
@@ -122,7 +123,7 @@ function Cart(props) {
               <RestaurantCardButton
                 id={card.id}
                 title={card.title}
-                image={card.image1}
+                image={card.image1 === null ? planDefaultImg : card.image1}
                 onClick={() => routerGuideDetail(card.id)}
               />
             </CardWrap>

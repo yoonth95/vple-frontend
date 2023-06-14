@@ -62,8 +62,6 @@ export default function RestaurantDetail() {
         })
     }
 
-    // const [visible, setVisible] = useState(false);
-
     //식당 상세 정보 url 받아오기
     const location = useLocation();
     const id = location.state.id;
