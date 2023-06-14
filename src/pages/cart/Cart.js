@@ -12,6 +12,8 @@ import {
   CardWrap,
 } from './CartStyle';
 import lock from '../../asset/lock.png';
+import { useRecoilState } from 'recoil';
+import { cartPlanBtnState } from '../../recoil/state';
 
 function Cart(props) {
 
@@ -58,7 +60,7 @@ function Cart(props) {
 
   }, []);
 
-  const [planActive, setPlanActive] = useState(true);
+  const [planActive, setPlanActive] = useRecoilState(cartPlanBtnState);
 
   const navigate = useNavigate();
   const routerLogin = () => {

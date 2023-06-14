@@ -56,9 +56,9 @@ export const WrapSelection = styled.div`
 export const CardContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
     gap: 1%;
-    padding-bottom: 30%;
-    padding-left: 3.5%;
+    padding: 0 3% 30% 3%;
     background-color: white;
 
   ::-webkit-scrollbar {

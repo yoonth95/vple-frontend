@@ -84,6 +84,11 @@ export const viewAllRestaurantPageState = atom({
     default: 0
 })
 
+export const cartPlanBtnState = atom({
+    key: 'cartPlanBtnState',
+    default: true
+})
+
 
 
 

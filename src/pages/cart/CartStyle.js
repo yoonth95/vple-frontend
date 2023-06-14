@@ -84,8 +84,7 @@ export const WrapButton = styled.div`
 export const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
   cursor: pointer;
   overflow: auto;
   gap: 3px;
