@@ -80,3 +80,19 @@ export const WrapButton = styled.div`
     line-height: 35px;
   }
 `;
+
+export const CardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  overflow: auto;
+  gap: 3px;
+  margin: 0 18px;
+  overflow: hidden;
+`;
+
+export const CardWrap = styled.div`
+  margin: 0 -2px;
+`;

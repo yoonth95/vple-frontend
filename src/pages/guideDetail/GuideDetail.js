@@ -35,11 +35,13 @@ export default function GuideDetail() {
 
     useEffect(() => {
 
-        axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${id}`, {
-            headers: {
-                Authorization: token
-            }
-        })
+        axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/${id}`
+        // , {
+        //     headers: {
+        //         Authorization: token
+        //     }
+        // }
+        )
             .then(response => {
                 setGuideData(response.data);
                 response.data.planTravels.map(e => {
@@ -67,7 +69,7 @@ export default function GuideDetail() {
         }
     }
     useEffect(() => {
-        // console.log("guideData", guideData);
+        console.log("guideData", guideData);
 
         if (guideData.planTravels) {
             
@@ -76,6 +78,18 @@ export default function GuideDetail() {
         }
 
     }, [guideData, dayPageNum])
+
+    const addToCart = () => {
+        axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/like/${id}`
+        , {
+            headers: {
+                Authorization: token
+            }
+        })
+            .then(response => {
+                console.log(response);
+            });
+    }
 
     return (
         <>
@@ -92,7 +106,7 @@ export default function GuideDetail() {
                 <div className="titleWrap">{guideData.title}</div>
                 <WrapClip
                     onClick={() => setClip(!isClip)}>
-                    {isClip ? <ClipButtonG /> : <ClipButtonW />}
+                    {isClip ? <ClipButtonG /> : <ClipButtonW onClick={addToCart}/>}
                 </WrapClip>
                 <div className="writerWrap">{guideData.district}  {guideData.city}</div>
                 <EditButton>플랜 수정</EditButton>

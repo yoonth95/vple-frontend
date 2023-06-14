@@ -58,7 +58,7 @@ export const CardContainer = styled.div`
     flex-wrap: wrap;
     gap: 1%;
     padding-bottom: 30%;
-    margin-left: 3.5%;
+    padding-left: 3.5%;
     background-color: white;
 
   ::-webkit-scrollbar {

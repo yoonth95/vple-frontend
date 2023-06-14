@@ -181,11 +181,13 @@ const BottomSheet = (props) => {
 
     const plan = myPlansInfo.find((plan) => plan.id === card.id);
 
-    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${plan.id}`, {
-      headers: {
-        Authorization: token,
-      }
-    })
+    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/${plan.id}`
+    // , {
+    //   headers: {
+    //     Authorization: token,
+    //   }
+    // }
+    )
       .then(response => {
         console.log(response.data);
 

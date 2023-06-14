@@ -13,6 +13,8 @@ import {
 
 } from './ViewAllGuideStyle';
 
+import planDefaultImg from '../../asset/planDefault.png';
+
 function ViewAllGuide() {
 
     const location = useLocation();
@@ -99,7 +101,7 @@ function ViewAllGuide() {
                         recommandGuideList.content.map((card) => {
                             return (
                                 <WrapCard onClick={()=>routerGuideDetail(card.id)}>
-                                    <img className='img-photo' src={card.image}/>
+                                    <img className='img-photo' src={card.image === null ? planDefaultImg : card.image}/>
                                     <div className='div-content'>
                                         <span className='plan-title'>{card.title}</span>
                                     </div>

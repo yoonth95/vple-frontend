@@ -62,7 +62,6 @@ const PlanMap = () => {
             {
                 "name": place.name,
                 "planId": planId[0].toString(),
-                "address": "필요 여부 확인 후 컬럼 삭제",
                 "image": place.image,
                 "longitude": place.longitude,
                 "latitude": place.latitude,

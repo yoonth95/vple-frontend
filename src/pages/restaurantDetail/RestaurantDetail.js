@@ -82,6 +82,10 @@ export default function RestaurantDetail() {
                 console.log(response.data);
 
             });
+
+
+
+        // 장바구니 기능
         axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart',
         {
             headers: {
@@ -89,6 +93,7 @@ export default function RestaurantDetail() {
             }
         })
         .then(response => {
+            // console.log("장바구니 목록", response);
             response.data.map(e => 
                 {
                     console.log("e", id);
@@ -97,9 +102,11 @@ export default function RestaurantDetail() {
         });
     }, []);
 
-    const putInCart = () => {
+    const addToCart = () => {
+        // setClip(true);
         axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart`,
             {
+                "restaurantId": id,
                 "name": detailRestaurant.name,
                 "address": detailRestaurant.address,
                 "longitude": detailRestaurant.longitude,
@@ -117,8 +124,8 @@ export default function RestaurantDetail() {
                 console.log(res);
             });
     }
-    const deleteInCart = () => {
-        
+    const removeInCart = () => {
+        setClip(false);
     }
 
     return (
@@ -132,9 +139,9 @@ export default function RestaurantDetail() {
 
                 <WrapInfo>
                     <div className="titleWrap">{detailRestaurant.name}</div>
-                    <ClipDiv>
-                        {isClip ? <ClipButtonG /> 
-                        : <ClipButtonW onClick={putInCart} />}
+                    <ClipDiv >
+                        {isClip ? <ClipButtonG onClick={removeInCart} /> 
+                        : <ClipButtonW onClick={addToCart} />}
                     </ClipDiv>
                     <TagContainer>
                         {

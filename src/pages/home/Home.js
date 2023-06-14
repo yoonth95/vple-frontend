@@ -16,6 +16,8 @@ import {
     RecommendTitleWrap,
 } from "./HomeStyle";
 import arrow from '../../asset/arrow.png'
+import planDefaultImg from '../../asset/planDefault.png';
+
 import GuideCardButton from '../../components/guideCardButton/GuideCardButton';
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
 import axios from 'axios'
@@ -51,11 +53,8 @@ const Home = () => {
                 }
             });
 
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/like', {
-            headers: {
-                Authorization: token
-            }
-        })
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/like'
+        )
             .then(response => {
                 setRecommendGuide(response.data);
             }).catch(err => {
@@ -153,7 +152,7 @@ const Home = () => {
                         <CardWrap>
                             <GuideCardButton
                                 title={card.title}
-                                image={card.image}
+                                image={card.image === null ? planDefaultImg : card.image}
                                 onClick={() => routerGuideDetail(card.id)}
                             />
                         </CardWrap>
