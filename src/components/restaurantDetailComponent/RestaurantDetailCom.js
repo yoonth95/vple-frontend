@@ -48,30 +48,34 @@ import IconMore from '../../asset/restaurant/IconMore.png';
 import IconUp from '../../asset/restaurant/IconUp.png';
 import arrow from '../../asset/arrow.png';
 import camera from '../../asset/camera.png';
-import BackArrow from '../../asset/back_arrow.png';
+import BackArrow from '../../asset/back_arrow.png';import menuDefaultImg from '../../asset/menuDefault.png';
 
 export default function RestaurantDetailCom(props) {
 
+    const token = localStorage.getItem('token');
+
     const [isClip, setClip] = useState(false);
 
-    const reviews = [
-        { review1: 1 },
-        { review2: 2 },
-        { review1: 3 },
-    ];
+    // const reviews = [
+    //     { review1: 1 },
+    //     { review2: 2 },
+    //     { review1: 3 },
+    // ];
 
-    const scrollToUp = () => {
-        window.scroll({
-            top: 0,
-            behavior: 'smooth'
-        })
-    }
+    // const scrollToUp = () => {
+    //     window.scroll({
+    //         top: 0,
+    //         behavior: 'smooth'
+    //     })
+    // }
 
-    const [visible, setVisible] = useState(false);
+    // const [visible, setVisible] = useState(false);
 
     const [detailRestaurant, setDetailRestaurant] = useState([]);
     const [menu, setMenu] = useState([]);
 
+    const [cartId, setCartId] = useState(-1);
+    
     useEffect(() => {
 
         axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/' + props.id)
@@ -82,7 +86,60 @@ export default function RestaurantDetailCom(props) {
                 console.log(response.data);
                 
             });
+
+        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart',
+        {
+            headers: {
+                Authorization: token
+            }
+        })
+        .then(response => {
+            console.log("장바구니 목록", response);
+            response.data.map(e => 
+                {
+                    if(e.restaurantId === props.id) {
+                        setClip(true);
+                        setCartId(e.id);
+                    }
+                });
+        });
     }, []);
+
+
+    const addToCart = () => {
+        // setClip(true);
+        axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart`,
+            {
+                "restaurantId": props.id,
+                "name": detailRestaurant.name,
+                "address": detailRestaurant.address,
+                "longitude": detailRestaurant.longitude,
+                "latitude": detailRestaurant.latitude,
+                "image": detailRestaurant.image,
+            },
+            {
+                headers: {
+                    Authorization: token
+                }
+            })
+            .then(res => {
+
+                setClip(true);
+                console.log(res);
+            });
+    }
+    const removeInCart = () => {
+        axios.delete(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart/${cartId}`,
+            {
+                headers: {
+                    Authorization: token
+                }
+            })
+            .then(res => {
+                setClip(false);
+                console.log(res);
+            });
+    }
 
     return (
         <WrapView>
@@ -103,9 +160,9 @@ export default function RestaurantDetailCom(props) {
 
             <WrapInfo>
                 <div className="titleWrap">{detailRestaurant.name}</div>
-                <ClipDiv
-                    onClick={() => setClip(!isClip)}>
-                    {isClip ? <ClipButtonG /> : <ClipButtonW />}
+                <ClipDiv>
+                    {isClip ? <ClipButtonG onClick={removeInCart} /> 
+                        : <ClipButtonW onClick={addToCart} />}
                 </ClipDiv>
                 <TagContainer>
                     {
@@ -146,7 +203,7 @@ export default function RestaurantDetailCom(props) {
                         menu.map((value, index) => {
                             return (
                                 <WrapCard>
-                                    <img className='img-photo' src={value.image} />
+                                    {value.image ===null ? <div className='wrap-img-default'><img className='img-default' src= {menuDefaultImg}/></div> : <img className='img-photo' src={value.image} />}
                                     <div className='div-content'>
                                         <span className='plan-title'>{value.name}</span>
                                     </div>

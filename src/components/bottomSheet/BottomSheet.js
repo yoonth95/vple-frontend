@@ -104,9 +104,9 @@ const BottomSheet = (props) => {
     setStep(index);
   }
   const goBack = () => {
-    setStep(prev=> {
-      if(prev === 3) return 0;
-      if(prev>0) return prev-1;
+    setStep(prev => {
+      if (prev === 3) return 0;
+      if (prev > 0) return prev - 1;
       else return prev;
     });
   }
@@ -151,7 +151,7 @@ const BottomSheet = (props) => {
         console.log(res.data);
         updateMyPlansInfo();
         hideModal();
-        
+
       }).catch(err => {
         console.log(err);
       });
@@ -167,18 +167,18 @@ const BottomSheet = (props) => {
 
   const makeNewPlan = () => {
 
-    let copyNewPlanData = {...newPlanData};
+    let copyNewPlanData = { ...newPlanData };
     setPlanData(copyNewPlanData);
 
-    axios.post("http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan", 
-    {
-      "title": newPlanData.title,
-      "startDate": newPlanData.startDate,
-      "endDate": newPlanData.endDate,
-      "district": newPlanData.district,
-      "city": newPlanData.city,
-      "peopleNum": newPlanData.peopleNum,
-    },
+    axios.post("http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan",
+      {
+        "title": newPlanData.title,
+        "startDate": newPlanData.startDate,
+        "endDate": newPlanData.endDate,
+        "district": newPlanData.district,
+        "city": newPlanData.city,
+        "peopleNum": newPlanData.peopleNum,
+      },
       {
         headers: {
           Authorization: token
@@ -276,7 +276,7 @@ const BottomSheet = (props) => {
   }
 
 
-  const [dayPageNum, setDayPageNum] = useState(1);  
+  const [dayPageNum, setDayPageNum] = useState(1);
   const setPlanDayNum = useSetRecoilState(planDayState);
   const goNextDayPage = () => {
     if (dayPageNum < planData.totalDays) {
@@ -292,12 +292,12 @@ const BottomSheet = (props) => {
     setPlanDayNum(dayPageNum);
   }, [dayPageNum]);
 
-  
+
   const [dayPageContent, setDayPageContent] = useRecoilState(dayPageContentState);
   const [specificDayContent, setSpecificDayContent] = useState([]);
   useEffect(() => {
     console.log("현재 모든 컨텐츠", dayPageContent);
-    if(dayPageContent !== undefined) {
+    if (dayPageContent !== undefined) {
       setSpecificDayContent(dayPageContent.filter((travel) => travel.day === dayPageNum));
     }
   }, [dayPageNum, dayPageContent])
@@ -311,7 +311,7 @@ const BottomSheet = (props) => {
       })
       .then(res => {
         console.log(res.data);
-        setDayPageContent(dayPageContent.filter((card)=> card.id !== id));
+        setDayPageContent(dayPageContent.filter((card) => card.id !== id));
       }).catch(err => {
         console.log(err);
       });
@@ -322,93 +322,95 @@ const BottomSheet = (props) => {
 
 
   const [planTravelId, setPlanTravelId] = useState(-1);
-  const [checkedTime, setCheckedTime] = useState("00:00:00");
+  const [checkedTime, setCheckedTime] = useState("07:30:00");
   const onClickTime = (card) => {
     setPlanTravelId(card.id);
     setCheckedTime(card.startTime);
-    console.log(card.startTime);
     changeContent(4);
-
-    // const amPmElement = document.getElementsByName('ampm');
-
-    // amPmElement.addEventListener('change', )
   }
 
-  const saveTime = () => {
-
-    let tempPlanTravelTime = {};
-    document.getElementsByName('ampm').forEach((node) => {
-      if(node.checked) {
-        tempPlanTravelTime.ampm= node.value;
-      }
-    })
-    document.getElementsByName('hour').forEach((node) => {
-      // if(node.checked) {
-      //   tempPlanTravelTime.hour= node.value;
-      // }
-      if(node.checked && tempPlanTravelTime.ampm==='오전') {
-        tempPlanTravelTime.hour= node.value;
-      } else {
-        tempPlanTravelTime.hour= (node.value);
-      }
-    })
-    document.getElementsByName('minute').forEach((node) => {
-      if(node.checked) {
-        tempPlanTravelTime.minute= node.value;
-      }
-    })
-
-    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${planTravelId}`,
-    {
-      "startTime" : `${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`,
-    },
-    {
-      headers: {
-        Authorization: token
-      },
-    })
-    .then(res=> {
-      
-      axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId}`, {
-        headers: {
-          Authorization: token
-        }
-      })
-        .then(response => {
-          // setDayPageContent(response.data.planTravels);
-          console.log(tempPlanTravelTime);
-        });
-      changeContent(2);
-    }).catch(err => {
-      console.log(`${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`);
-      console.log(err);
-    })
-  }
-
-  useEffect(()=> {
+  useEffect(() => {
     console.log("checkedTime", checkedTime);
 
     const prevTimeString = checkedTime.split(":");
-    if(prevTimeString[0] < 12) {
-      document.getElementsByName('ampm').forEach((node)=> {
-        if(node.value === '오전') node.checked=true;
+    let hour = prevTimeString[0];
+
+    console.log("prevTimeString[0]", prevTimeString[0]);
+
+    if (prevTimeString[0] < 12) {
+      document.getElementsByName('ampm').forEach((node) => {
+        if (node.value === '오전') node.checked = true;
       })
     } else {
-      document.getElementsByName('ampm').forEach((node)=> {
-        if(node.value === '오후') node.checked=true;
+      document.getElementsByName('ampm').forEach((node) => {
+        hour = (prevTimeString[0] - 12).toString();
+        if (node.value === '오후') node.checked = true;
       })
     }
-    document.getElementsByName('hour').forEach((node)=> {
-      if(node.value === prevTimeString[0]) node.checked=true;
+
+    document.getElementsByName('hour').forEach((node) => {
+      // console.log(node.value);
+      if (node.value === hour.padStart(2, '0')) node.checked = true;
     })
-    document.getElementsByName('minute').forEach((node)=> {
-      if(node.value === prevTimeString[1]) node.checked=true;
+
+    document.getElementsByName('minute').forEach((node) => {
+      if (node.value === prevTimeString[1]) node.checked = true;
     })
-  },[onClickTime, checkedTime, height])
+  }, [onClickTime, checkedTime, height])
+
+
+  const saveTime = () => {
+
+    let tempPlanTravelTime =
+    {
+      'ampm': '',
+      'hour': '',
+      'minute': '',
+    };
+    document.getElementsByName('ampm').forEach((node) => {
+      if (node.checked) {
+        tempPlanTravelTime.ampm = node.value;
+      }
+    })
+    document.getElementsByName('hour').forEach((node) => {
+      if (node.checked) {
+        if(tempPlanTravelTime.ampm === '오전') {
+          tempPlanTravelTime.hour = node.value;
+        } else {
+          tempPlanTravelTime.hour = (parseInt(node.value)+12).toString();
+        }
+      }
+    })
+    document.getElementsByName('minute').forEach((node) => {
+      if (node.checked) {
+        tempPlanTravelTime.minute = node.value;
+      }
+    })
+
+    console.log(`${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`);
+
+    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${planTravelId}`,
+      {
+        "startTime": `${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`,
+      })
+      .then(res => {
+        console.log(res);
+        
+        axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/${planId}`)
+          .then(response => {
+            console.log(response);
+
+            setDayPageContent(response.data.planTravels);
+          });
+        changeContent(2);
+      })
+  }
 
 
 
-  
+
+
+
 
   const contents = [
     {
@@ -487,11 +489,11 @@ const BottomSheet = (props) => {
             </WrapLine>
 
             {specificDayContent && specificDayContent.map(card => (
-              <PlanCard 
+              <PlanCard
                 card={card}
-                onRemove={()=>removeTravel(card.id)}
-                onClickTime={()=>onClickTime(card)}
-                />
+                onRemove={() => removeTravel(card.id)}
+                onClickTime={() => onClickTime(card)}
+              />
             ))}
             {specificDayContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
           </PlanDiv>
@@ -535,11 +537,11 @@ const BottomSheet = (props) => {
             </WrapLine>
 
             {specificDayContent && specificDayContent.map(card => (
-              <PlanCard 
+              <PlanCard
                 card={card}
-                onRemove={()=>removeTravel(card.id)}
-                onClickTime={()=>onClickTime(card)}
-                />
+                onRemove={() => removeTravel(card.id)}
+                onClickTime={() => onClickTime(card)}
+              />
             ))}
             {specificDayContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
           </PlanDiv>
@@ -557,119 +559,119 @@ const BottomSheet = (props) => {
             <WrapSelect>
               <p className="time-head">오전 / 오후</p>
               <label className="long-box">
-                <input type="radio" name="ampm" value="오전"/>
+                <input type="radio" name="ampm" value="오전" />
                 <div>오전</div>
               </label>
               <label className="long-box">
-                <input type="radio" name="ampm" value="오후"/>
+                <input type="radio" name="ampm" value="오후" />
                 <div>오후</div>
               </label>
             </WrapSelect>
             <WrapSelect>
               <p className="time-head">시</p>
               <label className="short-box">
-                <input type="radio" name="hour" value="01"/>
+                <input type="radio" name="hour" value="01" />
                 <div>1</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="02"/>
+                <input type="radio" name="hour" value="02" />
                 <div>2</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="03"/>
+                <input type="radio" name="hour" value="03" />
                 <div>3</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="04"/>
+                <input type="radio" name="hour" value="04" />
                 <div>4</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="05"/>
+                <input type="radio" name="hour" value="05" />
                 <div>5</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="06"/>
+                <input type="radio" name="hour" value="06" />
                 <div>6</div>
               </label>
             </WrapSelect>
             <WrapSelect>
               <p className="time-head"></p>
               <label className="short-box">
-                <input type="radio" name="hour" value="07"/>
+                <input type="radio" name="hour" value="07" />
                 <div>7</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="08"/>
+                <input type="radio" name="hour" value="08" />
                 <div>8</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="09"/>
+                <input type="radio" name="hour" value="09" />
                 <div>9</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="10"/>
+                <input type="radio" name="hour" value="10" />
                 <div>10</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="11"/>
+                <input type="radio" name="hour" value="11" />
                 <div>11</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="hour" value="12"/>
+                <input type="radio" name="hour" value="12" />
                 <div>12</div>
               </label>
             </WrapSelect>
             <WrapSelect>
               <p className="time-head">분</p>
               <label className="short-box">
-                <input type="radio" name="minute" value="00"/>
+                <input type="radio" name="minute" value="00" />
                 <div>00</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="05"/>
+                <input type="radio" name="minute" value="05" />
                 <div>05</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="10"/>
+                <input type="radio" name="minute" value="10" />
                 <div>10</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="15"/>
+                <input type="radio" name="minute" value="15" />
                 <div>15</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="20"/>
+                <input type="radio" name="minute" value="20" />
                 <div>20</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="25"/>
+                <input type="radio" name="minute" value="25" />
                 <div>25</div>
               </label>
             </WrapSelect>
             <WrapSelect>
               <p className="time-head"></p>
               <label className="short-box">
-                <input type="radio" name="minute" value="30"/>
+                <input type="radio" name="minute" value="30" />
                 <div>30</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="35"/>
+                <input type="radio" name="minute" value="35" />
                 <div>35</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="40"/>
+                <input type="radio" name="minute" value="40" />
                 <div>40</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="45"/>
+                <input type="radio" name="minute" value="45" />
                 <div>45</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="50"/>
+                <input type="radio" name="minute" value="50" />
                 <div>50</div>
               </label>
               <label className="short-box">
-                <input type="radio" name="minute" value="55"/>
+                <input type="radio" name="minute" value="55" />
                 <div>55</div>
               </label>
             </WrapSelect>
@@ -690,9 +692,9 @@ const BottomSheet = (props) => {
           <span
             className='spread-btn'
             onClick={isHigh ? setHeightLower : setHeightHigher}
-            >
-              {isHigh ? "내리기" : "펼치기"}
-            </span>
+          >
+            {isHigh ? "내리기" : "펼치기"}
+          </span>
           {/* <span className="title">{props.title}</span> */}
           <img
             className='close-btn'

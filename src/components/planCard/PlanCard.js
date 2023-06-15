@@ -31,11 +31,8 @@ export default function PlanCard({ card, time, onRemove, onClickTime }) {
                     <TimeButton 
                         onClick={onClickTimeBtn}>{
                         prevTimeString[0] < 12 ? 
-                        `오전 ${prevTimeString[0]}:${prevTimeString[1]}`
-                        : `오후 : ${prevTimeString[0]}:${prevTimeString[1]}`}
-                        {/* {
-                            `${time.ampm} ${time.hour}:${time.minute}`
-                        } */}
+                        `오전 ${parseInt(prevTimeString[0])}:${prevTimeString[1]}`
+                        : `오후 ${parseInt(prevTimeString[0])-12}:${prevTimeString[1]}`}
                     </TimeButton>
                     </p>
                 </div>

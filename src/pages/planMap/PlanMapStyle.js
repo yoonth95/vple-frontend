@@ -68,7 +68,7 @@ export const WrapSavedButton = styled.div`
   position: absolute;
   top: 65px;
   right: 20px;
-  z-index: 5;
+  z-index: 3;
 
   text-align: center;
 
