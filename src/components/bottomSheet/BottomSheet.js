@@ -78,8 +78,6 @@ const BottomSheet = (props) => {
 
     position: fixed;
     bottom: 0;
-
-    transition: all 1s;
   `;
 
   const closeSheet = () => {
@@ -89,9 +87,7 @@ const BottomSheet = (props) => {
 
   const [isShowModal, setIsShowModal] = useState(false);
   const showModal = (card) => {
-
     setIsShowModal(true);
-
     setDeletePlanTitle(card.title);
     setDeletePlanId(card.id);
   }
@@ -151,10 +147,7 @@ const BottomSheet = (props) => {
         console.log(res.data);
         updateMyPlansInfo();
         hideModal();
-
-      }).catch(err => {
-        console.log(err);
-      });
+      })
 
     setIsShowModal(false);
   }
@@ -213,28 +206,6 @@ const BottomSheet = (props) => {
     setDayPageContent(planData.planTravels);
     setIsOpen(planData.opened);
   }, [planData]);
-
-
-
-
-  //확인용------------------------------------------------------------
-  useEffect(() => {
-
-    // console.log("location" ,newPlanData);
-    // console.log("myPlansInfo", myPlansInfo);
-    console.log("확인용planId", planId);
-    // console.log("planData", planData);
-
-    // console.log("planDay", planDayNum);
-
-  }, [planId])
-
-
-  const removeAll = () => {
-
-  }
-  //----------------------------------------------------------------
-
 
 
   const [isOpen, setIsOpen] = useState(planData.opened);
@@ -316,10 +287,6 @@ const BottomSheet = (props) => {
         console.log(err);
       });
   }
-
-
-
-
 
   const [planTravelId, setPlanTravelId] = useState(-1);
   const [checkedTime, setCheckedTime] = useState("07:30:00");
@@ -408,10 +375,6 @@ const BottomSheet = (props) => {
 
 
 
-
-
-
-
   const contents = [
     {
       content:
@@ -495,7 +458,7 @@ const BottomSheet = (props) => {
                 onClickTime={() => onClickTime(card)}
               />
             ))}
-            {specificDayContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
+            {specificDayContent.length === 0 ? null : <DeleteAllButton>전체 삭제</DeleteAllButton>}
           </PlanDiv>
         </div>
     },
@@ -543,7 +506,7 @@ const BottomSheet = (props) => {
                 onClickTime={() => onClickTime(card)}
               />
             ))}
-            {specificDayContent.length === 0 ? null : <DeleteAllButton onClick={removeAll}>전체 삭제</DeleteAllButton>}
+            {specificDayContent.length === 0 ? null : <DeleteAllButton>전체 삭제</DeleteAllButton>}
           </PlanDiv>
         </div>
     },
