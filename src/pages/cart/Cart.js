@@ -4,6 +4,7 @@ import axios from 'axios';
 import DetailHeader from '../../components/titleHeader/TitleHeader';
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
 import {Url} from '../Url';
+import BottomNav from "../../components/bottomNav/BottomNav"
 
 import {
   LoginWindow,
@@ -144,7 +145,7 @@ function Cart(props) {
 
           ))}
         </CardContainer>}
-
+        <BottomNav/>
     </>
   );
 }

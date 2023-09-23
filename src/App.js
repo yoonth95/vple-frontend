@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     RecoilRoot,
     atom,
@@ -7,6 +7,7 @@ import {
     useRecoilValue,
 } from 'recoil';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import PlanMap from './pages/planMap/PlanMap'
 import Login from "./pages/login/Login";
 import ViewAllGuide from "./pages/viewAllGuide/ViewAllGuide";
@@ -25,6 +26,7 @@ import BottomSheet from './components/bottomSheet/BottomSheet';
 import Cart from './pages/cart/Cart';
 
 function App() {
+
     return (
         <div className="App">
             <Router>
@@ -47,8 +49,10 @@ function App() {
                     <Route path='/myProfile/edit' element={<MyProfileEdit/> }/>
                     <Route path='/cart' element={<Cart/>} />
                 </Routes>
-                <BottomNav/>
+
+                {/* <BottomNav/> */}
             </Router>
+
         </div>
     );
 }

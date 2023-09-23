@@ -3,6 +3,7 @@ import axios from 'axios';
 import Calendar from 'react-calendar';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
 import {Url} from '../Url';
+import BottomNav from "../../components/bottomNav/BottomNav"
 
 import {
     LoginWindow,
@@ -246,6 +247,7 @@ const Plan = () => {
                 }
 
             </PlanContainer>
+            <BottomNav push={2}/>
         </>
     )
 }

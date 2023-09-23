@@ -35,6 +35,7 @@ import styled, { keyframes } from "styled-components";
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { dayPageContentState, planDataState, planDayState, planIdState, } from '../../recoil/state';
 
+import {Url} from "../../pages/Url"
 
 const BottomSheet = (props) => {
 
@@ -112,7 +113,7 @@ const BottomSheet = (props) => {
   const [myPlansInfo, setMyPlansInfo] = useState([]);
   const getMyPlansInfo = () => {
 
-    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan', {
+    axios.get(`${Url}/auth/plan`, {
       headers: {
         Authorization: token,
       }
@@ -126,7 +127,7 @@ const BottomSheet = (props) => {
   const [deletePlanTitle, setDeletePlanTitle] = useState("무제");
   const [deletePlanId, setDeletePlanId] = useState(-1);
   const updateMyPlansInfo = () => {
-    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan', {
+    axios.get(`${Url}/auth/plan`, {
       headers: {
         Authorization: token
       }
@@ -137,7 +138,7 @@ const BottomSheet = (props) => {
   }
   const deletePlan = () => {
 
-    axios.delete(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${deletePlanId}`,
+    axios.delete(`${Url}/auth/plan/${deletePlanId}`,
       {
         headers: {
           Authorization: token
@@ -163,7 +164,7 @@ const BottomSheet = (props) => {
     let copyNewPlanData = { ...newPlanData };
     setPlanData(copyNewPlanData);
 
-    axios.post("http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan",
+    axios.post(`${Url}/auth/plan`,
       {
         "title": newPlanData.title,
         "startDate": newPlanData.startDate,
@@ -193,7 +194,7 @@ const BottomSheet = (props) => {
     setDayPageNum(1);
     const plan = myPlansInfo.find((plan) => plan.id === card.id);
 
-    axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/${plan.id}`)
+    axios.get(`${Url}/api/plan/${plan.id}`)
       .then(response => {
         console.log("플랜데이터", response.data);
         setPlanData(response.data);
@@ -227,7 +228,7 @@ const BottomSheet = (props) => {
 
   const savePlanData = () => {
 
-    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${planId}`, {
+    axios.patch(`${Url}/auth/plan/${planId}`, {
       "title": setTitle(),
       "isOpened": isOpen,
     },
@@ -274,7 +275,7 @@ const BottomSheet = (props) => {
   }, [dayPageNum, dayPageContent])
 
   const removeTravel = (id) => {
-    axios.delete(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${id}`,
+    axios.delete(`${Url}/api/plan_travel/${id}`,
       {
         headers: {
           Authorization: token
@@ -356,14 +357,14 @@ const BottomSheet = (props) => {
 
     console.log(`${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`);
 
-    axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel/${planTravelId}`,
+    axios.patch(`${Url}/api/plan_travel/${planTravelId}`,
       {
         "startTime": `${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`,
       })
       .then(res => {
         console.log(res);
         
-        axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/${planId}`)
+        axios.get(`${Url}/api/plan/${planId}`)
           .then(response => {
             console.log(response);
 

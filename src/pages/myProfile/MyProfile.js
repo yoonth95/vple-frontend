@@ -14,6 +14,7 @@ import {
 
 } from './MyProfileStyle';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
+import BottomNav from "../../components/bottomNav/BottomNav"
 
 import tempProfile from '../../asset/profile/tempProfile.jpeg';
 import settingButton from '../../asset/profile/setting.png';
@@ -185,7 +186,7 @@ export default function MyProfile() {
                 <div className='menu'>탈퇴하기<img src={arrow} className='arrow-btn' /></div>
                 <div className='menu'>버전<span>1.0.0</span></div>
             </WrapMenuContainer>
-
+            <BottomNav/>
         </>
     );
 }

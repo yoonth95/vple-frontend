@@ -25,6 +25,7 @@ import axios from 'axios'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { loginCodeState, getAllRecommandRestaurantUrl } from '../../recoil/state';
 import { useState, useEffect } from 'react';
+import BottomNav from "../../components/bottomNav/BottomNav"
 
 const Home = () => {
 
@@ -188,6 +189,8 @@ const Home = () => {
             </RecommendContainer>
 
             <ResponsiveDiv />
+
+            <BottomNav push={1}/>
         </>
     )
 }

@@ -7,12 +7,15 @@ import keepBtn from "../../asset/navBar/keep.png";
 import planBtn from "../../asset/navBar/plan.png";
 import userBtn from "../../asset/navBar/user.png";
 
-const BottomNav = () => {
+const BottomNav = (push) => {
 
-    const[active, setActive] = useState(1);
+    const[active, setActive] = useState(push);
+
+    console.log("push", push);
+    console.log("active", active);
 
     return (
-        <>
+        {active } && <>
             <Container>
                 <NavContainer >
                     <div>
