@@ -2,6 +2,7 @@ import DetailHeader from '../../components/titleHeader/TitleHeader'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import {Url} from '../Url';
 
 import planDefaultImg from '../../asset/planDefault.png';
 import DeleteModeBtn from '../../asset/moreGreen.png';
@@ -35,7 +36,7 @@ function ViewAllMyPlan() {
     }, []);
 
     const updateMyInfo = () => {
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+        axios.get(`${Url}/auth/me`, {
             headers: {
                 Authorization: token
             }
@@ -81,7 +82,7 @@ function ViewAllMyPlan() {
 
     const deletePlan = () => {
 
-        const deleteUrl = `http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/${deleteId}`;
+        const deleteUrl = `${Url}/auth/plan/${deleteId}`;
 
         axios.delete(deleteUrl,
             {

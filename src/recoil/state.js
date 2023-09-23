@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {atom, selector, } from 'recoil';
+import {Url} from '../pages/Url';
 
 export const headerListState = atom({
     key: 'headerState',
@@ -70,7 +71,7 @@ export const dayPageContentState = atom({
 export const getAllRecommandRestaurantUrl = selector({
     key: 'getAllRecommandRestaurantUrl',
     get: async ({get}) => {
-        const res = await axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant?page=0');
+        const res = await axios.get(`${Url}/api/recommand/restaurant?page=0`);
         return res.data
     },
 })

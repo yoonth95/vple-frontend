@@ -21,6 +21,7 @@ import BottomSheet from '../../components/bottomSheet/BottomSheet';
 
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import {Url} from '../Url';
 
 import { keyframes } from 'styled-components';
 import RestaurantDetailCom from '../../components/restaurantDetailComponent/RestaurantDetailCom'
@@ -36,7 +37,7 @@ const PlanMap = () => {
 
         if (searchWord !== '') {
 
-            axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/map/search?keyword=${searchWord}`, {
+            axios.get(`${Url}/api/map/search?keyword=${searchWord}`, {
                 headers: {
                     Authorization: token
                 }
@@ -57,7 +58,7 @@ const PlanMap = () => {
     const setDayPageContent = useSetRecoilState(dayPageContentState);
     const addPlace = (place) => {
 
-        axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan_travel`,
+        axios.post(`${Url}/api/plan_travel`,
             {
                 "name": place.name,
                 "planId": planId[0].toString(),
@@ -76,7 +77,7 @@ const PlanMap = () => {
                 console.log(place);
                 console.log(response);
 
-                axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/${planId[0]}`
+                axios.get(`${Url}/api/plan/${planId[0]}`
                 ).then(res => {
                     console.log("새로 get한 데이터", res);
                     setDayPageContent(res.data.planTravels);

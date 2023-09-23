@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DetailHeader from '../../components/titleHeader/TitleHeader';
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
+import {Url} from '../Url';
 
 import {
   LoginWindow,
@@ -24,7 +25,7 @@ function Cart(props) {
   const [planList, setPlanList] = useState([]);
 
   useEffect(() => {
-    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+    axios.get(`${Url}/auth/me`, {
       headers: {
         Authorization: token
       }
@@ -41,7 +42,7 @@ function Cart(props) {
         }
       });
 
-    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart', {
+    axios.get(`${Url}/auth/cart`, {
       headers: {
         Authorization: token
       }
@@ -51,7 +52,7 @@ function Cart(props) {
         setRestaurantList(response.data);
       })
 
-    axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/liked/plan', {
+    axios.get(`${Url}/auth/liked/plan`, {
       headers: {
         Authorization: token
       }

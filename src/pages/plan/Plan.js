@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar';
 import TitleHeader from '../../components/titleHeader/TitleHeader';
+import {Url} from '../Url';
 
 import {
     LoginWindow,
@@ -28,7 +29,7 @@ const Plan = () => {
 
     useEffect(() => {
 
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+        axios.get(`${Url}/auth/me`, {
             headers: {
                 Authorization: token
             }

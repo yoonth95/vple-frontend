@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {Url} from '../Url';
 
 import {
     ProfileContainer,
@@ -28,7 +29,7 @@ export default function MyProfile() {
 
     useEffect(() => {
 
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+        axios.get(`${Url}/auth/me`, {
             headers: {
                 Authorization: token
             }

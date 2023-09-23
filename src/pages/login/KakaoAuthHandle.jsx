@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
+import {Url} from '../Url';
 
 const KakaoAuthHandle = (props) => {
 
@@ -10,7 +11,7 @@ const KakaoAuthHandle = (props) => {
 
       const kakaoLogin = async () => {
         axios
-          .get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/oauth/token?code=${code}`)
+          .get(`${Url}/api/oauth/token?code=${code}`)
           .then((res) => {
             console.log(res);
 

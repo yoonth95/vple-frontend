@@ -2,6 +2,7 @@ import DetailHeader from '../../components/titleHeader/TitleHeader'
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import {Url} from '../Url';
 
 import {
     ImageContainer,
@@ -35,7 +36,7 @@ export default function GuideDetail() {
 
     useEffect(() => {
 
-        axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/${id}`
+        axios.get(`${Url}/api/plan/${id}`
             // , {
             //     headers: {
             //         Authorization: token
@@ -53,7 +54,7 @@ export default function GuideDetail() {
                 }
             });
 
-        axios.get(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/liked/plan`
+        axios.get(`${Url}/auth/liked/plan`
             , {
                 headers: {
                     Authorization: token
@@ -97,7 +98,7 @@ export default function GuideDetail() {
     }, [guideData, dayPageNum])
 
     const addOrRemoveToCart = () => {
-        axios.patch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/plan/like/${id}`
+        axios.patch(`${Url}/auth/plan/like/${id}`
             , {}, {
             headers: {
                 Authorization: token

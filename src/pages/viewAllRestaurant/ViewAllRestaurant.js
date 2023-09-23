@@ -13,6 +13,7 @@ import { useCallback, useEffect, useState, useRef } from 'react';
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { getAllRecommandRestaurantUrl, viewAllRestaurantListState, viewAllRestaurantPageState } from '../../recoil/state';
 import { useNavigate } from 'react-router-dom';
+import {Url} from '../Url';
 
 
 function ViewAllRestaurant() {
@@ -102,7 +103,7 @@ function ViewAllRestaurant() {
     const fetchData = async () => {
         console.log("prev-page", page);
 
-        const response = await fetch(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
+        const response = await fetch(`${Url}/api/recommand/restaurant/search?district=${selectedCity}&city=${selectedProvince}&page=${page}`);
 
         const data = await response.json();
         totalPages = data.totalPages;

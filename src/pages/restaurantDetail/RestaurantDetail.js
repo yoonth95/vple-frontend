@@ -7,6 +7,7 @@ import restaurantId from '../../recoil/state';
 import axios from 'axios';
 import Review from '../../components/review/Review';
 import ReviewBoard from '../../components/reviewBoard/ReviewBoard';
+import {Url} from '../Url';
 
 import {
     WrapView,
@@ -73,7 +74,7 @@ export default function RestaurantDetail() {
 
     useEffect(() => {
 
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/' + id)
+        axios.get(`${Url}/api/recommand/restaurant/` + id)
             .then(response => {
                 setDetailRestaurant(response.data);
                 setMenu(response.data.menus);
@@ -84,7 +85,7 @@ export default function RestaurantDetail() {
 
 
         // 장바구니 기능
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart',
+        axios.get(`${Url}/auth/cart`,
         {
             headers: {
                 Authorization: token
@@ -105,7 +106,7 @@ export default function RestaurantDetail() {
 
     const addToCart = () => {
         // setClip(true);
-        axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart`,
+        axios.post(`${Url}/auth/cart`,
             {
                 "restaurantId": id,
                 "name": detailRestaurant.name,
@@ -126,7 +127,7 @@ export default function RestaurantDetail() {
             });
     }
     const removeInCart = () => {
-        axios.delete(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart/${cartId}`,
+        axios.delete(`${Url}/auth/cart/${cartId}`,
             {
                 headers: {
                     Authorization: token

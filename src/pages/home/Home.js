@@ -17,6 +17,7 @@ import {
 } from "./HomeStyle";
 import arrow from '../../asset/arrow.png'
 import planDefaultImg from '../../asset/planDefault.png';
+import {Url} from '../Url';
 
 import GuideCardButton from '../../components/guideCardButton/GuideCardButton';
 import RestaurantCardButton from '../../components/restaurantCardButton/RestaurantCardButton';
@@ -36,7 +37,7 @@ const Home = () => {
     useEffect(() => {
         console.log("토큰", token);
 
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/me', {
+        axios.get(`${Url}/auth/me`, {
             headers: {
                 Authorization: token
             }
@@ -53,7 +54,7 @@ const Home = () => {
                 }
             });
 
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/plan/like'
+        axios.get(`${Url}/api/plan/like`
         )
             .then(response => {
                 setRecommendGuide(response.data);
