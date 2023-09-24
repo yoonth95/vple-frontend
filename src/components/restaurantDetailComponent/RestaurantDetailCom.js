@@ -48,7 +48,10 @@ import IconMore from '../../asset/restaurant/IconMore.png';
 import IconUp from '../../asset/restaurant/IconUp.png';
 import arrow from '../../asset/arrow.png';
 import camera from '../../asset/camera.png';
-import BackArrow from '../../asset/back_arrow.png';import menuDefaultImg from '../../asset/menuDefault.png';
+import BackArrow from '../../asset/back_arrow.png';
+import menuDefaultImg from '../../asset/menuDefault.png';
+
+import {Url} from "../../pages/Url";
 
 export default function RestaurantDetailCom(props) {
 
@@ -78,7 +81,7 @@ export default function RestaurantDetailCom(props) {
     
     useEffect(() => {
 
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/api/recommand/restaurant/' + props.id)
+        axios.get(`${Url}/api/recommand/restaurant/` + props.id)
             .then(response => {
                 setDetailRestaurant(response.data);
                 setMenu(response.data.menus);
@@ -87,7 +90,7 @@ export default function RestaurantDetailCom(props) {
                 
             });
 
-        axios.get('http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart',
+        axios.get(`${Url}/auth/cart`,
         {
             headers: {
                 Authorization: token
@@ -108,7 +111,7 @@ export default function RestaurantDetailCom(props) {
 
     const addToCart = () => {
         // setClip(true);
-        axios.post(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart`,
+        axios.post(`${Url}/auth/cart`,
             {
                 "restaurantId": props.id,
                 "name": detailRestaurant.name,
@@ -129,7 +132,7 @@ export default function RestaurantDetailCom(props) {
             });
     }
     const removeInCart = () => {
-        axios.delete(`http://ec2-3-35-56-252.ap-northeast-2.compute.amazonaws.com:8080/auth/cart/${cartId}`,
+        axios.delete(`${Url}/auth/cart/${cartId}`,
             {
                 headers: {
                     Authorization: token

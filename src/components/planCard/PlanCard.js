@@ -30,9 +30,10 @@ export default function PlanCard({ card, time, onRemove, onClickTime }) {
                     <p className='time'>예상 시간 |
                     <TimeButton 
                         onClick={onClickTimeBtn}>{
-                        prevTimeString[0] < 12 ? 
-                        `오전 ${parseInt(prevTimeString[0])}:${prevTimeString[1]}`
-                        : `오후 ${parseInt(prevTimeString[0])-12}:${prevTimeString[1]}`}
+                        parseInt(prevTimeString[0]) === 12 ? `오후 ${prevTimeString[0]}:${prevTimeString[1]}` :
+                        parseInt(prevTimeString[0]) < 12 ? 
+                        `오전 ${prevTimeString[0].padStart(2,0)}:${prevTimeString[1]}`
+                        : `오후 ${(parseInt(prevTimeString[0])-12).toString().padStart(2,0)}:${prevTimeString[1]}`}
                     </TimeButton>
                     </p>
                 </div>

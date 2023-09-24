@@ -57,6 +57,7 @@ export const PlanContainer = styled.div`
   padding-left: 26px;
   padding-right: 26px;
   margin-top: 10px;
+  padding-bottom: 50%;
 `;
 
 export const SetLocationWrap = styled.div`

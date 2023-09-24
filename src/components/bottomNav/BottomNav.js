@@ -11,8 +11,8 @@ const BottomNav = (push) => {
 
     const[active, setActive] = useState(push);
 
-    console.log("push", push);
-    console.log("active", active);
+    // console.log("push", push);
+    // console.log("active", active);
 
     return (
         {active } && <>

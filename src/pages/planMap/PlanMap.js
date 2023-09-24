@@ -124,6 +124,7 @@ const PlanMap = () => {
     const showDetailView = (id) => {
         setIsDetailView(true);
         setRestaurantId(id);
+        console.log("지도 식당", id);
     }
     const hideDetailView = () => {
         setIsDetailView(false);

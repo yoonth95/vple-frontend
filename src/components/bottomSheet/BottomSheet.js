@@ -238,9 +238,13 @@ const BottomSheet = (props) => {
         }
       })
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
+        console.log("저장버튼누름", planData);
+        console.log("specific plan data", specificDayContent);
+        console.log("daypagecontent", dayPageContent);
         setPlanData(plan => ({
           ...plan,
+          planTravels: [...dayPageContent],
           title: document.querySelector('.title-input').value,
           opened: isOpen,
         }))
@@ -317,8 +321,11 @@ const BottomSheet = (props) => {
     }
 
     document.getElementsByName('hour').forEach((node) => {
-      // console.log(node.value);
-      if (node.value === hour.padStart(2, '0')) node.checked = true;
+      hour = parseInt(hour);
+      if (hour === 0) hour = 12;
+      console.log(hour);
+      if (hour > 12) hour -= 12;
+      if (parseInt(node.value) === hour) node.checked = true;
     })
 
     document.getElementsByName('minute').forEach((node) => {
@@ -342,12 +349,17 @@ const BottomSheet = (props) => {
     })
     document.getElementsByName('hour').forEach((node) => {
       if (node.checked) {
+        console.log("여기여기오전오후", tempPlanTravelTime.ampm)
         if(tempPlanTravelTime.ampm === '오전') {
-          tempPlanTravelTime.hour = node.value;
-        } else {
-          tempPlanTravelTime.hour = (parseInt(node.value)+12).toString();
+          if(node.value === "12") tempPlanTravelTime.hour = "00";
+          else tempPlanTravelTime.hour = node.value;
+        }
+        else if (tempPlanTravelTime.ampm === '오후') {
+          if (node.value === "12") tempPlanTravelTime.hour = "12";
+          else tempPlanTravelTime.hour = (parseInt(node.value)+12).toString();
         }
       }
+      
     })
     document.getElementsByName('minute').forEach((node) => {
       if (node.checked) {
@@ -355,7 +367,7 @@ const BottomSheet = (props) => {
       }
     })
 
-    console.log(`${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`);
+    console.log("요기", `${tempPlanTravelTime.hour.toString()}:${tempPlanTravelTime.minute.toString()}:00`);
 
     axios.patch(`${Url}/api/plan_travel/${planTravelId}`,
       {
