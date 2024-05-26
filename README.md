@@ -7,11 +7,14 @@
 
 | **박솔미** |
 | :------: | 
-| [<img src="https://github.com/vple-remake/vple-frontend/issues/12#issue-2317367549" height=150 width=150> <br/> @Parksolmi]([https://github.com/Parksolmi]) |
+| [<img src="https://private-user-images.githubusercontent.com/69065439/333841530-5a0fafe2-f9d8-4e9d-b778-8ca62d3a0ed5.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTY2ODg4OTUsIm5iZiI6MTcxNjY4ODU5NSwicGF0aCI6Ii82OTA2NTQzOS8zMzM4NDE1MzAtNWEwZmFmZTItZjlkOC00ZTlkLWI3NzgtOGNhNjJkM2EwZWQ1LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA1MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNTI2VDAxNTYzNVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTI4Y2ZhZTU3Zjc4OTMzZGI1MjIxOGVjNmYxZWQ5NGU2NzRmYjZmNTdiZTdmMTdhMTI3NGZkNDQxM2Q4ODQ4MDAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.0rBCYa8TwKPCHsnB1UJ2Ec80U_2IOaHVNIHagC6c60E" height=150 width=150> <br/> @Parksolmi]([https://github.com/Parksolmi]) |
 
 </div>
 </div>
 <br>
+
+## 개발 기간
+- 2023.01 ~ 2023.07
 
 ## 개발 환경
 - FRONTEND : React, Javascript, styled-components, Recoil<br>
@@ -60,11 +63,11 @@
 ### 비로그인 기능
 1. 채식 식당 조회 기능
 2. 채식 식당 검색 기능
+3. 다른 비플인(사용자)가 세운 플랜 조회
 
 ### 로그인 기능 (비로그인 기능은 로그인 기능에 모두 포함)
 1. 채식 식당 저장 기능
-2. 다른 비플인(사용자)가 세운 플랜 조회
-3. 다른 비플인(사용자)가 세운 플랜 저장
-4. 다른 비플인(사용자)가 세운 플랜 편집
-5. 나의 플랜 세우기 기능
-6. 내가 세운 플랜 조회 기능
+2. 다른 비플인(사용자)가 세운 플랜 저장
+3. 다른 비플인(사용자)가 세운 플랜 편집
+4. 나의 플랜 세우기 기능
+5. 내가 세운 플랜 조회 기능
