@@ -54,7 +54,8 @@
 
 
 ## 시현 화면
-<img width="726" alt="image" src="">
+<a>https://changeable-roof-74d.notion.site/Vple-92f090b7d69b4bba9d79fccb84516833?pvs=4</a>
+
 
 
 ---
