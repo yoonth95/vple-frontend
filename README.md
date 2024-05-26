@@ -1,6 +1,8 @@
 # 채식인들을 위한 관광 플랜 서비스, Vple
 
-## 팀원 구성
+## 🏆 2022 한국관광공사X카카오 주최 ‘관광 데이터 활용 공모전’ 장려상
+
+## 👥 팀원 구성
 <div align="center">
 
 <div align="center">
@@ -13,18 +15,18 @@
 </div>
 <br>
 
-## 개발 기간
+## 🗓️ 개발 기간
 - 2023.01 ~ 2023.07
 
-## 개발 환경
+## 🌱 개발 환경
 - FRONTEND : React, Javascript, styled-components, Recoil<br>
 - APIs : Kakao Map Web Api, Kakao Login Api <br>
 - 협업 툴 : Github   <br>
 
-## 주제
+## 📌 주제
 - 채식 식당 정보 기반의 관광 플래너 웹 서비스
   
-## 요구사항
+## 👂 요구사항
 - 관광지에서 먹을 수 있는 채식 식당 정보를 제공해야 한다.
 - 해당 식당의 소개 글, 위치, 영업 시간, 채식 메뉴 정보를 제공해야 한다.
 - 관광 플랜을 생성할 수 있도록 지도 기반의 식당 위치를 시각적으로 제공해야 한다.
@@ -39,7 +41,7 @@
 - 저장된 기록들(내가 세운 플랜, 찜한 식당, 찜한 플랜)은 삭제할 수 있어야 한다.
 
 
-## 화면 구성 📺
+## 📺 화면 구성
 |  홈 페이지  |  식당 조회 페이지   |
 | :-------------------------------------------: | :------------: |
 |  <img width="390" src="https://github.com/vple-remake/vple-frontend/assets/69065439/b1d1ca0f-3906-4f19-8a98-51b840284966"/> |  <img width="390" src="https://github.com/vple-remake/vple-frontend/assets/69065439/f32124e2-75b9-4785-8757-ef7e370d96b4">|  
@@ -53,14 +55,14 @@
 ---
 
 
-## 시현 화면
+## 👀 시현 화면
 <a>https://changeable-roof-74d.notion.site/Vple-92f090b7d69b4bba9d79fccb84516833?pvs=4</a>
 
 
 
 ---
 
-## 기능정리
+## 🛠️ 기능정리
 ### 비로그인 기능
 1. 채식 식당 조회 기능
 2. 채식 식당 검색 기능
