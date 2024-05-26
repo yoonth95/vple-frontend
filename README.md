@@ -7,7 +7,7 @@
 
 | **박솔미** |
 | :------: | 
-| [<img src="https://github.com/vple-remake/vple-frontend/assets/69065439/955fba59-371d-4c6b-b1fb-3679439c9ba2" height=150 width=150> <br/> @Parksolmi]([https://github.com/Parksolmi]) |
+| [<img src="https://github.com/vple-remake/vple-frontend/assets/69065439/955fba59-371d-4c6b-b1fb-3679439c9ba2" height=150 width=150> <br/> @Parksolmi](https://github.com/Parksolmi) |
 
 </div>
 </div>
@@ -17,7 +17,7 @@
 - 2023.01 ~ 2023.07
 
 ## 개발 환경
-- FRONTEND : React, Javascript, styled-components, Recoil<br>
+- FRONTEND : React, Javascript, styled-components, Recoil<br>
 - APIs : Kakao Map Web Api, Kakao Login Api <br>
 - 협업 툴 : Github   <br>
 
