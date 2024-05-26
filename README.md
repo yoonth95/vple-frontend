@@ -7,7 +7,7 @@
 
 | **박솔미** |
 | :------: | 
-| [<img src="https://private-user-images.githubusercontent.com/69065439/333841530-5a0fafe2-f9d8-4e9d-b778-8ca62d3a0ed5.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTY2ODg4OTUsIm5iZiI6MTcxNjY4ODU5NSwicGF0aCI6Ii82OTA2NTQzOS8zMzM4NDE1MzAtNWEwZmFmZTItZjlkOC00ZTlkLWI3NzgtOGNhNjJkM2EwZWQ1LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA1MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNTI2VDAxNTYzNVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTI4Y2ZhZTU3Zjc4OTMzZGI1MjIxOGVjNmYxZWQ5NGU2NzRmYjZmNTdiZTdmMTdhMTI3NGZkNDQxM2Q4ODQ4MDAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.0rBCYa8TwKPCHsnB1UJ2Ec80U_2IOaHVNIHagC6c60E" height=150 width=150> <br/> @Parksolmi]([https://github.com/Parksolmi]) |
+| [<img src="https://github.com/vple-remake/vple-frontend/assets/69065439/955fba59-371d-4c6b-b1fb-3679439c9ba2" height=150 width=150> <br/> @Parksolmi]([https://github.com/Parksolmi]) |
 
 </div>
 </div>
