@@ -16,7 +16,7 @@
 <br>
 
 ## 🗓️ 개발 기간
-- 2023.01 ~ 2023.07
+- 2023.01 ~ 2023.06
 
 ## 🌱 개발 환경
 - FRONTEND : React, Javascript, styled-components, Recoil<br>
