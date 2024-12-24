@@ -5,7 +5,7 @@ import { Url } from "../Url";
 
 const KakaoAuthHandle = (props) => {
   useEffect(() => {
-    let code = new URL(window.location.href).searchParams.get("code");
+    const code = new URL(window.location.href).searchParams.get("code");
 
     const kakaoLogin = async () => {
       axios
