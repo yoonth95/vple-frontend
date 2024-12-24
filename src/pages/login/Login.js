@@ -4,7 +4,7 @@ import Logo from "../../asset/logo.png";
 import kakao from "../../asset/kakao.png";
 import { Container, WrapLogin } from "./LoginStyle";
 
-const CLIENT_ID = "9bace5ab316d4073d7412f542dd4f2c8";
+const CLIENT_ID = "5681ba5beb345aa85d32837edd41bde8";
 const REDIRECT_URI = `https://${window.location.host}/user/kakao/callback`;
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
